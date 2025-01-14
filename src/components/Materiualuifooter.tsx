@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
 
     {/* Useful Links */}
     <Grid item xs={12} md={2}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Useful links</Typography>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Hasznos Linkek</Typography>
       <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
       <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
         Bejelentkezés
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
         Térkép
       </Link>
       <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Segítség
+        Ügyfélszolgálat
       </Link>
       <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
         FAQ
