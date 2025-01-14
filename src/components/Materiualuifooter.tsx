@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <Container>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
-              <Typography variant="body1">Get connected with us on social networks:</Typography>
+              <Typography variant="body1">Social média elérhetőségeink:</Typography>
             </Grid>
             <Grid item>
               <IconButton color="inherit">
@@ -36,62 +36,75 @@ const Footer: React.FC = () => {
         </Container>
       </Box>
 
-      {/* Links Section */}
       <Container sx={{ marginTop: 10 }}>
-        <Grid container spacing={5}>
-          {/* Company Info */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Company name</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-            <Typography variant="body2">
-              Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </Typography>
-          </Grid>
+  <Grid container spacing={5}>
+    {/* Company Info */}
+    <Grid item xs={12} md={3}>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>PlázaÁsz</Typography>
+      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
+      <Typography variant="body2" sx={{ marginBottom: 2 }}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda animi eaque neque quia, vel modi aut voluptates aspernatur esse vero voluptate perferendis optio tenetur facilis repudiandae quam! Tempore, recusandae quam.
+      </Typography>
+    </Grid>
 
-          {/* Products Links */}
-          <Grid item xs={12} md={2}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Products</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-            <Link href="#" color="inherit" display="block">MDBootstrap</Link>
-            <Link href="#" color="inherit" display="block">MDWordPress</Link>
-            <Link href="#" color="inherit" display="block">BrandFlow</Link>
-            <Link href="#" color="inherit" display="block">Bootstrap Angular</Link>
-          </Grid>
+    {/* Products Links */}
+    <Grid item xs={12} md={2}>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rólunk</Typography>
+      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        Nagy-Eperjesi Richárd
+      </Link>
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        Tóth Zoltán
+      </Link>
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        Hustikker Szabolcs
+      </Link>
+    </Grid>
 
-          {/* Useful Links */}
-          <Grid item xs={12} md={2}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Useful links</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-            <Link href="#" color="inherit" display="block">Your Account</Link>
-            <Link href="#" color="inherit" display="block">Become an Affiliate</Link>
-            <Link href="#" color="inherit" display="block">Shipping Rates</Link>
-            <Link href="#" color="inherit" display="block">Help</Link>
-          </Grid>
+    {/* Useful Links */}
+    <Grid item xs={12} md={2}>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Useful links</Typography>
+      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        Bejelentkezés
+      </Link>
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        Térkép
+      </Link>
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        Segítség
+      </Link>
+      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+        FAQ
+      </Link>
+    </Grid>
 
-          {/* Contact Info */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Contact</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-            <Typography variant="body2">
-              <i className="fas fa-home mr-3"></i> New York, NY 10012, US
-            </Typography>
-            <Typography variant="body2">
-              <i className="fas fa-envelope mr-3"></i> info@example.com
-            </Typography>
-            <Typography variant="body2">
-              <i className="fas fa-phone mr-3"></i> + 01 234 567 88
-            </Typography>
-            <Typography variant="body2">
-              <i className="fas fa-print mr-3"></i> + 01 234 567 89
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container>
+    {/* Contact Info */}
+    <Grid item xs={12} md={3}>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Elérhetőségek</Typography>
+      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
+      <Typography variant="body2" sx={{ marginBottom: 1 }}>
+        <i className="fas fa-home mr-3"></i> 9735 Csepreg, Rákóczi u. 13-15.
+      </Typography>
+      <Typography variant="body2" sx={{ marginBottom: 1 }}>
+        <i className="fas fa-envelope mr-3"></i> plazaasz@gmail.com
+      </Typography>
+      <Typography variant="body2" sx={{ marginBottom: 1 }}>
+        <i className="fas fa-phone mr-3"></i> 06 30 782 8553
+      </Typography>
+      <Typography variant="body2" sx={{ marginBottom: 1 }}>
+        <i className="fas fa-print mr-3"></i> 06 30 555 5555
+      </Typography>
+    </Grid>
+  </Grid>
+</Container>
+
 
       {/* Copyright Section */}
       <Box sx={{ backgroundColor: '#161C27', textAlign: 'center', paddingY: 3, marginTop: '40px' }}>
         <Typography variant="body2">
-          © 2020 Copyright: <Link href="https://mdbootstrap.com/" color="inherit">MDBootstrap.com</Link>
+          © 2025 Copyright: <Link href="" color="inherit">PlazaAsz.hu</Link>
         </Typography>
       </Box>
     </Box>

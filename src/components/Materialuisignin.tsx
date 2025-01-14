@@ -110,7 +110,7 @@ export default function SignIn() {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)', textAlign: 'center', color: 'white' }}
           >
-            Sign in
+            Bejelentkezés
           </Typography>
           <Box
             component="form"
@@ -131,7 +131,7 @@ export default function SignIn() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="your@email.com"
+                placeholder="sajatemailed@email.com"
                 autoComplete="email"
                 autoFocus
                 required
@@ -160,7 +160,7 @@ export default function SignIn() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="password" sx={{ color: 'white' }}>Password</FormLabel>
+              <FormLabel htmlFor="password" sx={{ color: 'white' }}>Jelszó</FormLabel>
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
@@ -196,7 +196,7 @@ export default function SignIn() {
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" sx={{ color: 'white' }} />}
-              label={<Typography sx={{ color: 'white' }}>Remember me</Typography>}
+              label={<Typography sx={{ color: 'white' }}>Emlékezzen rám!</Typography>}
             />
             <Button
               type="submit"
@@ -211,19 +211,20 @@ export default function SignIn() {
                 },
               }}
             >
-              Sign in
+              Bejelentkezés
             </Button>
             <Link
               component="button"
               type="button"
               onClick={handleClickOpen}
-              variant="body2"
+              variant="body1"
               sx={{ alignSelf: 'center', color: 'white' }}
             >
-              Forgot your password?
+              Elfelejtetted a jelszavad?
+
             </Link>
           </Box>
-          <Divider sx={{ borderColor: 'white' }}>or</Divider>
+          <Divider sx={{ borderColor: 'white', color: 'white' }}>vagy</Divider>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <Button
               fullWidth
@@ -238,7 +239,7 @@ export default function SignIn() {
                 },
               }}
             >
-              Sign in with Google
+              Bejelentkezés Google fiókkal
             </Button>
             <Button
               fullWidth
@@ -253,16 +254,16 @@ export default function SignIn() {
                 },
               }}
             >
-              Sign in with Facebook
+              Bejelentkezés Facebook fiókkal
             </Button>
             <Typography sx={{ textAlign: 'center', color: 'white' }}>
-              Don't have an account?{' '}
+              Még nincs felhasználód ?{' '}
               <Link
                 href="/material-ui/getting-started/templates/sign-in/"
                 variant="body2"
                 sx={{ alignSelf: 'center', color: 'white' }}
               >
-                Sign up
+                Regisztrálás
               </Link>
             </Typography>
           </Box>
