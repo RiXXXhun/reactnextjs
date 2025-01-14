@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function App() {
   return (
-    <Container sx={{ bgcolor: 'black', py: 5 }}>
+    <Container sx={{ backgroundColor: '#1c2331', py: 5 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
         <Typography variant="h5" sx={{ color: 'white', mb: 5 }}>
           GYORSKERESÉS
@@ -31,7 +31,7 @@ export default function App() {
             ),
             style: {
               color: 'white',
-              backgroundColor: 'black',
+              backgroundColor: '#1c2331',
               borderRadius: '25px',
               border: '2px solid white', // Vastagabb körvonal
             },

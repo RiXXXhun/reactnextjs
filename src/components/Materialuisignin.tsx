@@ -31,7 +31,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
     maxWidth: '450px',
   },
   boxShadow: 'none',
-  backgroundColor: 'black',
+  backgroundColor: '#1c2331',
   border: '2px solid white',
 }));
 
@@ -42,7 +42,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
   },
-  backgroundColor: 'black',
+  backgroundColor: '#1c2331',
 }));
 
 export default function SignIn() {
@@ -104,7 +104,7 @@ export default function SignIn() {
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <LockOutlinedIcon sx={{ fontSize: 60, color: 'white', alignSelf: 'center' }} />
+          <LockOutlinedIcon sx={{  fontSize: 60, color: 'white', alignSelf: 'center'  }} />
           <Typography
             component="h1"
             variant="h4"
