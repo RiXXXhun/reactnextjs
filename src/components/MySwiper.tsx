@@ -6,12 +6,42 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
-import { Container, Box } from '@mui/material';
+import { Container, Box, TextField, IconButton, InputAdornment, Typography } from '@mui/material';
 import { Pagination, Autoplay, Navigation, Keyboard } from 'swiper/modules';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function App() {
   return (
     <Container sx={{ bgcolor: 'black', py: 5 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
+        <Typography variant="h5" sx={{ color: 'white', mb: 5 }}>
+          GYORSKERESÉS
+        </Typography>
+        <TextField
+          variant="outlined"
+          placeholder="Gyorskeresés..."
+          fullWidth
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton>
+                  <SearchIcon sx={{ color: 'white' }} />
+                </IconButton>
+              </InputAdornment>
+            ),
+            style: {
+              color: 'white',
+              backgroundColor: 'black',
+              borderRadius: '25px',
+              border: '2px solid white', // Vastagabb körvonal
+            },
+          }}
+          sx={{
+            width: { xs: 'calc(100% - 80px)', sm: 'calc(100% - 80px)', md: '60%', lg: '40%' },
+            mx: { xs: '40px', sm: '40px', md: 0, lg: 0 }, // Jobb és bal oldalon 40px margó xs és sm méretekben
+          }}
+        />
+      </Box>
       <Swiper
         spaceBetween={30}
         pagination={{

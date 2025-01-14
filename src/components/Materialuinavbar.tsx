@@ -22,7 +22,7 @@ import Switch from '@mui/material/Switch';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const languages = ['English', 'Español', 'Français', 'Deutsch'];
+const languages = ['English', 'Deutsch'];
 
 const CustomSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase': {

@@ -1,5 +1,6 @@
 
 import ResponsiveAppBar from "@/components/Materialuinavbar";
+import Materialuisignin from "@/components/Materialuisignin";
 import Materialuifooter from "@/components/Materiualuifooter";
 import MySwiper from "@/components/MySwiper";
 import Navbarmenu from "@/components/Navbarmenu";
@@ -18,6 +19,9 @@ export default function Page() {
         </Row>
         <Row>
             <MySwiper />
+        </Row>
+        <Row>
+            <Materialuisignin />
         </Row>
         <Row>
             <Materialuifooter />
