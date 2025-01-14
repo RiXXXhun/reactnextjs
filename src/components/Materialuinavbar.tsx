@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -17,11 +17,27 @@ import AdbIcon from '@mui/icons-material/Adb';
 import LanguageIcon from '@mui/icons-material/Language';
 import BlindIcon from '@mui/icons-material/Blind';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const languages = ['English', 'Español', 'Français', 'Deutsch'];
+
+const CustomSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase': {
+    color: theme.palette.warning.main,
+  },
+  '& .MuiSwitch-switchBase + .MuiSwitch-track': {
+    backgroundColor: 'white',
+  },
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: theme.palette.warning.main,
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: theme.palette.warning.main,
+  },
+}));
 
 const label = { inputProps: { 'aria-label': 'Toggle switch' } };
 
@@ -34,9 +50,11 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
+
   const handleOpenLangMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElLang(event.currentTarget);
   };
@@ -78,7 +96,7 @@ function ResponsiveAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              fontSize: { xl: 40 }
+              fontSize: { xl: 40 },
             }}
           >
             LOGO
@@ -98,15 +116,9 @@ function ResponsiveAppBar() {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'left' }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
@@ -118,6 +130,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none', xl: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -133,11 +146,12 @@ function ResponsiveAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              fontSize: { xl: 35 }
+              fontSize: { xl: 35 },
             }}
           >
             LOGO
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -149,6 +163,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Select language">
               <IconButton onClick={handleOpenLangMenu} sx={{ p: 0, mr: 2, fontSize: { xl: 20 } }}>
@@ -159,15 +174,9 @@ function ResponsiveAppBar() {
               sx={{ mt: '45px' }}
               id="menu-lang"
               anchorEl={anchorElLang}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElLang)}
               onClose={handleCloseLangMenu}
             >
@@ -177,14 +186,20 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
+
             <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white', borderRadius: 1, height: 40, mr: 1 }}>
               <Tooltip title="Toggle accessibility mode">
                 <IconButton sx={{ p: 0, mr: 2, ml: '10px', fontSize: { xl: 20 } }}>
-                  {checked ? <BlindIcon sx={{ color: 'white', fontSize: { xl: 30 } }} /> : <RemoveRedEyeIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />}
+                  {checked ? (
+                    <BlindIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />
+                  ) : (
+                    <RemoveRedEyeIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />
+                  )}
                 </IconButton>
               </Tooltip>
-              <Switch {...label} checked={checked} onChange={handleChange} />
+              <CustomSwitch {...label} checked={checked} onChange={handleChange} />
             </Box>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 0.5 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{ width: { xl: 50 }, height: { xl: 50 } }} />
@@ -194,15 +209,9 @@ function ResponsiveAppBar() {
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
