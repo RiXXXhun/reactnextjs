@@ -15,7 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import LanguageIcon from '@mui/icons-material/Language';
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import BlindIcon from '@mui/icons-material/Blind';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -56,8 +56,8 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: 'black' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ minHeight: { xs: 50, md: 80, xl: 100 } }}>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Toolbar disableGutters sx={{ minHeight: { xs: 50, md: 80, xl: 100 }, fontSize: { xl: 20 } }}>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex', xl: 'flex' }, mr: 1, fontSize: { xl: 40 } }} />
           <Typography
             variant="h6"
             noWrap
@@ -71,6 +71,7 @@ function ResponsiveAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontSize: { xl: 40 }
             }}
           >
             LOGO
@@ -105,12 +106,12 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none', xl: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -125,6 +126,7 @@ function ResponsiveAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontSize: { xl: 35 }
             }}
           >
             LOGO
@@ -134,7 +136,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 20 } }}
               >
                 {page}
               </Button>
@@ -142,8 +144,8 @@ function ResponsiveAppBar() {
           </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Select language">
-              <IconButton onClick={handleOpenLangMenu} sx={{ p: 0, mr: 2 }}>
-                <LanguageIcon sx={{ color: 'white' }} />
+              <IconButton onClick={handleOpenLangMenu} sx={{ p: 0, mr: 2, fontSize: { xl: 20 } }}>
+                <LanguageIcon sx={{ color: 'white', fontSize: { xl: 35 } }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -164,18 +166,18 @@ function ResponsiveAppBar() {
             >
               {languages.map((language) => (
                 <MenuItem key={language} onClick={handleCloseLangMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{language}</Typography>
+                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{language}</Typography>
                 </MenuItem>
               ))}
             </Menu>
             <Tooltip title="Toggle accessibility mode">
-              <IconButton onClick={handleToggleAccessibilityMode} sx={{ p: 0, mr: 2 }}>
-                <AccessibilityIcon sx={{ color: 'white' }} />
+              <IconButton onClick={handleToggleAccessibilityMode} sx={{ p: 0, mr: 2, fontSize: { xl: 20 } }}>
+                <BlindIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />
               </IconButton>
             </Tooltip>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{ width: { xl: 50 }, height: { xl: 50 } }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -183,7 +185,7 @@ function ResponsiveAppBar() {
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'right',
               }}
               keepMounted
@@ -196,7 +198,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
