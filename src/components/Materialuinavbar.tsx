@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -7,26 +7,33 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-
+import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
+import AdbIcon from '@mui/icons-material/Adb';
+import LanguageIcon from '@mui/icons-material/Language';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const languages = ['English', 'Español', 'Français', 'Deutsch'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElLang, setAnchorElLang] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
+  };
+  const handleOpenLangMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElLang(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -37,11 +44,20 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleCloseLangMenu = () => {
+    setAnchorElLang(null);
+  };
+
+  const handleToggleAccessibilityMode = () => {
+    console.log('Gyengénlátó mód bekapcsolva');
+    // Itt implementálhatod a gyengénlátó mód logikáját
+  };
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: 'black' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          
+        <Toolbar disableGutters sx={{ minHeight: { xs: 50, md: 80, xl: 100 } }}>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -69,7 +85,7 @@ function ResponsiveAppBar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-            
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -94,7 +110,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -124,7 +140,39 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+            <Tooltip title="Select language">
+              <IconButton onClick={handleOpenLangMenu} sx={{ p: 0, mr: 2 }}>
+                <LanguageIcon sx={{ color: 'white' }} />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-lang"
+              anchorEl={anchorElLang}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElLang)}
+              onClose={handleCloseLangMenu}
+            >
+              {languages.map((language) => (
+                <MenuItem key={language} onClick={handleCloseLangMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{language}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+            <Tooltip title="Toggle accessibility mode">
+              <IconButton onClick={handleToggleAccessibilityMode} sx={{ p: 0, mr: 2 }}>
+                <AccessibilityIcon sx={{ color: 'white' }} />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

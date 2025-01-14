@@ -8,14 +8,9 @@ export default function Page() {
     
 
     return (
-        <><Row>
-            <Col>
-                <Navbarmenu />
-            </Col>
-        </Row>
+        <>
         <Row>
             <Col>
-             <Navbarmenu2 />
              <ResponsiveAppBar />
             </Col>
         </Row>
