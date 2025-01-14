@@ -16,15 +16,20 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import LanguageIcon from '@mui/icons-material/Language';
 import BlindIcon from '@mui/icons-material/Blind';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Switch from '@mui/material/Switch';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const languages = ['English', 'Español', 'Français', 'Deutsch'];
 
+const label = { inputProps: { 'aria-label': 'Toggle switch' } };
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [anchorElLang, setAnchorElLang] = React.useState<null | HTMLElement>(null);
+  const [checked, setChecked] = React.useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -48,9 +53,11 @@ function ResponsiveAppBar() {
     setAnchorElLang(null);
   };
 
-  const handleToggleAccessibilityMode = () => {
-    console.log('Gyengénlátó mód bekapcsolva');
-    // Itt implementálhatod a gyengénlátó mód logikáját
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    if (event.target.checked) {
+      console.log('Gyengénlátó mód bekapcsolva');
+    }
   };
 
   return (
@@ -136,7 +143,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 20 } }}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 20 }, mr: { xl: 2.5 } }}
               >
                 {page}
               </Button>
@@ -170,13 +177,16 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-            <Tooltip title="Toggle accessibility mode">
-              <IconButton onClick={handleToggleAccessibilityMode} sx={{ p: 0, mr: 2, fontSize: { xl: 20 } }}>
-                <BlindIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />
-              </IconButton>
-            </Tooltip>
+            <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white', borderRadius: 1, height: 40, mr: 1 }}>
+              <Tooltip title="Toggle accessibility mode">
+                <IconButton sx={{ p: 0, mr: 2, ml: '10px', fontSize: { xl: 20 } }}>
+                  {checked ? <BlindIcon sx={{ color: 'white', fontSize: { xl: 30 } }} /> : <RemoveRedEyeIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />}
+                </IconButton>
+              </Tooltip>
+              <Switch {...label} checked={checked} onChange={handleChange} />
+            </Box>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 0.5 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{ width: { xl: 50 }, height: { xl: 50 } }} />
               </IconButton>
             </Tooltip>
@@ -208,4 +218,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
