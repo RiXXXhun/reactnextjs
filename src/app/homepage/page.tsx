@@ -1,4 +1,5 @@
 
+import Materialuiinform from "@/components/Materialuiinform";
 import ResponsiveAppBar from "@/components/Materialuinavbar";
 import Materialuisignin from "@/components/Materialuisignin";
 import Materiualuifaq from "@/components/Materiualuifaq";
@@ -16,6 +17,9 @@ export default function Page() {
             <Col>
              <ResponsiveAppBar />
             </Col>
+        </Row>
+        <Row>
+            <Materialuiinform />
         </Row>
         <Row>
             <MySwiper />

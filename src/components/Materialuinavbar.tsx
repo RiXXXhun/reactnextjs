@@ -20,7 +20,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
-const pages = ['Kuponok', 'Térkép', 'Rólunk'];
+const pages = ['Kuponok', 'Ügyfélszolgálat', 'Rólunk'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const languages = ['English', 'Deutsch'];
 
