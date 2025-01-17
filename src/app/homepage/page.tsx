@@ -11,6 +11,7 @@ import { Col, Row } from "react-bootstrap";
 import { Box, Slide } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
+import Materialuislider from "@/components/Materialuislider";
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -35,8 +36,7 @@ export default function Page() {
                     </Col>
                 </Row>
             </Slide>
-
-            
+         
 
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
@@ -50,7 +50,7 @@ export default function Page() {
 
             <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
-                    <MySwiper />
+                <Materialuislider />
                 </Row>
             </Slide>
 

@@ -21,7 +21,7 @@ const MyMap: React.FC = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton sx={{ color: 'white'  }} onClick={() => { /* keresési logika ide kerülhet */ }}>
+                <IconButton sx={{ color: 'white'  }} onClick={() => { /* keresési logika ide majd egyszer */ }}>
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>

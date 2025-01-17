@@ -64,7 +64,7 @@ const Materialuiinform = () => {
                   pt: "50px",
                   transition: 'box-shadow 0.3s ease-in-out',
                   '&:hover': {
-                    boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', // neon-szerű világos kék fény
+                    boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', 
                   },
                 }}
               >

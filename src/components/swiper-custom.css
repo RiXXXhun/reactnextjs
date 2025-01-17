@@ -1,0 +1,18 @@
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white; 
+  transform: translateX(-30px);
+}
+
+
+.swiper-button-next {
+  transform: translateX(30px); 
+}
+
+@media (max-width: 1200px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+}
