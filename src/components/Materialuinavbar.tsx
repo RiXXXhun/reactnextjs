@@ -13,15 +13,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import LanguageIcon from '@mui/icons-material/Language';
 import BlindIcon from '@mui/icons-material/Blind';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import LogoDevIcon from '@mui/icons-material/LogoDev';
 
 const pages = ['Kuponok', 'Ügyfélszolgálat', 'Rólunk'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profil', 'Belépés', 'Regisztráció', 'Kijelentkezés'];
 const languages = ['English', 'Deutsch'];
 
 const CustomSwitch = styled(Switch)(({ theme }) => ({
@@ -81,8 +81,8 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: '#1c2331', color: '#ecf0f1' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ minHeight: { xs: 50, md: 80, xl: 100 }, fontSize: { xl: 20 } }}>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex', xl: 'flex' }, mr: 1, fontSize: { xl: 40 } }} />
+        <Toolbar disableGutters sx={{ minHeight: { xs: 80, md: 80, xl: 100 }, fontSize: { xl: 20 } }}>
+          <LogoDevIcon sx={{ display: { xs: 'none', md: 'flex', xl: 'flex' }, mr: 1, fontSize: { xl: 40 } }} />
           <Typography
             variant="h6"
             noWrap
@@ -96,10 +96,10 @@ function ResponsiveAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              fontSize: { xl: 40 },
+              fontSize: { xl: 40, md: 25},
             }}
           >
-            LOGO
+            PLÁZAÁSZ
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -131,7 +131,7 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
 
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none', xl: 'none' }, mr: 1 }} />
+          <LogoDevIcon sx={{ display: { xs: 'flex', md: 'none', xl: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -149,7 +149,7 @@ function ResponsiveAppBar() {
               fontSize: { xl: 35 },
             }}
           >
-            LOGO
+            PLÁZAÁSZ
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -157,7 +157,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 20 }, mr: { xl: 2.5 } }}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 25, md: 20 }, mr: { xl: 2.5 } }}
               >
                 {page}
               </Button>
@@ -166,7 +166,7 @@ function ResponsiveAppBar() {
           
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <Tooltip title="Select language">
+            <Tooltip title="Nyelvválasztó">
               <IconButton onClick={handleOpenLangMenu} sx={{ p: 0, mr: 2, fontSize: { xl: 20 } }}>
                 <LanguageIcon sx={{ color: 'white', fontSize: { xl: 35 } }} />
               </IconButton>
@@ -189,7 +189,7 @@ function ResponsiveAppBar() {
             </Menu>
 
             <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white', borderRadius: 1, height: 40, mr: 1 }}>
-              <Tooltip title="Toggle accessibility mode">
+              <Tooltip title="Gyengénlátó mód">
                 <IconButton sx={{ p: 0, mr: 2, ml: '10px', fontSize: { xl: 20 } }}>
                   {checked ? (
                     <BlindIcon sx={{ color: 'white', fontSize: { xl: 30 } }} />
@@ -201,9 +201,9 @@ function ResponsiveAppBar() {
               <CustomSwitch {...label} checked={checked} onChange={handleChange} />
             </Box>
 
-            <Tooltip title="Open settings">
+            <Tooltip title="Profil beállitások">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 0.5 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{ width: { xl: 50 }, height: { xl: 50 } }} />
+                <Avatar alt="Remy Sharp" src="" sx={{ width: { xl: 50 }, height: { xl: 50 } }} />
               </IconButton>
             </Tooltip>
             <Menu

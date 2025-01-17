@@ -9,8 +9,8 @@ const MyMap: React.FC = () => {
   const position: [number, number] = [51.505, -0.09];
 
   return (
-    <Container sx={{ backgroundColor: '#1c2331', py: 5, minHeight: '24vh', maxWidth: 'lg', mx: 'auto'  }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
+    <Container sx={{ backgroundColor: '#1c2331', py: 5, minHeight: '24vh', maxWidth: 'lg', mx: 'auto', pt: "100px" }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 10 }}>
         <Typography variant="h5" sx={{ color: 'white', mb: 5 }}>
           Térkép és Keresés
         </Typography>
@@ -21,7 +21,7 @@ const MyMap: React.FC = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton sx={{ color: 'white' }} onClick={() => { /* keresési logika ide kerülhet */ }}>
+                <IconButton sx={{ color: 'white'  }} onClick={() => { /* keresési logika ide kerülhet */ }}>
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>
@@ -34,30 +34,41 @@ const MyMap: React.FC = () => {
             },
           }}
           sx={{
-            width: { xs: '80%', sm: '60%', md: '50%' },  // Reszponzív szélesség
+            width: { xs: '80%', sm: '60%', md: '50%' },
             mb: 3,
-            maxWidth: '600px',  // Maximális szélesség beállítása
+            maxWidth: '600px', 
           }}
         />
       </Box>
 
-      {/* Leaflet térkép */}
-      <MapContainer 
-        center={position} 
-        zoom={13} 
-        style={{ height: '400px', width: '100%', backgroundColor: '#1c2331' }} // Háttérszín beállítása
-        scrollWheelZoom={false}
+      <Box 
+        sx={{
+          border: '10px solid #161C27', 
+          borderRadius: '25px',         
+          overflow: 'hidden',   
+        }}
       >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </MapContainer>
+        <MapContainer 
+          center={position} 
+          zoom={13} 
+          style={{ 
+            height: '800px', 
+            width: '100%', 
+            backgroundColor: '#1c2331',
+          }} 
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <Marker position={position}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
+      </Box>
     </Container>
   );
 };

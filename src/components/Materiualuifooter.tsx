@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Grid, Typography, Link, Box, IconButton } from '@mui/material';
 import { Facebook, Twitter, Google, Instagram, LinkedIn, GitHub } from '@mui/icons-material';
 
 const Footer: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    window.addEventListener('load', () => {
+      setIsLoaded(true); 
+    });
+
+
+    return () => {
+      window.removeEventListener('load', () => setIsLoaded(true));
+    };
+  }, []);
+
   return (
     <Box sx={{ backgroundColor: '#1c2331', color: 'white', paddingY: 5 }}>
-      {/* Social Media Section */}
+
       <Box sx={{ backgroundColor: '#161C27' , padding: 2 }}>
         <Container>
           <Grid container justifyContent="space-between" alignItems="center">
@@ -37,71 +50,117 @@ const Footer: React.FC = () => {
       </Box>
 
       <Container sx={{ marginTop: 10 }}>
-  <Grid container spacing={5}>
-    {/* Company Info */}
-    <Grid item xs={12} md={3}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>PlázaÁsz</Typography>
-      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-      <Typography variant="body2" sx={{ marginBottom: 2 }}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda animi eaque neque quia, vel modi aut voluptates aspernatur esse vero voluptate perferendis optio tenetur facilis repudiandae quam! Tempore, recusandae quam.
-      </Typography>
-    </Grid>
+        <Grid container spacing={5}>
+          <Grid item xs={12} md={3}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>PlázaÁsz</Typography>
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
 
-    {/* Products Links */}
-    <Grid item xs={12} md={2}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rólunk</Typography>
-      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Nagy-Eperjesi Richárd
-      </Link>
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Tóth Zoltán
-      </Link>
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Hustikker Szabolcs
-      </Link>
-    </Grid>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '20%',
+                  height: '100%',
+                  backgroundColor: '#1E90FF', 
+                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
+                }}
+              />
+            </Box>
+            <Typography variant="body2" sx={{ marginBottom: 2 }}>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda animi eaque neque quia, vel modi aut voluptates aspernatur esse vero voluptate perferendis optio tenetur facilis repudiandae quam! Tempore, recusandae quam.
+            </Typography>
+          </Grid>
 
-    {/* Useful Links */}
-    <Grid item xs={12} md={2}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Hasznos Linkek</Typography>
-      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Bejelentkezés
-      </Link>
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Térkép
-      </Link>
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        Ügyfélszolgálat
-      </Link>
-      <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-        FAQ
-      </Link>
-    </Grid>
+          <Grid item xs={12} md={2}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rólunk</Typography>
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
 
-    {/* Contact Info */}
-    <Grid item xs={12} md={3}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Elérhetőségek</Typography>
-      <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1 }} />
-      <Typography variant="body2" sx={{ marginBottom: 1 }}>
-        <i className="fas fa-home mr-3"></i> 9735 Csepreg, Rákóczi u. 13-15.
-      </Typography>
-      <Typography variant="body2" sx={{ marginBottom: 1 }}>
-        <i className="fas fa-envelope mr-3"></i> plazaasz@gmail.com
-      </Typography>
-      <Typography variant="body2" sx={{ marginBottom: 1 }}>
-        <i className="fas fa-phone mr-3"></i> 06 30 782 8553
-      </Typography>
-      <Typography variant="body2" sx={{ marginBottom: 1 }}>
-        <i className="fas fa-print mr-3"></i> 06 30 555 5555
-      </Typography>
-    </Grid>
-  </Grid>
-</Container>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '20%',
+                  height: '100%',
+                  backgroundColor: '#1E90FF', 
+                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
+                }}
+              />
+            </Box>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Nagy-Eperjesi Richárd
+            </Link>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Tóth Zoltán
+            </Link>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Hustikker Szabolcs
+            </Link>
+          </Grid>
 
+          <Grid item xs={12} md={2}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Hasznos Linkek</Typography>
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
 
-      {/* Copyright Section */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '20%',
+                  height: '100%',
+                  backgroundColor: '#1E90FF', 
+                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
+                }}
+              />
+            </Box>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Bejelentkezés
+            </Link>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Térkép
+            </Link>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Ügyfélszolgálat
+            </Link>
+            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              FAQ
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} md={3}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Elérhetőségek</Typography>
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
+
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '20%',
+                  height: '100%',
+                  backgroundColor: '#1E90FF', 
+                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
+                }}
+              />
+            </Box>
+            <Typography variant="body2" sx={{ marginBottom: 1 }}>
+              <i className="fas fa-home mr-3"></i> 9735 Csepreg, Rákóczi u. 13-15.
+            </Typography>
+            <Typography variant="body2" sx={{ marginBottom: 1 }}>
+              <i className="fas fa-envelope mr-3"></i> plazaasz@gmail.com
+            </Typography>
+            <Typography variant="body2" sx={{ marginBottom: 1 }}>
+              <i className="fas fa-phone mr-3"></i> 06 30 782 8553
+            </Typography>
+            <Typography variant="body2" sx={{ marginBottom: 1 }}>
+              <i className="fas fa-print mr-3"></i> 06 30 555 5555
+            </Typography>
+          </Grid>
+        </Grid>
+      </Container>
+
       <Box sx={{ backgroundColor: '#161C27', textAlign: 'center', paddingY: 3, marginTop: '40px' }}>
         <Typography variant="body2">
           © 2025 Copyright: <Link href="" color="inherit">PlazaAsz.hu</Link>

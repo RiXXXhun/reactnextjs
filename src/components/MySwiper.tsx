@@ -12,11 +12,15 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function App() {
   return (
+
+
     <Container sx={{ backgroundColor: '#1c2331', py: 5, minHeight: '20vh', width: '100%', padding: 0, marginTop: '60px' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4, backgroundColor: '#1c2331' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4, backgroundColor: '#1c2331' , pt: "100px"}}>
         <Typography variant="h5" sx={{ color: 'white', mb: 5 }}>
           GYORSKERESÉS
         </Typography>
+
+
         <TextField
           variant="outlined"
           placeholder="Gyorskeresés..."
@@ -42,6 +46,8 @@ export default function App() {
           }}
         />
       </Box>
+
+
       <Swiper
         spaceBetween={30}
         pagination={{
@@ -63,6 +69,9 @@ export default function App() {
         }}
         slidesPerView={1}
       >
+
+
+
         <SwiperSlide>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200, color: 'black', backgroundColor: '#1c2331', width: '100%' }}>
             Slide 1
@@ -109,6 +118,11 @@ export default function App() {
           </Box>
         </SwiperSlide>
       </Swiper>
+
+
     </Container>
+
+
+
   );
 }

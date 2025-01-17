@@ -104,7 +104,7 @@ export default function SignIn() {
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <LockOutlinedIcon sx={{  fontSize: 60, color: 'white', alignSelf: 'center'  }} />
+          <LockOutlinedIcon sx={{  fontSize: 60, color: 'white', alignSelf: 'center' }} />
           <Typography
             component="h1"
             variant="h4"
