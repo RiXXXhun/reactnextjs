@@ -32,7 +32,6 @@ const cardData = [
     description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
     icon: <BusinessIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
-  
 
 ];
 
@@ -54,7 +53,21 @@ const Materialuiinform = () => {
 
           {cardData.map((card, index) => (
             <Grid item xs={12} sm={8} md={4} lg={4} key={index}>
-              <Card sx={{ borderRadius: '16px', boxShadow: 3, textAlign: 'center', padding: '20px', backgroundColor: '#161C27', color: '#ffffff', pt: "50px" }}>
+              <Card 
+                sx={{ 
+                  borderRadius: '16px', 
+                  boxShadow: 3, 
+                  textAlign: 'center', 
+                  padding: '20px', 
+                  backgroundColor: '#161C27', 
+                  color: '#ffffff', 
+                  pt: "50px",
+                  transition: 'box-shadow 0.3s ease-in-out',
+                  '&:hover': {
+                    boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', // neon-szerű világos kék fény
+                  },
+                }}
+              >
                 <Box
                   sx={{
                     width: '60px',

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as React from 'react';
 import { Container, Typography, Accordion, AccordionSummary, AccordionDetails, Box } from '@mui/material';
@@ -35,7 +35,20 @@ const Materialuifaq: React.FC = () => {
           FAQ
         </Typography>
         {faqs.map((faq, index) => (
-          <Accordion key={index} sx={{ bgcolor: '#1c2331', color: 'white', border: '1px solid white', mb: 2 }}>
+          <Accordion
+            key={index}
+            sx={{
+              bgcolor: '#161C27',
+              borderRadius: 1,
+              color: 'white',
+              border: '1px solid white',
+              mb: '30px', 
+              transition: 'box-shadow 0.3s ease-in-out',
+              '&:hover': {
+                boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)',
+              },
+            }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
               aria-controls={`panel${index}-content`}

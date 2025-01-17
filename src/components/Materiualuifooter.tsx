@@ -7,9 +7,8 @@ const Footer: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener('load', () => {
-      setIsLoaded(true); 
+      setIsLoaded(true);
     });
-
 
     return () => {
       window.removeEventListener('load', () => setIsLoaded(true));
@@ -18,32 +17,44 @@ const Footer: React.FC = () => {
 
   return (
     <Box sx={{ backgroundColor: '#1c2331', color: 'white', paddingY: 5 }}>
-
-      <Box sx={{ backgroundColor: '#161C27' , padding: 2 }}>
+      <Box sx={{ backgroundColor: '#161C27', padding: 2 }}>
         <Container>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
               <Typography variant="body1">Social média elérhetőségeink:</Typography>
             </Grid>
             <Grid item>
-              <IconButton color="inherit">
-                <Facebook />
-              </IconButton>
-              <IconButton color="inherit">
-                <Twitter />
-              </IconButton>
-              <IconButton color="inherit">
-                <Google />
-              </IconButton>
-              <IconButton color="inherit">
-                <Instagram />
-              </IconButton>
-              <IconButton color="inherit">
-                <LinkedIn />
-              </IconButton>
-              <IconButton color="inherit">
-                <GitHub />
-              </IconButton>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 1,
+                  '& .MuiIconButton-root': {
+                    transition: 'box-shadow 0.3s ease-in-out',
+                    '&:hover': {
+                      boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', // Neon kék fény effektus
+                    },
+                  },
+                }}
+              >
+                <IconButton color="inherit">
+                  <Facebook />
+                </IconButton>
+                <IconButton color="inherit">
+                  <Twitter />
+                </IconButton>
+                <IconButton color="inherit">
+                  <Google />
+                </IconButton>
+                <IconButton color="inherit">
+                  <Instagram />
+                </IconButton>
+                <IconButton color="inherit">
+                  <LinkedIn />
+                </IconButton>
+                <IconButton color="inherit">
+                  <GitHub />
+                </IconButton>
+              </Box>
             </Grid>
           </Grid>
         </Container>
@@ -54,7 +65,6 @@ const Footer: React.FC = () => {
           <Grid item xs={12} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>PlázaÁsz</Typography>
             <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-
               <Box
                 sx={{
                   position: 'absolute',
@@ -62,7 +72,7 @@ const Footer: React.FC = () => {
                   left: 0,
                   width: '20%',
                   height: '100%',
-                  backgroundColor: '#1E90FF', 
+                  backgroundColor: '#1E90FF',
                   animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
                 }}
               />
@@ -75,7 +85,6 @@ const Footer: React.FC = () => {
           <Grid item xs={12} md={2}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rólunk</Typography>
             <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-
               <Box
                 sx={{
                   position: 'absolute',
@@ -83,7 +92,7 @@ const Footer: React.FC = () => {
                   left: 0,
                   width: '20%',
                   height: '100%',
-                  backgroundColor: '#1E90FF', 
+                  backgroundColor: '#1E90FF',
                   animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
                 }}
               />
@@ -102,7 +111,6 @@ const Footer: React.FC = () => {
           <Grid item xs={12} md={2}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Hasznos Linkek</Typography>
             <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-
               <Box
                 sx={{
                   position: 'absolute',
@@ -110,7 +118,7 @@ const Footer: React.FC = () => {
                   left: 0,
                   width: '20%',
                   height: '100%',
-                  backgroundColor: '#1E90FF', 
+                  backgroundColor: '#1E90FF',
                   animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
                 }}
               />
@@ -132,7 +140,6 @@ const Footer: React.FC = () => {
           <Grid item xs={12} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Elérhetőségek</Typography>
             <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-
               <Box
                 sx={{
                   position: 'absolute',
@@ -140,7 +147,7 @@ const Footer: React.FC = () => {
                   left: 0,
                   width: '20%',
                   height: '100%',
-                  backgroundColor: '#1E90FF', 
+                  backgroundColor: '#1E90FF',
                   animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
                 }}
               />
