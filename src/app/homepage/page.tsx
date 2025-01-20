@@ -10,6 +10,7 @@ import { Col, Row } from "react-bootstrap";
 import { Box, Slide } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
+import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -27,7 +28,6 @@ export default function Page() {
                 padding: "16px",
             }}
         >
-
             <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <Col>
@@ -36,18 +36,15 @@ export default function Page() {
                 </Row>
             </Slide>
 
-
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <Materialuiinform />
                 </Row>
             </Slide>
 
-
             <Row>
                 <Materialuiline />
             </Row>
-
 
             <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
@@ -59,13 +56,11 @@ export default function Page() {
                 <Materialuiline />
             </Row>
 
-
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <MyMap />
                 </Row>
             </Slide>
-
 
             <Row>
                 <Materialuiline />
@@ -77,12 +72,14 @@ export default function Page() {
                 </Row>
             </Slide>
 
-
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <Materialuifooter />
                 </Row>
             </Slide>
+
+            {/* Görgetés gomb hozzáadása */}
+            <Materialuiscrollbutton />
         </Box>
     );
 }
