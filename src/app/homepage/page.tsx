@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
 import Materialuiinform from "@/components/Materialuiinform";
 import ResponsiveAppBar from "@/components/Materialuinavbar";
-import Materialuisignin from "@/components/Materialuisignin";
 import Materiualuifaq from "@/components/Materiualuifaq";
 import Materialuifooter from "@/components/Materiualuifooter";
 import MyMap from "@/components/Mymap";
@@ -11,7 +10,6 @@ import { Col, Row } from "react-bootstrap";
 import { Box, Slide } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
-import Materialuislider from "@/components/Materialuislider";
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -29,6 +27,7 @@ export default function Page() {
                 padding: "16px",
             }}
         >
+
             <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <Col>
@@ -36,33 +35,37 @@ export default function Page() {
                     </Col>
                 </Row>
             </Slide>
-         
+
 
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <Materialuiinform />
                 </Row>
             </Slide>
-            
+
+
             <Row>
                 <Materialuiline />
             </Row>
 
+
             <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
-                <Materialuislider />
+                    <MySwiper />
                 </Row>
             </Slide>
 
             <Row>
                 <Materialuiline />
             </Row>
+
 
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <MyMap />
                 </Row>
             </Slide>
+
 
             <Row>
                 <Materialuiline />
@@ -73,6 +76,7 @@ export default function Page() {
                     <Materiualuifaq />
                 </Row>
             </Slide>
+
 
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>

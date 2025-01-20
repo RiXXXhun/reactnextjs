@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                   '& .MuiIconButton-root': {
                     transition: 'box-shadow 0.3s ease-in-out',
                     '&:hover': {
-                      boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', // Neon kék fény effektus
+                      boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', 
                     },
                   },
                 }}
