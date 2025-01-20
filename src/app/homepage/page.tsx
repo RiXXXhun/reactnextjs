@@ -10,6 +10,7 @@ import { Col, Row } from "react-bootstrap";
 import { Box, Slide } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
+import ScrollToTopButton from "@/components/Materialuiscrollbutton";  // Importáljuk a nyíl komponenst
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
 
 export default function Page() {

@@ -86,7 +86,7 @@ const HierarchicalNavigation: React.FC = () => {
 
   return (
     <Box p={2} display="flex" flexDirection="column" gap={4}>
-      {/* Search bar */}
+      
       <Box display="flex" justifyContent="center">
         <TextField
           variant="outlined"

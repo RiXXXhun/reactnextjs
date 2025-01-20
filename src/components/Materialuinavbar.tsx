@@ -78,6 +78,14 @@ function ResponsiveAppBar() {
     }
   };
 
+
+
+
+
+
+
+
+
   return (
     <AppBar position="static" sx={{ backgroundColor: '#1c2331', color: '#ecf0f1' }}>
       <Container maxWidth="xl">
@@ -101,6 +109,28 @@ function ResponsiveAppBar() {
           >
             PLÁZAÁSZ
           </Typography>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -165,6 +195,21 @@ function ResponsiveAppBar() {
           </Box>
           
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Nyelvválasztó">
               <IconButton onClick={handleOpenLangMenu} sx={{ p: 0, mr: 2, fontSize: { xl: 20 } }}>
@@ -187,6 +232,20 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white', borderRadius: 1, height: 40, mr: 1 }}>
               <Tooltip title="Gyengénlátó mód">
