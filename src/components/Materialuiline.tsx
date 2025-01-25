@@ -1,17 +1,17 @@
-"use client"
-import React, { useEffect, useState } from 'react';
+"use client";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 
-const Linebar: React.FC = () => {
+export default function Linebar() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
-        window.addEventListener('load', () => {
-            setIsLoaded(true); 
-        });
+        const handleLoad = () => setIsLoaded(true);
+
+        window.addEventListener("load", handleLoad);
 
         return () => {
-            window.removeEventListener('load', () => setIsLoaded(true));
+            window.removeEventListener("load", handleLoad);
         };
     }, []);
 
@@ -19,9 +19,9 @@ const Linebar: React.FC = () => {
         <Box
             sx={{
                 marginTop: "60px",
-                height: "80px", 
-                width: "100%",  
-                backgroundColor: "#161C27", 
+                height: "80px",
+                width: "100%",
+                backgroundColor: "#161C27",
                 position: "relative",
             }}
         >
@@ -46,7 +46,7 @@ const Linebar: React.FC = () => {
                     width: "20%",
                     backgroundColor: "#1E90FF",
                     transform: "translateY(-50%)",
-                    animation: isLoaded ? `moveLine 8s linear infinite` : 'none',
+                    animation: isLoaded ? `moveLine 8s linear infinite` : "none",
                 }}
             />
             <style jsx>{`
@@ -65,5 +65,3 @@ const Linebar: React.FC = () => {
         </Box>
     );
 }
-
-export default Linebar;
