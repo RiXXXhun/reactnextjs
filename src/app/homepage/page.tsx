@@ -10,11 +10,15 @@ import { Col, Row } from "react-bootstrap";
 import { Box, Slide } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
-import ScrollToTopButton from "@/components/Materialuiscrollbutton";  // Importáljuk a nyíl komponenst
+import ScrollToTopButton from "@/components/Materialuiscrollbutton";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
+import Materialuisignin from "@/components/Materialuisignin";
+import Materialuiquicksearch from "@/components/Materialuiquicksearch";
 
 export default function Page() {
     const [open, setOpen] = useState(false);
+
+    
 
     useEffect(() => {
         setOpen(true);
@@ -49,6 +53,7 @@ export default function Page() {
 
             <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
+                    <Materialuiquicksearch />
                     <MySwiper />
                 </Row>
             </Slide>
@@ -73,13 +78,13 @@ export default function Page() {
                 </Row>
             </Slide>
 
+
             <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <Row>
                     <Materialuifooter />
                 </Row>
             </Slide>
 
-            {/* Görgetés gomb hozzáadása */}
             <Materialuiscrollbutton />
         </Box>
     );

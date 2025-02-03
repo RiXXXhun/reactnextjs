@@ -180,50 +180,7 @@ const Materialuiinform = () => {
       }}
     >
 
-      <Typography
-        variant="h6"
-        sx={{
-          color: "#ffffff",
-          marginBottom: "50px",
-        }}
-      >
-        Gyorskeresés
-      </Typography>
-
-
-      <Box
-        sx={{
-          width: {
-            xs: "90%",
-            sm: "70%",
-            md: "50%",
-          },
-          marginBottom: "50px",
-        }}
-      >
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Gyorskeresés..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton sx={{ color: "white" }} onClick={handleSearch}>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-            style: {
-              borderRadius: "25px",
-              border: "2px solid white",
-              color: "white",
-              backgroundColor: "#1c2331",
-            },
-          }}
-        />
-      </Box>
+      
 
       <Typography
         variant="h6"
