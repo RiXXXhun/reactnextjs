@@ -32,7 +32,7 @@ const BackToEarthButton = () => {
         gap: '8px', 
       }}
     >
-      Vissza a Földre
+      Vissza a Főoldalra
       <ExitToAppIcon sx={{ fontSize: '20px' }} />
     </Button>
   );

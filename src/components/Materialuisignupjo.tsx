@@ -36,7 +36,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: '60vh',
+  height: '80vh',
   minHeight: '100%',
   padding: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
@@ -112,6 +112,8 @@ export default function SignUp() {
     return isValid;
   };
 
+
+  
   return (
     <>
       <CssBaseline enableColorScheme />
