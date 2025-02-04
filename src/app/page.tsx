@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter(); 
 
   const handleClick = () => {
-    router.push("/homepage");  
+    window.location.href = '/homepage'; 
   };
 
   return (
