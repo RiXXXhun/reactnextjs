@@ -32,31 +32,6 @@ const cardData = [
     ],
   },
   {
-    title: "Zala vármegye",
-    description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />, 
-    extraCards: [
-      {
-        title: "Zalaegerszeg",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Zala Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Zalakerámia Sportcsarnok", description: "Sportlétesítmény.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-      {
-        title: "Keszthely",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Festetics-kastély", description: "Történelmi helyszín.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Balaton Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-    ],
-  },
-  {
     title: "Győr-Moson-Sopron vármegye",
     description: "Kattints a részletekhez!",
     icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />, 
@@ -81,6 +56,32 @@ const cardData = [
       },
     ],
   },
+  {
+    title: "Zala vármegye",
+    description: "Kattints a részletekhez!",
+    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />, 
+    extraCards: [
+      {
+        title: "Zalaegerszeg",
+        description: "A város nevezetességei.",
+        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+        extraCards: [
+          { title: "Zala Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+          { title: "Zalakerámia Sportcsarnok", description: "Sportlétesítmény.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+        ],
+      },
+      {
+        title: "Keszthely",
+        description: "A város nevezetességei.",
+        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+        extraCards: [
+          { title: "Festetics-kastély", description: "Történelmi helyszín.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+          { title: "Balaton Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+        ],
+      },
+    ],
+  },
+  
 ];
 
 const Materialuiinform = () => {
@@ -116,7 +117,7 @@ const Materialuiinform = () => {
             item
             key={currentPath}
             xs={12}
-            sm={isChild ? 12 : 6}
+            sm={isChild ? 12 : 8}
             md={isChild ? 12 : 4}
             lg={isChild ? 12 : 4}
           >
