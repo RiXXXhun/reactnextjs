@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
@@ -14,8 +15,9 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -33,7 +35,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
   border: '2px solid white',
 }));
 
-const SignInContainer = styled(Stack)(({ theme }) => ({
+const SignUpContainer = styled(Stack)(({ theme }) => ({
   height: '60vh',
   minHeight: '100%',
   padding: theme.spacing(2),
@@ -43,11 +45,13 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   backgroundColor: '#1c2331',
 }));
 
-export default function SignIn() {
+export default function SignUp() {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+  const [usernameError, setUsernameError] = React.useState(false);
+  const [usernameErrorMessage, setUsernameErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -64,6 +68,7 @@ export default function SignIn() {
     if (validateInputs()) {
       const data = new FormData(event.currentTarget);
       console.log({
+        username: data.get('username'),
         email: data.get('email'),
         password: data.get('password'),
       });
@@ -71,10 +76,20 @@ export default function SignIn() {
   };
 
   const validateInputs = () => {
+    const username = document.getElementById('username') as HTMLInputElement;
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
 
     let isValid = true;
+
+    if (!username.value || username.value.length < 4) {
+      setUsernameError(true);
+      setUsernameErrorMessage('A felhasználónévnek legalább 4 karakter hosszúnak kell lennie.');
+      isValid = false;
+    } else {
+      setUsernameError(false);
+      setUsernameErrorMessage('');
+    }
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
@@ -100,15 +115,15 @@ export default function SignIn() {
   return (
     <>
       <CssBaseline enableColorScheme />
-      <SignInContainer direction="column" justifyContent="space-between">
+      <SignUpContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <LockOpenIcon sx={{  fontSize: 60, color: 'white', alignSelf: 'center' }} />
+          <LockOutlinedIcon sx={{ fontSize: 60, color: 'white', alignSelf: 'center' }} />
           <Typography
             component="h1"
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)', textAlign: 'center', color: 'white' }}
           >
-            Bejelentkezés
+            Regisztráció
           </Typography>
           <Box
             component="form"
@@ -122,6 +137,41 @@ export default function SignIn() {
             }}
           >
             <FormControl>
+              <FormLabel htmlFor="username" sx={{ color: 'white' }}>Felhasználónév</FormLabel>
+              <TextField
+                error={usernameError}
+                helperText={usernameErrorMessage}
+                id="username"
+                name="username"
+                placeholder="Felhasználónév"
+                autoComplete="username"
+                autoFocus
+                required
+                fullWidth
+                variant="outlined"
+                color={usernameError ? 'error' : 'primary'}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'white',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'white',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'white',
+                    },
+                  },
+                  '& .MuiInputBase-input': {
+                    color: 'white',
+                  },
+                  '& .MuiFormHelperText-root': {
+                    color: usernameError ? 'error.main' : 'white',
+                  },
+                }}
+              />
+            </FormControl>
+            <FormControl>
               <FormLabel htmlFor="email" sx={{ color: 'white' }}>Email</FormLabel>
               <TextField
                 error={emailError}
@@ -131,7 +181,6 @@ export default function SignIn() {
                 name="email"
                 placeholder="sajatemailed@email.com"
                 autoComplete="email"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
@@ -209,7 +258,7 @@ export default function SignIn() {
                 },
               }}
             >
-              Bejelentkezés
+              Regisztrálás
             </Button>
             <Link
               component="button"
@@ -219,25 +268,23 @@ export default function SignIn() {
               sx={{ alignSelf: 'center', color: 'white' }}
             >
               Elfelejtetted a jelszavad?
-
             </Link>
           </Box>
-          
+
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            
             <Typography sx={{ textAlign: 'center', color: 'white' }}>
-              Még nincs felhasználód ?{' '}
+              Már van felhasználód?{' '}
               <Link
-                href="/registration"
+                href="/login"
                 variant="body2"
                 sx={{ alignSelf: 'center', color: 'white' }}
               >
-                Regisztrálás
+                Bejelentkezés
               </Link>
             </Typography>
           </Box>
         </Card>
-      </SignInContainer>
+      </SignUpContainer>
     </>
   );
 }

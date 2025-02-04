@@ -19,6 +19,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
+import Link from 'next/link'; // Importáljuk a Link komponenst
 
 const pages = ['Kuponok', 'Ügyfélszolgálat', 'Rólunk'];
 const settings = ['Profil', 'Belépés', 'Regisztráció', 'Kijelentkezés'];
@@ -78,14 +79,6 @@ function ResponsiveAppBar() {
     }
   };
 
-
-
-
-
-
-
-
-
   return (
     <AppBar position="static" sx={{ backgroundColor: '#1c2331', color: '#ecf0f1' }}>
       <Container maxWidth="xl">
@@ -95,7 +88,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/homepage"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -104,33 +97,11 @@ function ResponsiveAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              fontSize: { xl: 40, md: 25},
+              fontSize: { xl: 40, md: 25 },
             }}
           >
             PLÁZAÁSZ
           </Typography>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -166,7 +137,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/homepage"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -193,22 +164,6 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Nyelvválasztó">
@@ -232,20 +187,6 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white', borderRadius: 1, height: 40, mr: 1 }}>
               <Tooltip title="Gyengénlátó mód">
@@ -277,19 +218,23 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
+                    {setting === 'Belépés' ? (
+                      <Link href="/login" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> // Link a Bejelentkezéshez, aláhúzás nélkül
+                    ) : setting === 'Regisztráció' ? (
+                      <Link href="/registration" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> // Link a Regisztrációhoz, aláhúzás nélkül
+                    ) : (
+                      setting // A többi menüpont változatlan
+                    )}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           
         </Toolbar>
-
-
-        
       </Container>
     </AppBar>
-    
   );
 }
 

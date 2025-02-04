@@ -4,11 +4,17 @@ import { Container, Box, TextField, IconButton, InputAdornment, Typography } fro
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import SearchIcon from "@mui/icons-material/Search";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialIcon from "@mui/material/SpeedDialIcon";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
+import SaveIcon from "@mui/icons-material/Save";
+import PrintIcon from "@mui/icons-material/Print";
+import ShareIcon from "@mui/icons-material/Share";
 import { LatLngExpression } from "leaflet";
 
 const position: LatLngExpression = [47.1625, 19.5033]; 
 const zoom = 7;
-
 
 const hungaryGeoJson: GeoJSON.FeatureCollection = {
   type: "FeatureCollection",
@@ -38,6 +44,13 @@ const hungaryGeoJson: GeoJSON.FeatureCollection = {
     },
   ],
 };
+
+const actions = [
+  { icon: <FileCopyIcon />, name: "Copy" },
+  { icon: <SaveIcon />, name: "Save" },
+  { icon: <PrintIcon />, name: "Print" },
+  { icon: <ShareIcon />, name: "Share" },
+];
 
 const MyMap: React.FC = () => {
   return (
@@ -83,6 +96,7 @@ const MyMap: React.FC = () => {
           border: "10px solid #161C27",
           borderRadius: "25px",
           overflow: "hidden",
+          position: "relative"
         }}
       >
         <MapContainer
@@ -112,6 +126,44 @@ const MyMap: React.FC = () => {
             <Popup>Magyarország középpontja</Popup>
           </Marker>
         </MapContainer>
+        <Box sx={{ position: "absolute", bottom: 16, right: 16 }}>
+          <SpeedDial
+            ariaLabel="SpeedDial example"
+            icon={<SpeedDialIcon />}
+            sx={{
+              backgroundColor: "#161C27", 
+              "& .MuiSpeedDialIcon-root": {
+                backgroundColor: "#161C27", 
+                color: "white",
+              },
+              "& .MuiSpeedDial-fab": {
+                backgroundColor: "#161C27", 
+                "&:hover": {
+                  backgroundColor: "#161C27",
+                }
+              },
+            }}
+          >
+            {actions.map((action) => (
+              <SpeedDialAction
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                sx={{
+                  backgroundColor: "#1c2331", 
+                  color: "white", 
+                  "&:hover": {
+                    backgroundColor: "#1c2331", 
+                  }
+                }}
+              />
+            ))}
+          </SpeedDial>
+        </Box>
+
+
+
+
       </Box>
     </Container>
   );
