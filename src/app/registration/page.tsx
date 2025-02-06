@@ -11,6 +11,9 @@ import Materialuibackbutton from "@/components/Materialuibackbutton";
 
 export default function Page() {
   return (
+      <>
+          <title>PLÁZAÁSZ Regisztráció</title>
+          <link rel="icon" href="/LogoIcon.ico" />
     <Box
       sx={{
         backgroundColor: "#1c2331",
@@ -31,5 +34,6 @@ export default function Page() {
 
       <Materialuiscrollbutton />
     </Box>
+    </>
   );
 }

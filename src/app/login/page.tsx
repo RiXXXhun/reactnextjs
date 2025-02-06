@@ -9,6 +9,10 @@ import { Box } from "@mui/material";
 
 export default function Page() {
   return (
+    <>
+
+          <title>PLÁZAÁSZ Bejelentkezés</title>
+          <link rel="icon" href="/LogoIcon.ico" />
     <Box
       sx={{
         backgroundColor: "#1c2331",
@@ -27,5 +31,6 @@ export default function Page() {
 
       <Materialuiscrollbutton />
     </Box>
+    </>
   );
 }

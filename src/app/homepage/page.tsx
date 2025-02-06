@@ -1,5 +1,6 @@
 "use client";
 
+import Head from "next/head";
 import Materialuiinform from "@/components/Materialuiinform";
 import ResponsiveAppBar from "@/components/Materialuinavbar";
 import Materiualuifaq from "@/components/Materiualuifaq";
@@ -10,82 +11,82 @@ import { Col, Row } from "react-bootstrap";
 import { Box, Slide } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
-import ScrollToTopButton from "@/components/Materialuiscrollbutton";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
-import Materialuisignin from "@/components/Materialuisignin";
 import Materialuiquicksearch from "@/components/Materialuiquicksearch";
 
 export default function Page() {
     const [open, setOpen] = useState(false);
-
-    
 
     useEffect(() => {
         setOpen(true);
     }, []);
 
     return (
-        <Box
-            sx={{
-                backgroundColor: "#1c2331",
-                minHeight: "100vh",
-                color: "white",
-                padding: "16px",
-            }}
-        >
-            <Slide direction="right" in={open} mountOnEnter unmountOnExit>
+        <>
+            <title>PLÁZAÁSZ Homepage</title>
+            <link rel="icon" href="/LogoIcon.ico" />
+
+            <Box
+                sx={{
+                    backgroundColor: "#1c2331",
+                    minHeight: "100vh",
+                    color: "white",
+                    padding: "16px",
+                }}
+            >
+                <Slide direction="right" in={open} mountOnEnter unmountOnExit>
+                    <Row>
+                        <Col>
+                            <ResponsiveAppBar />
+                        </Col>
+                    </Row>
+                </Slide>
+
+                <Slide direction="left" in={open} mountOnEnter unmountOnExit>
+                    <Row>
+                        <Materialuiinform />
+                    </Row>
+                </Slide>
+
                 <Row>
-                    <Col>
-                        <ResponsiveAppBar />
-                    </Col>
+                    <Materialuiline />
                 </Row>
-            </Slide>
 
-            <Slide direction="left" in={open} mountOnEnter unmountOnExit>
+                <Slide direction="right" in={open} mountOnEnter unmountOnExit>
+                    <Row>
+                        <Materialuiquicksearch />
+                        <MySwiper />
+                    </Row>
+                </Slide>
+
                 <Row>
-                    <Materialuiinform />
+                    <Materialuiline />
                 </Row>
-            </Slide>
 
-            <Row>
-                <Materialuiline />
-            </Row>
+                <Slide direction="left" in={open} mountOnEnter unmountOnExit>
+                    <Row>
+                        <MyMap />
+                    </Row>
+                </Slide>
 
-            <Slide direction="right" in={open} mountOnEnter unmountOnExit>
                 <Row>
-                    <Materialuiquicksearch />
-                    <MySwiper />
+                    <Materialuiline />
                 </Row>
-            </Slide>
 
-            <Row>
-                <Materialuiline />
-            </Row>
+                <Slide direction="right" in={open} mountOnEnter unmountOnExit>
+                    <Row>
+                        <Materiualuifaq />
+                    </Row>
+                </Slide>
 
-            <Slide direction="left" in={open} mountOnEnter unmountOnExit>
-                <Row>
-                    <MyMap />
-                </Row>
-            </Slide>
+                <Slide direction="left" in={open} mountOnEnter unmountOnExit>
+                    <Row>
+                        <Materialuifooter />
+                    </Row>
+                </Slide>
 
-            <Row>
-                <Materialuiline />
-            </Row>
-
-            <Slide direction="right" in={open} mountOnEnter unmountOnExit>
-                <Row>
-                    <Materiualuifaq />
-                </Row>
-            </Slide>
-
-
-            <Slide direction="left" in={open} mountOnEnter unmountOnExit>
-                <Row>
-                    <Materialuifooter />
-                </Row>
-            </Slide>
-
-            <Materialuiscrollbutton />
-        </Box>
+                <Materialuiscrollbutton />
+            </Box>
+        </>
     );
 }
