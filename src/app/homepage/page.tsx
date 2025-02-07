@@ -23,7 +23,7 @@ export default function Page() {
 
     return (
         <>
-            <title>PLÁZAÁSZ Homepage</title>
+            <title>PLÁZAÁSZ Főoldal</title>
             
 
             <Box
