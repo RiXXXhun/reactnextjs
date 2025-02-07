@@ -220,11 +220,11 @@ function ResponsiveAppBar() {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
                     {setting === 'Belépés' ? (
-                      <Link href="/login" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> // Link a Bejelentkezéshez, aláhúzás nélkül
+                      <Link href="/login" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> 
                     ) : setting === 'Regisztráció' ? (
-                      <Link href="/registration" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> // Link a Regisztrációhoz, aláhúzás nélkül
+                      <Link href="/registration" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> 
                     ) : (
-                      setting // A többi menüpont változatlan
+                      setting 
                     )}
                   </Typography>
                 </MenuItem>
