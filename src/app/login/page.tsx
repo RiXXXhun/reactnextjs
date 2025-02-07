@@ -12,7 +12,7 @@ export default function Page() {
     <>
 
           <title>PLÁZAÁSZ Bejelentkezés</title>
-          <link rel="icon" href="/LogoIcon.ico" />
+          
     <Box
       sx={{
         backgroundColor: "#1c2331",

@@ -13,7 +13,7 @@ export default function Page() {
   return (
       <>
           <title>PLÁZAÁSZ Regisztráció</title>
-          <link rel="icon" href="/LogoIcon.ico" />
+          
     <Box
       sx={{
         backgroundColor: "#1c2331",

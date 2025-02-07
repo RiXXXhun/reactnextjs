@@ -24,7 +24,7 @@ export default function Page() {
     return (
         <>
             <title>PLÁZAÁSZ Homepage</title>
-            <link rel="icon" href="/LogoIcon.ico" />
+            
 
             <Box
                 sx={{
