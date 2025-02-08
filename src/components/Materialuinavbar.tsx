@@ -179,7 +179,7 @@ function ResponsiveAppBar() {
                 )}
               </Button>
             ))}
-            {/* Ügyfélszolgálat link hozzáadása */}
+
             <Button
               key="Ügyfélszolgálat"
               onClick={handleCloseNavMenu}
