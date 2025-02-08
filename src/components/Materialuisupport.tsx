@@ -34,7 +34,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#1c2331", py: 3 }}>
+    <Box sx={{ backgroundColor: "#1c2331", py: 3, mt: 20, mb: 20 }}>
       <Container>
         <Grid container spacing={4}>
 

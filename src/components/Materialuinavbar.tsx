@@ -1,5 +1,4 @@
-'use client';
-
+"use client"
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,7 +20,7 @@ import Switch from '@mui/material/Switch';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import Link from 'next/link';
 
-const pages = ['Kuponok', 'Ügyfélszolgálat', 'Rólunk'];
+const pages = ['Kuponok', 'Rólunk']; 
 const settings = ['Profil', 'Belépés', 'Regisztráció', 'Kijelentkezés'];
 const languages = ['English', 'Deutsch'];
 
@@ -135,6 +134,11 @@ function ResponsiveAppBar() {
                   )}
                 </MenuItem>
               ))}
+              <MenuItem key="Ügyfélszolgálat" onClick={handleCloseNavMenu}>
+                <Link href="/support" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>Ügyfélszolgálat</Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -175,6 +179,16 @@ function ResponsiveAppBar() {
                 )}
               </Button>
             ))}
+            {/* Ügyfélszolgálat link hozzáadása */}
+            <Button
+              key="Ügyfélszolgálat"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 25, md: 20 }, mr: { xl: 2.5 } }}
+            >
+              <Link href="/support" style={{ textDecoration: 'none', color: 'inherit' }}>
+                Ügyfélszolgálat
+              </Link>
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
