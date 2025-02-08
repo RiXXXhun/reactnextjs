@@ -16,7 +16,6 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 
-
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -25,12 +24,16 @@ const Card = styled(MuiCard)(({ theme }) => ({
   padding: theme.spacing(4),
   gap: theme.spacing(2),
   margin: 'auto',
+  border: 'none', 
+  borderRadius: '20px', 
+  backgroundColor: '#161C27', 
+  transition: 'box-shadow 0.3s ease-in-out', 
+  '&:hover': {
+    boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)',
+  },
   [theme.breakpoints.up('sm')]: {
     maxWidth: '450px',
   },
-  boxShadow: 'none',
-  backgroundColor: '#1c2331',
-  border: '2px solid white',
 }));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({

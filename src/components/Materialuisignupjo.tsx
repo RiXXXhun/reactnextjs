@@ -31,8 +31,13 @@ const Card = styled(MuiCard)(({ theme }) => ({
     maxWidth: '450px',
   },
   boxShadow: 'none',
-  backgroundColor: '#1c2331',
-  border: '2px solid white',
+  backgroundColor: '#161C27',
+  border: 'none',
+  borderRadius: '20px',
+  transition: 'box-shadow 0.3s ease-in-out',
+  '&:hover': {
+    boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', 
+  },
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
@@ -112,8 +117,6 @@ export default function SignUp() {
     return isValid;
   };
 
-
-  
   return (
     <>
       <CssBaseline enableColorScheme />

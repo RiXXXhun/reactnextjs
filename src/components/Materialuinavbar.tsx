@@ -19,7 +19,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import Link from 'next/link'; // Importáljuk a Link komponenst
+import Link from 'next/link'; 
 
 const pages = ['Kuponok', 'Ügyfélszolgálat', 'Rólunk'];
 const settings = ['Profil', 'Belépés', 'Regisztráció', 'Kijelentkezés'];

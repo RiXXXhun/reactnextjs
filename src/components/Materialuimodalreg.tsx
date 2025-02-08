@@ -21,7 +21,6 @@ const style = {
   p: 4,
 };
 
-// Props interface, amely az open és onClose prop-okat tartalmazza
 interface RegistrationModalProps {
   open: boolean;
   onClose: () => void;

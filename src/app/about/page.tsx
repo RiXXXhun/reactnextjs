@@ -1,6 +1,7 @@
 "use client";
 
 import Materialuiabout from "@/components/Materialuiabout";
+import Materialuiaboutmembers from "@/components/Materialuiaboutmembers";
 import Materialuibackbutton from "@/components/Materialuibackbutton";
 import ResponsiveAppBar from "@/components/Materialuinavbar";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
@@ -27,6 +28,8 @@ export default function Page() {
       <Materialuibackbutton />
       
       <Materialuiabout />
+
+      <Materialuiaboutmembers />
       
       <Materialuifooter />
 

@@ -16,13 +16,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  title: "PLÁZAÁSZ",
   description: "All rights reserved by: PLÁZAÁSZ",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/public/apple-touch-icon-180x180.png",
-  },
+  icons: [
+    {
+      rel: "icon",
+      url: "/favicon.ico", 
+    },
+    {
+      rel: "apple-touch-icon",
+      url: "/apple-touch-icon-180x180.png",
+    },
+    {
+      rel: "shortcut icon",
+      url: "/favicon.ico", 
+    },
+  ],
 };
+
 
 export default function RootLayout({
   children,

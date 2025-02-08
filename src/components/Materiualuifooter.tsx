@@ -64,18 +64,8 @@ const Footer: React.FC = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>PlázaÁsz</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '20%',
-                  height: '100%',
-                  backgroundColor: '#1E90FF',
-                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
-                }}
-              />
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#1E90FF', marginY: 1, position: 'relative' }}>
+              
             </Box>
             <Typography variant="body2" sx={{ marginBottom: 2 }}>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda animi eaque neque quia, vel modi aut voluptates aspernatur esse vero voluptate perferendis optio tenetur facilis repudiandae quam! Tempore, recusandae quam.
@@ -84,18 +74,8 @@ const Footer: React.FC = () => {
 
           <Grid item xs={12} md={2}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rólunk</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '20%',
-                  height: '100%',
-                  backgroundColor: '#1E90FF',
-                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
-                }}
-              />
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#1E90FF', marginY: 1, position: 'relative' }}>
+              
             </Box>
             <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
               Nagy-Eperjesi Richárd
@@ -110,18 +90,8 @@ const Footer: React.FC = () => {
 
           <Grid item xs={12} md={2}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Hasznos Linkek</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '20%',
-                  height: '100%',
-                  backgroundColor: '#1E90FF',
-                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
-                }}
-              />
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#1E90FF', marginY: 1, position: 'relative' }}>
+              
             </Box>
             <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
               Bejelentkezés
@@ -139,18 +109,8 @@ const Footer: React.FC = () => {
 
           <Grid item xs={12} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Elérhetőségek</Typography>
-            <Box sx={{ width: 60, height: 2, backgroundColor: '#7c4dff', marginY: 1, position: 'relative' }}>
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '20%',
-                  height: '100%',
-                  backgroundColor: '#1E90FF',
-                  animation: isLoaded ? `moveLine 3s linear infinite` : 'none',
-                }}
-              />
+            <Box sx={{ width: 60, height: 2, backgroundColor: '#1E90FF', marginY: 1, position: 'relative' }}>
+              
             </Box>
             <Typography variant="body2" sx={{ marginBottom: 1 }}>
               <i className="fas fa-home mr-3"></i> 9735 Csepreg, Rákóczi u. 13-15.

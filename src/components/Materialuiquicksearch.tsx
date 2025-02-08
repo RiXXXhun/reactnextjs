@@ -122,7 +122,7 @@ const QuickSearch: React.FC = () => {
               zIndex: 1,
               top: "calc(100% + 10px)",
               width: "100%",
-              maxHeight: "135px", // 150px - 15px
+              maxHeight: "135px", 
               overflowY: "auto",
               backgroundColor: "#161C27"
             }}

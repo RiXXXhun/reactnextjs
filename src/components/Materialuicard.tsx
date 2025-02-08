@@ -17,7 +17,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-// Dummy data
+
 const data = {
   Vármegyék: [
     {
