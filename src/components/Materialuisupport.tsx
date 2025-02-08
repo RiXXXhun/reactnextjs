@@ -215,40 +215,41 @@ const ContactForm: React.FC = () => {
               </FormControl>
 
 
-              <FormControl required fullWidth sx={{ mb: 3 }}>
+            <FormControl required fullWidth sx={{ mb: 3 }}>
                 <FormLabel htmlFor="message" sx={{ color: 'white' }}>
-                  Üzenet
+                    Üzenet
                 </FormLabel>
                 <TextField
-                  id="message"
-                  name="message"
-                  placeholder="Üzenet"
-                  value={formData.message}
-                  onChange={handleChange}
-                  variant="outlined"
-                  multiline
-                  rows={4}
-                  inputProps={{
-                    maxLength: 1000, 
-                  }}
-                  sx={{
+                    id="message"
+                    name="message"
+                    placeholder="Üzenet"
+                    value={formData.message}
+                    onChange={handleChange}
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    inputProps={{
+                    maxLength: 1000,
+                    }}
+                    sx={{
                     '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
+                        '& fieldset': {
                         borderColor: 'white',
-                      },
-                      '&:hover fieldset': {
+                        },
+                        '&:hover fieldset': {
                         borderColor: 'white',
-                      },
-                      '&.Mui-focused fieldset': {
+                        },
+                        '&.Mui-focused fieldset': {
                         borderColor: 'white',
-                      },
+                        },
                     },
                     '& .MuiInputBase-input': {
-                      color: 'white',
+                        color: 'white',
                     },
-                  }}
+                    }}
                 />
-              </FormControl>
+            </FormControl>
+
 
               <Button
                 type="submit"

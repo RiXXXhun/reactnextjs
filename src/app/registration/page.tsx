@@ -4,7 +4,6 @@ import ResponsiveAppBar from "@/components/Materialuinavbar";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
 import Materialuifooter from "@/components/Materiualuifooter";
 import { Box } from "@mui/material";
-import Materialuisignup from "@/components/Materialuisignup";
 import Materialuisignupjo from "@/components/Materialuisignupjo";
 import Materialuicardreg from "@/components/Materialuicardreg";
 import Materialuibackbutton from "@/components/Materialuibackbutton";
