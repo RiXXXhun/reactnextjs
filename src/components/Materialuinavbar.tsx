@@ -19,7 +19,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import Link from 'next/link'; 
+import Link from 'next/link';
 
 const pages = ['Kuponok', 'Ügyfélszolgálat', 'Rólunk'];
 const settings = ['Profil', 'Belépés', 'Regisztráció', 'Kijelentkezés'];
@@ -126,7 +126,13 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{page}</Typography>
+                  {page === 'Rólunk' ? (
+                    <Link href="/about" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{page}</Typography>
+                    </Link>
+                  ) : (
+                    <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>{page}</Typography>
+                  )}
                 </MenuItem>
               ))}
             </Menu>
@@ -160,7 +166,13 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', fontSize: { xl: 25, md: 20 }, mr: { xl: 2.5 } }}
               >
-                {page}
+                {page === 'Rólunk' ? (
+                  <Link href="/about" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    {page}
+                  </Link>
+                ) : (
+                  page
+                )}
               </Button>
             ))}
           </Box>

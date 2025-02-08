@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Container, Box, TextField, IconButton, InputAdornment, Typography } from "@mui/material";
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import SearchIcon from "@mui/icons-material/Search";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -122,9 +122,6 @@ const MyMap: React.FC = () => {
               dashArray: "5,5", 
             }}
           />
-          <Marker position={position}>
-            <Popup>Magyarország középpontja</Popup>
-          </Marker>
         </MapContainer>
         <Box sx={{ position: "absolute", bottom: 16, right: 16 }}>
           <SpeedDial
@@ -160,10 +157,6 @@ const MyMap: React.FC = () => {
             ))}
           </SpeedDial>
         </Box>
-
-
-
-
       </Box>
     </Container>
   );
