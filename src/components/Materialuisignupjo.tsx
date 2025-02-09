@@ -1,23 +1,18 @@
-"use client"
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
+import Link from '@mui/material/Link';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -57,26 +52,40 @@ export default function SignUp() {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [usernameError, setUsernameError] = React.useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (validateInputs()) {
       const data = new FormData(event.currentTarget);
-      console.log({
+      const userData = {
         username: data.get('username'),
         email: data.get('email'),
         password: data.get('password'),
-      });
+      };
+
+      try {
+        const response = await fetch('http://localhost:3000/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Sikeres regisztráció:', result);
+          alert('Sikeresen regisztráltál!');
+        } else {
+          const errorData = await response.json();
+          console.error('Regisztrációs hiba:', errorData);
+          alert('Hiba történt a regisztráció során!');
+        }
+      } catch (error) {
+        console.error('Hálózati hiba:', error);
+        alert('Hálózati hiba történt!');
+      }
     }
   };
 
@@ -254,36 +263,23 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              onClick={validateInputs}
               sx={{
-                backgroundColor: 'white',
-                color: 'black',
+                backgroundColor: 'rgba(50, 150, 255, 0.8)',
+                color: 'white',
+                fontWeight: 'bold',
                 '&:hover': {
-                  backgroundColor: 'grey.300',
+                  backgroundColor: 'rgba(50, 150, 255, 1)',
                 },
+                padding: '0.75rem',
+                marginBottom: '1rem',
               }}
             >
               Regisztrálás
             </Button>
-            <Link
-              component="button"
-              type="button"
-              onClick={handleClickOpen}
-              variant="body1"
-              sx={{ alignSelf: 'center', color: 'white' }}
-            >
-              Elfelejtetted a jelszavad?
-            </Link>
-          </Box>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Typography sx={{ textAlign: 'center', color: 'white' }}>
+            <Typography align="center" sx={{ color: 'white' }}>
               Már van felhasználód?{' '}
-              <Link
-                href="/login"
-                variant="body2"
-                sx={{ alignSelf: 'center', color: 'white' }}
-              >
+              <Link href="/login" sx={{ color: 'rgba(50, 150, 255, 0.8)', '&:hover': { color: 'rgba(50, 150, 255, 1)' } }}>
                 Bejelentkezés
               </Link>
             </Typography>
