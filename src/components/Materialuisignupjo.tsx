@@ -36,13 +36,13 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: '80vh',
-  minHeight: '100%',
+  minHeight: "60vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   padding: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4),
-  },
-  backgroundColor: '#1c2331',
+  backgroundColor: "#1c2331",
+  position: "relative",
 }));
 
 export default function SignUp() {
@@ -255,10 +255,6 @@ export default function SignUp() {
                 }}
               />
             </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" sx={{ color: 'white' }} />}
-              label={<Typography sx={{ color: 'white' }}>Emlékezzen rám!</Typography>}
-            />
             <Button
               type="submit"
               fullWidth
