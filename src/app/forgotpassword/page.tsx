@@ -1,18 +1,19 @@
 "use client";
 
 import Materialuibackbutton from "@/components/Materialuibackbutton";
-import Materialuicoupons from "@/components/Materialuicoupons";
+import Materialuiforgotpass from "@/components/Materialuiforgotpass";
 import ResponsiveAppBar from "@/components/Materialuinavbar";
+import MaterialuiNewPassword from "@/components/MaterialuiNewPassword";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
-
 import Materialuifooter from "@/components/Materiualuifooter";
 import { Box } from "@mui/material";
 
 export default function Page() {
+  
   return (
     <>
 
-          <title>PLÁZAÁSZ Kuponok</title>
+          <title>PLÁZAÁSZ Jelszó elfelejtés</title>
           
     <Box
       sx={{
@@ -26,9 +27,8 @@ export default function Page() {
 
       <Materialuibackbutton />
       
+      <Materialuiforgotpass /> 
       
-      <Materialuicoupons />
-     
       <Materialuifooter />
 
       <Materialuiscrollbutton />

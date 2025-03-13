@@ -1,20 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 
 export default function Linebar() {
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-    useEffect(() => {
-        const handleLoad = () => setIsLoaded(true);
-
-        window.addEventListener("load", handleLoad);
-
-        return () => {
-            window.removeEventListener("load", handleLoad);
-        };
-    }, []);
-
     return (
         <Box
             sx={{
@@ -46,10 +34,10 @@ export default function Linebar() {
                     width: "20%",
                     backgroundColor: "#1E90FF",
                     transform: "translateY(-50%)",
-                    animation: isLoaded ? `moveLine 8s linear infinite` : "none",
+                    animation: `moveLine 8s linear infinite`,
                 }}
             />
-            <style jsx>{`
+            <style jsx global>{`
                 @keyframes moveLine {
                     0% {
                         left: 0;
