@@ -1,7 +1,6 @@
-"use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Box, TextField, IconButton, InputAdornment, Typography } from "@mui/material";
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import SearchIcon from "@mui/icons-material/Search";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -12,38 +11,20 @@ import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 import { LatLngExpression } from "leaflet";
+import L from "leaflet"; 
 
 const position: LatLngExpression = [47.1625, 19.5033]; 
 const zoom = 7;
+const budapestPosition: LatLngExpression = [47.4979, 19.0402];
 
-const hungaryGeoJson: GeoJSON.FeatureCollection = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      properties: { name: "Hungary Boundary" },
-      geometry: {
-        type: "LineString", 
-        coordinates: [
-          [16.2022, 46.8524],
-          [16.5342, 47.4955],
-          [16.9596, 47.8818],
-          [18.8319, 48.5852],
-          [19.6618, 48.2666],
-          [20.8174, 48.65],
-          [22.0856, 48.4223],
-          [22.7105, 48.0954],
-          [22.0998, 47.3346],
-          [21.5202, 46.7403],
-          [21, 46.3249],
-          [18.8298, 45.9089],
-          [17.6301, 46.1662],
-          [16.2022, 46.8524], 
-        ],
-      },
-    },
-  ],
-};
+
+const randomPlaces = [
+  { name: "Parlament", position: [47.5079, 19.0450] as LatLngExpression, link: "https://hu.wikipedia.org/wiki/Országház" },
+  { name: "Hősök tere", position: [47.5145, 19.0760] as LatLngExpression, link: "https://hu.wikipedia.org/wiki/H%C5%91s%C3%B6k_tere" },
+  { name: "Buda Castle", position: [47.4969, 19.0399] as LatLngExpression, link: "https://hu.wikipedia.org/wiki/Buda_V%C3%A1r" },
+];
+
+
 
 const actions = [
   { icon: <FileCopyIcon />, name: "Copy" },
@@ -53,6 +34,19 @@ const actions = [
 ];
 
 const MyMap: React.FC = () => {
+  useEffect(() => {
+
+    const customIcon = new L.Icon({
+      iconUrl: '/Logo.png', 
+      iconSize: [40, 40], 
+      iconAnchor: [20, 40], 
+      popupAnchor: [0, -40], 
+    });
+    
+
+    L.Marker.prototype.options.icon = customIcon;
+  }, []);
+
   return (
     <Container
       sx={{ backgroundColor: "#1c2331", py: 5, minHeight: "24vh", maxWidth: "lg", mx: "auto", pt: "100px" }}
@@ -113,16 +107,35 @@ const MyMap: React.FC = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <GeoJSON
-            data={hungaryGeoJson}
-            style={{
-              color: "red", 
-              weight: 3, 
-              opacity: 1,
-              dashArray: "5,5", 
-            }}
-          />
+          
+
+          <Marker position={budapestPosition}>
+            <Popup>
+              <Typography variant="body1">
+                Továbbiak...
+                <br />
+                <a href="https://hu.wikipedia.org/wiki/Budapest" target="_blank" rel="noopener noreferrer">
+                  Nyisd meg a Wikipédiát!
+                </a>
+              </Typography>
+            </Popup>
+          </Marker>
+
+          {randomPlaces.map((place) => (
+            <Marker key={place.name} position={place.position}>
+              <Popup>
+                <Typography variant="body1">
+                  {place.name}
+                  <br />
+                  <a href={place.link} target="_blank" rel="noopener noreferrer">
+                    Nyisd meg a Wikipédiát!
+                  </a>
+                </Typography>
+              </Popup>
+            </Marker>
+          ))}
         </MapContainer>
+
         <Box sx={{ position: "absolute", bottom: 16, right: 16 }}>
           <SpeedDial
             ariaLabel="SpeedDial example"
