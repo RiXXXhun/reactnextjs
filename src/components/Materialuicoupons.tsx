@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Grid, Typography, Card, Box, Container } from "@mui/material";
+import QRCode from "react-qr-code";
 
 const Materialuiinform = () => {
   const [coupons, setCoupons] = useState<any[]>([]);
@@ -9,7 +10,7 @@ const Materialuiinform = () => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const response = await fetch("/api/stores"); 
+        const response = await fetch("/api/stores");
         const data = await response.json();
         setStores(data);
       } catch (error) {
@@ -34,11 +35,16 @@ const Materialuiinform = () => {
     fetchCoupons();
   }, []);
 
-
   const getStoreName = (storeId: number) => {
     const store = stores.find((store) => store.id === storeId);
     return store ? store.name : "Ismeretlen bolt";
   };
+
+  useEffect(() => {
+    coupons.forEach((coupon) => {
+      console.log(`Coupon ID: ${coupon.id}, QR Code: ${coupon.qrCode}`);
+    });
+  }, [coupons]);
 
   return (
     <Container
@@ -69,7 +75,7 @@ const Materialuiinform = () => {
                 color: "#ffffff",
                 textAlign: "center",
                 marginBottom: "30px",
-                textTransform: "uppercase", 
+                textTransform: "uppercase",
               }}
             >
               Kuponok
@@ -93,7 +99,6 @@ const Materialuiinform = () => {
                   },
                 }}
               >
-
                 <Box sx={{ marginBottom: "16px" }}>
                   <Typography variant="h5" sx={{ color: "#ffffff", textTransform: "uppercase" }}>
                     {card.discount}%
@@ -108,12 +113,28 @@ const Materialuiinform = () => {
                     backgroundColor: "#161C27",
                     display: "flex",
                     justifyContent: "center",
+                    position: "relative", 
                   }}
                 >
-                  <img
-                    src={card.qrCode}
-                    alt="QR Code"
-                    style={{ width: "300px", height: "300px" }}
+                  <QRCode
+                    value={card.qrCode}
+                    size={300}
+                    bgColor="#161C27"
+                    fgColor="#ffffff"
+                  />
+
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      width: "40px",
+                      height: "40px",
+                      backgroundImage: "url('/Logo.png')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
                   />
                 </Box>
 
@@ -134,7 +155,6 @@ const Materialuiinform = () => {
                     {getStoreName(card.storeId)}
                   </Typography>
                 </Box>
-
 
                 <Box sx={{ marginBottom: "16px" }}>
                   <Typography variant="body1" sx={{ color: "#ffffff", textTransform: "uppercase" }}>

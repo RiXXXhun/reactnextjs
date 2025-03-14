@@ -27,7 +27,6 @@ const CouponForm: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState<string>('');
   const [alertSeverity, setAlertSeverity] = useState<'success' | 'error'>('error');
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
-  const [qrCode] = useState<string>('qrcode1.png');
 
   useEffect(() => {
     const fetchStores = async () => {
@@ -63,6 +62,18 @@ const CouponForm: React.FC = () => {
     fetchCoupons();
   }, []);
 
+
+  const generateQrCode = (discount: number) => {
+    const randomNumbers = Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join('');
+    return `PLÁZAÁSZ-${discount}-${randomNumbers}`;
+  };
+
+  
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const validFromDate = new Date(validFrom);
+  const validUntilDate = new Date(validUntil);
+
   const validateForm = () => {
     if (discount <= 0 || discount > 99) {
       setAlertMessage('Kedvezménynek 1 és 99 közötti egész számnak kell lennie!');
@@ -71,13 +82,16 @@ const CouponForm: React.FC = () => {
       return false;
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const validFromDate = new Date(validFrom);
-    const validUntilDate = new Date(validUntil);
 
     if (validFromDate < today) {
       setAlertMessage('Az érvényesség kezdete nem lehet a mai napnál régebbi!');
+      setAlertSeverity('error');
+      setOpenSnackbar(true);
+      return false;
+    }
+
+    if (validUntilDate < validFromDate) {
+      setAlertMessage('Az érvényesség vége nem lehet korábbi, mint az érvényesség kezdete!');
       setAlertSeverity('error');
       setOpenSnackbar(true);
       return false;
@@ -96,6 +110,8 @@ const CouponForm: React.FC = () => {
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
+
+    const qrCode = generateQrCode(discount);
     const couponData = {
       qrCode,
       discount,
@@ -248,6 +264,7 @@ const CouponForm: React.FC = () => {
               <TableCell align="center">Kedvezmény</TableCell>
               <TableCell align="center">Érvényesség kezdete</TableCell>
               <TableCell align="center">Érvényesség vége</TableCell>
+              <TableCell align="center">Bolt id</TableCell>
               <TableCell align="center">Felhasználási módja</TableCell>
               <TableCell align="center">Műveletek</TableCell>
             </TableRow>
@@ -260,6 +277,7 @@ const CouponForm: React.FC = () => {
                 <TableCell align="center">{coupon.discount}%</TableCell>
                 <TableCell align="center">{new Date(coupon.validFrom).toLocaleDateString()}</TableCell>
                 <TableCell align="center">{new Date(coupon.validUntil).toLocaleDateString()}</TableCell>
+                <TableCell align="center">{coupon.storeId}</TableCell>
                 <TableCell align="center">{coupon.usageDetails}</TableCell>
                 <TableCell align="center">
                   <Button
