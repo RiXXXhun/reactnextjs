@@ -12,18 +12,17 @@ model Support {
   fullName  String
   email     String
   phone     String
-  message   String @db.VarChar(1000) 
+  message   String   @db.VarChar(1000)
   createdAt DateTime @default(now())
 }
 
-
 model User {
-  id                   Int    @id @default(autoincrement())
-  username             String @unique
-  email                String @unique
-  password             String
+  id                     Int      @id @default(autoincrement())
+  username               String   @unique
+  email                  String   @unique
+  password               String
   securityQuestionAnswer String
-  createdAt            DateTime @default(now())
+  createdAt              DateTime @default(now())
 }
 
 model Admin {
@@ -33,20 +32,54 @@ model Admin {
 }
 
 model Coupon {
-  id            Int      @id @default(autoincrement())
-  qrCode        String
-  discount      String
-  validFrom     DateTime
-  validUntil    DateTime
-  usageDetails  String
-  storeId       Int      
-  store         Store    @relation(fields: [storeId], references: [id])
-  createdAt     DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  qrCode       String
+  discount     String
+  validFrom    DateTime
+  validUntil   DateTime
+  usageDetails String
+  storeId      Int
+  store        Store    @relation(fields: [storeId], references: [id])
+  createdAt    DateTime @default(now())
 }
 
 model Store {
   id        Int      @id @default(autoincrement())
-  name      String   @unique    // Itt állítjuk be, hogy a name mező unique legyen
-  coupons   Coupon[] 
+  name      String   @unique
+  coupons   Coupon[]
   createdAt DateTime @default(now())
+}
+
+model Plaza {
+  id           Int          @id @default(autoincrement())
+  plazaName    String       @unique
+  location     String       @unique
+  openingTime  String
+  closingTime  String
+  email        String
+  phone        String
+  image        String?
+  description  String?
+  plazaStores  PlazaStore[] @relation("PlazaToStores")
+  leafletMapId Int          @unique
+  countyId     Int
+  county       County       @relation(fields: [countyId], references: [id])
+}
+
+model PlazaStore {
+  id     Int     @id @default(autoincrement())
+  name   String
+  plazas Plaza[] @relation("PlazaToStores")
+}
+
+model LeafletMap {
+  id          Int    @id @default(autoincrement())
+  plazaName   String
+  coordinates String
+}
+
+model County {
+  id     Int     @id @default(autoincrement())
+  name   String
+  plazas Plaza[]
 }
