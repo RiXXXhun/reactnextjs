@@ -69,17 +69,22 @@ model Plaza {
 model PlazaStore {
   id     Int     @id @default(autoincrement())
   name   String
+  openingTime   String
+  closingTime   String
   plazas Plaza[] @relation("PlazaToStores")
 }
 
 model LeafletMap {
-  id          Int    @id @default(autoincrement())
-  plazaName   String
-  coordinates String
+  id         Int     @id @default(autoincrement())
+  plazaMapName  String
+  latitude   Float
+  longitude  Float
 }
+
 
 model County {
   id     Int     @id @default(autoincrement())
   name   String
   plazas Plaza[]
 }
+
