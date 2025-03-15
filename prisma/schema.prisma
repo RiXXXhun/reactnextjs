@@ -54,6 +54,7 @@ model Plaza {
   id           Int          @id @default(autoincrement())
   plazaName    String       @unique
   location     String       @unique
+  city         String
   openingTime  String
   closingTime  String
   email        String
