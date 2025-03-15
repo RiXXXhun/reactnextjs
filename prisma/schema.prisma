@@ -65,6 +65,7 @@ model Plaza {
   leafletMapId Int          @unique
   countyId     Int
   county       County       @relation(fields: [countyId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model PlazaStore {
@@ -73,6 +74,7 @@ model PlazaStore {
   openingTime   String
   closingTime   String
   plazas Plaza[] @relation("PlazaToStores")
+  createdAt DateTime @default(now())
 }
 
 model LeafletMap {
@@ -80,6 +82,7 @@ model LeafletMap {
   plazaMapName  String
   latitude   Float
   longitude  Float
+  createdAt DateTime @default(now())
 }
 
 
@@ -87,5 +90,6 @@ model County {
   id     Int     @id @default(autoincrement())
   name   String
   plazas Plaza[]
+  createdAt DateTime @default(now())
 }
 
