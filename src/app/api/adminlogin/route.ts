@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // 🔹 Helyes bcrypt összehasonlítás
+  // Bcrypt összehasonlítás adminpassword
   const passwordMatch = await bcrypt.compare(password, admin.password);
 
   if (!passwordMatch) {
