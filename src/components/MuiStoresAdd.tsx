@@ -87,7 +87,7 @@ const StoreManager: React.FC = () => {
   };
 
   return (
-    <Box sx={{ padding: 2, mt: "200px" }}>
+    <Box sx={{ padding: 2, mt: "200px" }} id='storeSection'>
       <h2>Bolt Hozzáadás</h2>
 
 
