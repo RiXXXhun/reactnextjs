@@ -13,6 +13,7 @@ import Materialuiline from "@/components/Materialuiline";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
 import Materialuiquicksearch from "@/components/Materialuiquicksearch";
 import MaterialuiCookie from "@/components/MaterialuiCookie";
+import MuiVisualSearch from "@/components/MuiVisualSearch";
 
 export default function Page() {
     const [loading, setLoading] = useState(true);
@@ -84,6 +85,7 @@ export default function Page() {
                         <MySwiper />
                     </Row>
                 </Slide>
+
 
                 <Row>
                     <Materialuiline />

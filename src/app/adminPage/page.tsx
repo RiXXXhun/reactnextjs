@@ -8,6 +8,7 @@ import MuiStoresAdd from "@/components/MuiStoresAdd";
 import MuiCouponAdd from "@/components/MuiCouponAdd";
 import MuiUser from "@/components/MuiUser";
 import MuiSupport from "@/components/MuiSupport";
+import MuiPlazaStore from "@/components/MuiPlazaStore";
 
 const AdminPage = () => {
   const [username, setUsername] = useState("");
@@ -119,14 +120,25 @@ const AdminPage = () => {
                 onClick={() => scrollToSection('storeSection')}
                 sx={{ marginRight: "20px" }}
               >
-                Boltok
+                Kupon Boltok
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => scrollToSection('plazaStoreSection')}
+                sx={{ marginRight: "20px" }}
+              >
+                Pláza Boltok
               </Button>
             </Box>
             
+
+
             <MuiUser />
             <MuiSupport />
             <MuiCouponAdd/>
             <MuiStoresAdd />
+            <MuiPlazaStore />
             
 
           </Paper>

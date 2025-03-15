@@ -9,7 +9,7 @@ const cardData = [
   {
     title: "Vas vármegye",
     description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />, 
+    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
     extraCards: [
       {
         title: "Szombathely",
@@ -34,7 +34,7 @@ const cardData = [
   {
     title: "Győr-Moson-Sopron vármegye",
     description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />, 
+    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
     extraCards: [
       {
         title: "Győr",
@@ -59,7 +59,7 @@ const cardData = [
   {
     title: "Zala vármegye",
     description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />, 
+    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
     extraCards: [
       {
         title: "Zalaegerszeg",
@@ -81,8 +81,58 @@ const cardData = [
       },
     ],
   },
-  
+  {
+    title: "Borsod-Abaúj-Zemplén vármegye",
+    description: "Kattints a részletekhez!",
+    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+    extraCards: [
+      {
+        title: "Miskolc",
+        description: "A város nevezetességei.",
+        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+        extraCards: [
+          { title: "Miskolc Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+          { title: "Diósgyőri Vár", description: "Történelmi vár.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+        ],
+      },
+      {
+        title: "Sátoraljaújhely",
+        description: "A város nevezetességei.",
+        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+        extraCards: [
+          { title: "Zempléni Kalandpark", description: "Kalandpark.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+          { title: "Sátoraljaújhelyi Kávéház", description: "Kávézó.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Heves vármegye",
+    description: "Kattints a részletekhez!",
+    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+    extraCards: [
+      {
+        title: "Eger",
+        description: "A város nevezetességei.",
+        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+        extraCards: [
+          { title: "Egri Vár", description: "Történelmi vár.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+          { title: "Egri Borvidék", description: "Borászat.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+        ],
+      },
+      {
+        title: "Gyöngyös",
+        description: "A város nevezetességei.",
+        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
+        extraCards: [
+          { title: "Kékestető", description: "Legmagasabb pont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+          { title: "Gyöngyösi Templom", description: "Történelmi templom.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
+        ],
+      },
+    ],
+  },
 ];
+
 
 const Materialuiinform = () => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -131,6 +181,7 @@ const Materialuiinform = () => {
                 backgroundColor: "#161C27",
                 color: "#ffffff",
                 transition: "box-shadow 0.3s ease-in-out",
+                height: "250px",  
                 "&:hover": {
                   boxShadow: "0 0 8px 2px rgba(30, 144, 255, 0.8)",
                 },
@@ -151,11 +202,11 @@ const Materialuiinform = () => {
               >
                 {card.icon}
               </Box>
-              <CardContent>
+              <CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
                 <Typography variant="h6" component="h3" gutterBottom sx={{ color: "#ffffff" }}>
                   {card.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "#ffffff" }}>
+                <Typography variant="body2" sx={{ color: "#ffffff", flex: 1 }}>
                   {card.description}
                 </Typography>
               </CardContent>
@@ -180,9 +231,6 @@ const Materialuiinform = () => {
         padding: "20px",
       }}
     >
-
-      
-
       <Typography
         variant="h6"
         sx={{
@@ -192,7 +240,6 @@ const Materialuiinform = () => {
       >
         Vizuális Gyorskeresés
       </Typography>
-
 
       <Box sx={{ width: "100%" }}>
         {renderCards(cardData)}
