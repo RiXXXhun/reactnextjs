@@ -12,12 +12,17 @@ interface PlazaStore {
 
 const PlazaStoreManager: React.FC = () => {
   const [stores, setStores] = useState<PlazaStore[]>([]);
-  const [newStoreName, setNewStoreName] = useState<string>('');
+  const [storeId, setStoreId] = useState<number | null>(null);
+  const [storeName, setStoreName] = useState<string>('');
   const [openingTime, setOpeningTime] = useState<string>('');
   const [closingTime, setClosingTime] = useState<string>('');
   const [description, setDescription] = useState<string>(''); 
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchStores();
+  }, []);
 
   const fetchStores = async () => {
     try {
@@ -25,99 +30,100 @@ const PlazaStoreManager: React.FC = () => {
       if (response.ok) {
         const data: PlazaStore[] = await response.json();
         setStores(data);
-      } else {
-        console.error('Failed to fetch stores');
       }
     } catch (error) {
       console.error('Error fetching stores:', error);
     }
   };
 
-  useEffect(() => {
-    fetchStores();
-  }, []);
-
-  const handleAddStore = async () => {
-    if (newStoreName.trim() !== '' && openingTime && closingTime && description.trim() !== '') {
-      if (description.length > 1000) {
-        setErrorMessage('A leírás maximális hossza 1000 karakter lehet!');
-        setOpenSnackbar(true);
-        return;
-      }
-
-      if (closingTime <= openingTime) {
-        setErrorMessage('A zárási idő nem lehet korábban, mint a nyitási idő!');
-        setOpenSnackbar(true);
-        return;
-      }
-
-      try {
-        const response = await fetch('/api/plaza-stores/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: newStoreName,
-            openingTime,
-            closingTime,
-            description, 
-          }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setNewStoreName('');
-          setOpeningTime('');
-          setClosingTime('');
-          setDescription('');
-          fetchStores();
-          setErrorMessage('');
-        } else {
-          setErrorMessage(data.message);
-          setOpenSnackbar(true);
-        }
-      } catch (error) {
-        console.error('Error adding store:', error);
-      }
-    } else {
+  const validateInputs = () => {
+    if (!storeName.trim() || !openingTime || !closingTime || !description.trim()) {
       setErrorMessage('Kérjük, adja meg az összes adatot!');
       setOpenSnackbar(true);
+      return false;
     }
+    if (description.length > 1000) {
+      setErrorMessage('A leírás maximális hossza 1000 karakter lehet!');
+      setOpenSnackbar(true);
+      return false;
+    }
+    if (closingTime <= openingTime) {
+      setErrorMessage('A zárási idő nem lehet korábban, mint a nyitási idő!');
+      setOpenSnackbar(true);
+      return false;
+    }
+    return true;
+  };
+
+  const handleSaveStore = async () => {
+    if (!validateInputs()) return;
+
+    const endpoint = storeId ? '/api/plaza-stores/update' : '/api/plaza-stores/create';
+    const method = storeId ? 'PUT' : 'POST';
+    const payload = storeId ? { id: storeId, name: storeName, openingTime, closingTime, description } : { name: storeName, openingTime, closingTime, description };
+    
+    try {
+      const response = await fetch(endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      
+      const data = await response.json();
+      if (response.ok) {
+        setStoreId(null);
+        setStoreName('');
+        setOpeningTime('');
+        setClosingTime('');
+        setDescription('');
+        fetchStores();
+      } else {
+        setErrorMessage(data.message);
+        setOpenSnackbar(true);
+      }
+    } catch (error) {
+      console.error('Error saving store:', error);
+    }
+  };
+
+  const handleEditStore = (store: PlazaStore) => {
+    setStoreId(store.id);
+    setStoreName(store.name);
+    setOpeningTime(store.openingTime);
+    setClosingTime(store.closingTime);
+    setDescription(store.description);
+  };
+
+  const handleCancelEdit = () => {
+    setStoreId(null);
+    setStoreName('');
+    setOpeningTime('');
+    setClosingTime('');
+    setDescription('');
   };
 
   const handleDeleteStore = async (id: number) => {
     try {
       const response = await fetch('/api/plaza-stores/delete', {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),
       });
       if (response.ok) {
         setStores(stores.filter(store => store.id !== id));
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.message);
-        setOpenSnackbar(true);
       }
     } catch (error) {
       console.error('Error deleting store:', error);
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
-
   return (
-    <Box sx={{ padding: 2, mt: "200px" }} id='plazaStoreSection'>
-      <h2>Bolt Hozzáadás</h2>
-
+    <Box sx={{ padding: 2, mt: '200px' }} id='plazaStoreSection'>
+      <h2>{storeId ? 'Bolt Módosítása' : 'Bolt Hozzáadás'}</h2>
       <TextField
         label="Bolt neve"
-        value={newStoreName}
-        onChange={(e) => setNewStoreName(e.target.value)}
+        value={storeName}
+        onChange={(e) => setStoreName(e.target.value)}
         fullWidth
         error={!!errorMessage}
         helperText={errorMessage}
@@ -147,59 +153,41 @@ const PlazaStoreManager: React.FC = () => {
         fullWidth
         error={!!errorMessage}
         helperText={errorMessage}
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, mb: 2 }}
         inputProps={{ maxLength: 1000 }} 
       />
-      <Button onClick={handleAddStore} variant="contained" color="primary" style={{ marginTop: 10 }}>
-        Hozzáadás
-      </Button>
+      <Button onClick={handleSaveStore} variant='contained' color='primary' sx={{ mr: 2 }}>{storeId ? 'Mentés' : 'Hozzáadás'}</Button>
+      {storeId && <Button onClick={handleCancelEdit} variant='outlined' color='secondary'>Mégse</Button>}
 
-      <TableContainer component={Paper} sx={{ marginTop: "20px", width: "100%", mb: "100px" }}>
-        <Table aria-label="Plaza Stores Data">
+      <TableContainer component={Paper} sx={{ marginTop: '20px', width: '100%', mb: '100px' }}>
+        <Table aria-label='Plaza Stores Data'>
           <TableHead>
             <TableRow>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Bolt neve</TableCell>
-              <TableCell align="center">Nyitási idő</TableCell>
-              <TableCell align="center">Zárási idő</TableCell>
-              <TableCell align="center">Leírás</TableCell> 
-              <TableCell align="center">Létrehozva</TableCell>
-              <TableCell align="center">Műveletek</TableCell>
+              <TableCell align='center'>ID</TableCell>
+              <TableCell align='center'>Bolt neve</TableCell>
+              <TableCell align='center'>Nyitási idő</TableCell>
+              <TableCell align='center'>Zárási idő</TableCell>
+              <TableCell align='center'>Leírás</TableCell>
+              <TableCell align='center'>Műveletek</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {stores.map((store) => (
               <TableRow key={store.id}>
-                <TableCell align="center">{store.id}</TableCell>
-                <TableCell align="center">{store.name}</TableCell>
-                <TableCell align="center">{store.openingTime}</TableCell>
-                <TableCell align="center">{store.closingTime}</TableCell>
-                <TableCell align="center">{store.description}</TableCell> 
-                <TableCell align="center">{new Date(store.createdAt).toLocaleString()}</TableCell>
-                <TableCell align="center">
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => handleDeleteStore(store.id)}
-                  >
-                    Törlés
-                  </Button>
+                <TableCell align='center'>{store.id}</TableCell>
+                <TableCell align='center'>{store.name}</TableCell>
+                <TableCell align='center'>{store.openingTime}</TableCell>
+                <TableCell align='center'>{store.closingTime}</TableCell>
+                <TableCell align='center'>{store.description}</TableCell>
+                <TableCell align='center'>
+                  <Button variant='outlined' color='secondary' onClick={() => handleDeleteStore(store.id)} sx={{ mr: 2 }}>Törlés</Button> 
+                  <Button variant='outlined' color='primary' onClick={() => handleEditStore(store)}>Módosítás</Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-      >
-        <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

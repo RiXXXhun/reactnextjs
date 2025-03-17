@@ -154,22 +154,23 @@ const CouponForm: React.FC = () => {
 
   const handleDeleteCoupon = async (couponId: number) => {
     try {
-      const response = await fetch(`/api/coupons/delete?id=${couponId}`, {
+      const response = await fetch('/api/coupons/delete', {
         method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: couponId }),
       });
-
-      const data = await response.json();
-
+  
       if (response.ok) {
+        setCoupons(coupons.filter((coupon) => coupon.id !== couponId));
         setAlertMessage('A kupon sikeresen törölve!');
         setAlertSeverity('success');
-
-        setCoupons(coupons.filter((coupon) => coupon.id !== couponId));
+        setOpenSnackbar(true);
       } else {
-        setAlertMessage(data.message || 'Hiba történt a kupon törlésekor!');
+        const data = await response.json();
+        setAlertMessage(data.message || 'Hiba történt a kupon törlésében!');
         setAlertSeverity('error');
+        setOpenSnackbar(true);
       }
-      setOpenSnackbar(true);
     } catch (error) {
       console.error('Error deleting coupon:', error);
       setAlertMessage('Hiba történt a kupon törlésében!');
@@ -177,6 +178,7 @@ const CouponForm: React.FC = () => {
       setOpenSnackbar(true);
     }
   };
+  
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -282,9 +284,7 @@ const CouponForm: React.FC = () => {
                 <TableCell align="center">
                   <Button
                     variant="outlined"
-                    color="secondary"
-                    onClick={() => handleDeleteCoupon(coupon.id)}
-                  >
+                    color="secondary"onClick={() => handleDeleteCoupon(coupon.id)}>
                     Törlés
                   </Button>
                 </TableCell>

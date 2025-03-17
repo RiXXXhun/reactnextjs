@@ -7,7 +7,6 @@ interface Store {
   createdAt: string;
 }
 
-
 const StoreManager: React.FC = () => {
   const [stores, setStores] = useState<Store[]>([]);
   const [newStore, setNewStore] = useState<string>('');
@@ -30,12 +29,10 @@ const StoreManager: React.FC = () => {
     }
   };
 
-
-
-
   useEffect(() => {
     fetchStores();
   }, []);
+
   const handleAddStore = async () => {
     if (newStore.trim() !== '') {
       try {
@@ -60,8 +57,6 @@ const StoreManager: React.FC = () => {
       }
     }
   };
-
-
 
   const handleDeleteStore = async (id: number) => {
     try {
@@ -122,47 +117,60 @@ const StoreManager: React.FC = () => {
     }
   };
 
+  const handleCancelEdit = () => {
+    setEditStore('');
+    setEditStoreId(null);
+    setErrorMessage('');
+  };
 
-  
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
   return (
-    <Box sx={{ padding: 2, mt: "200px" }} id='storeSection'>
-      <h2>Bolt Hozzáadás</h2>
+    <Box sx={{ padding: 2, mt: "200px" }} id="storeSection">
+      <h2>{editStoreId !== null ? 'Bolt Módosítása' : 'Bolt Hozzáadás'}</h2>
 
       <TextField
-        label="Új bolt hozzáadása"
-        id='storeSection'
-        value={newStore}
-        onChange={(e) => setNewStore(e.target.value)}
+        label={editStoreId !== null ? 'Bolt neve (módosítás)' : 'Új bolt hozzáadása'}
+        value={editStoreId !== null ? editStore : newStore}
+        onChange={(e) => (editStoreId !== null ? setEditStore(e.target.value) : setNewStore(e.target.value))}
         fullWidth
         error={!!errorMessage}
         helperText={errorMessage}
       />
-      <Button onClick={handleAddStore} variant="contained" color="primary" style={{ marginTop: 10 }}>
-        Hozzáadás
-      </Button>
 
-      {editStoreId !== null && (
+      {editStoreId !== null ? (
         <Box sx={{ marginTop: '20px' }}>
-          <h3>Módosítás</h3>
-          <TextField
-            label="Bolt neve"
-            value={editStore}
-            onChange={(e) => setEditStore(e.target.value)}
-            fullWidth
-            error={!!errorMessage}
-            helperText={errorMessage}
-          />
-          <Button onClick={handleSaveEdit} variant="contained" color="secondary" style={{ marginTop: 10 }}>
+          <Button
+            onClick={handleSaveEdit}
+            variant="contained"
+            color="primary"
+            sx={{ marginTop: 2 }}
+          >
             Mentés
           </Button>
+          <Button
+            onClick={handleCancelEdit}
+            variant="outlined"
+            color="secondary"
+            sx={{ marginTop: 2, marginLeft: 2 }}
+          >
+            Mégse
+          </Button>
         </Box>
+      ) : (
+        <Button
+          onClick={handleAddStore}
+          variant="contained"
+          color="primary"
+          sx={{ marginTop: 2 }}
+        >
+          Hozzáadás
+        </Button>
       )}
 
-      <TableContainer component={Paper} sx={{ marginTop: "20px", width: "100%", mb: "100px" }}>
+      <TableContainer component={Paper} sx={{ marginTop: '20px', width: '100%', mb: '100px' }}>
         <Table aria-label="Stores Data">
           <TableHead>
             <TableRow>
@@ -183,7 +191,7 @@ const StoreManager: React.FC = () => {
                     variant="outlined"
                     color="secondary"
                     onClick={() => handleDeleteStore(store.id)}
-                    style={{ marginRight: 10 }}
+                    sx={{ mr: 2 }}
                   >
                     Törlés
                   </Button>
