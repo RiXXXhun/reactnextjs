@@ -1,12 +1,16 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Container, Grid, TextField, Button, Box, Typography, FormControl, FormLabel, FormHelperText } from "@mui/material";
-import { Phone, Mail, LocationOn, AccessTime } from "@mui/icons-material";
+import { Container, Grid, TextField, Button, Box, Typography, FormControl, FormLabel, FormHelperText, Snackbar, Alert, IconButton } from "@mui/material";
+import { Phone, Mail, LocationOn, Close as CloseIcon, Close } from "@mui/icons-material";
+import EmailIcon from '@mui/icons-material/Email';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
 interface FormData {
   fullName: string;
   email: string;
   phone: string;
-  message: string; 
+  message: string;
 }
 
 const ContactForm: React.FC = () => {
@@ -14,11 +18,16 @@ const ContactForm: React.FC = () => {
     fullName: "",
     email: "",
     phone: "",
-    message: "", 
+    message: "",
   });
 
-  const [usernameError, setUsernameError] = useState(false);
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [alert, setAlert] = useState<{ message: string; success: boolean } | null>(null);
+  const [errors, setErrors] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -28,17 +37,77 @@ const ContactForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent): void => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
+  const validateForm = (): boolean => {
+    let valid = true;
+    const newErrors = {
+      fullName: "",
+      email: "",
+      phone: "",
+      message: "",
+    };
+
+    if (!formData.fullName) {
+      newErrors.fullName = "A teljes név kötelező.";
+      valid = false;
+    }
+
+    if (!formData.email) {
+      newErrors.email = "Az e-mail cím kötelező.";
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Érvénytelen e-mail cím.";
+      valid = false;
+    }
+
+    if (!formData.phone) {
+      newErrors.phone = "A telefonszám kötelező.";
+      valid = false;
+    }
+
+    if (!formData.message) {
+      newErrors.message = "Az üzenet kötelező.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
   };
+
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      try {
+        const response = await fetch("http://localhost:3000/api/auth/support", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          setAlert({ message: "Sikeres beküldés!", success: true });
+          setFormData({ fullName: "", email: "", phone: "", message: "" });
+        } else {
+          setAlert({ message: "Hiba történt a beküldés során.", success: false });
+        }
+      } catch (error) {
+        console.error("Request failed", error);
+        setAlert({ message: "Hiba történt a beküldés során.", success: false });
+      }
+    }
+  };
+
 
   return (
     <Box sx={{ backgroundColor: "#1c2331", py: 3, mt: 20, mb: 20 }}>
       <Container>
+        
         <Grid container spacing={4}>
 
           <Grid item xs={12} md={6}>
+            
             <Typography variant="h4" gutterBottom color="white">
               Lépj velünk kapcsolatba
             </Typography>
@@ -46,52 +115,38 @@ const ContactForm: React.FC = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto natus voluptatem similique consectetur illo. Eius esse nostrum aperiam voluptatem? Quaerat eum, magni neque ducimus deleniti adipisci suscipit nostrum laboriosam explicabo?
             </Typography>
 
-
             <Box mb={4}>
-              <Typography variant="h6" color="white">
-                Cím
-              </Typography>
+              <Typography variant="h6" color="white">Cím</Typography>
               <Box display="flex" alignItems="center">
                 <LocationOn sx={{ color: "white", mr: 2 }} />
-                <Typography variant="body2" color="white">
-                  Csepreg
-                </Typography>
+                <Typography variant="body2" color="white">Csepreg</Typography>
               </Box>
             </Box>
+
             <Box mb={4}>
-              <Typography variant="h6" color="white">
-                Telefon
-              </Typography>
+              <Typography variant="h6" color="white">Telefon</Typography>
               <Box display="flex" alignItems="center">
                 <Phone sx={{ color: "white", mr: 2 }} />
                 <Typography variant="body2" color="white">
-                  <a href="" style={{ color: "white" }}>06 30 222 2222</a>
+                  <a href="tel:06302222222" style={{ color: "white" }}>06 30 222 2222</a>
                 </Typography>
               </Box>
             </Box>
+
             <Box mb={4}>
-              <Typography variant="h6" color="white">
-                E-mail
-              </Typography>
+              <Typography variant="h6" color="white">E-mail</Typography>
               <Box display="flex" alignItems="center">
                 <Mail sx={{ color: "white", mr: 2 }} />
                 <Typography variant="body2" color="white">
-                  <a href="" style={{ color: "white" }}>
-                    asd@asd.com
-                  </a>
+                  <a href="mailto:asd@asd.com" style={{ color: "white" }}>asd@asd.com</a>
                 </Typography>
               </Box>
             </Box>
+
             <Box mb={4}>
-              <Typography variant="h6" color="white">
-                Nyitvatartás
-              </Typography>
-              <Typography variant="body2" color="white">
-                H-P: 9:00 - 17:00
-              </Typography>
-              <Typography variant="body2" color="white">
-                Szo-V: Zárva
-              </Typography>
+              <Typography variant="h6" color="white">Nyitvatartás</Typography>
+              <Typography variant="body2" color="white">H-P: 9:00 - 17:00</Typography>
+              <Typography variant="body2" color="white">Szo-V: Zárva</Typography>
             </Box>
           </Grid>
 
@@ -115,21 +170,28 @@ const ContactForm: React.FC = () => {
             >
 
               <FormControl required fullWidth sx={{ mb: 3 }}>
-                <FormLabel htmlFor="username" sx={{ color: 'white' }}>
-                  Felhasználónév
+              <AlternateEmailIcon sx={{ fontSize: 60, color: 'white', alignSelf: 'center' }} />
+                <Typography
+                            component="h1"
+                            variant="h4"
+                            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)', textAlign: 'center', color: 'white', pb: '40px', pt: '10px' }}
+                          >
+                            Hibabejelentés
+                </Typography>
+                <FormLabel htmlFor="fullName" sx={{ color: 'white' }}>
+                  Teljes név
                 </FormLabel>
                 <TextField
-                  error={usernameError}
-                  helperText={usernameErrorMessage}
-                  id="username"
-                  name="username"
-                  placeholder="Felhasználónév"
-                  autoComplete="username"
-                  autoFocus
+                  error={!!errors.fullName}
+                  helperText={errors.fullName}
+                  id="fullName"
+                  name="fullName"
+                  placeholder="Teljes név"
+                  autoComplete="name"
                   value={formData.fullName}
                   onChange={handleChange}
                   variant="outlined"
-                  color={usernameError ? "error" : "primary"}
+                  color={errors.fullName ? "error" : "primary"}
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
@@ -146,7 +208,7 @@ const ContactForm: React.FC = () => {
                       color: 'white',
                     },
                     '& .MuiFormHelperText-root': {
-                      color: usernameError ? 'error.main' : 'white',
+                      color: errors.fullName ? 'error.main' : 'white',
                     },
                   }}
                 />
@@ -157,6 +219,8 @@ const ContactForm: React.FC = () => {
                   E-mail
                 </FormLabel>
                 <TextField
+                  error={!!errors.email}
+                  helperText={errors.email}
                   id="email"
                   name="email"
                   placeholder="E-mail"
@@ -183,12 +247,13 @@ const ContactForm: React.FC = () => {
                 />
               </FormControl>
 
-
               <FormControl required fullWidth sx={{ mb: 3 }}>
                 <FormLabel htmlFor="phone" sx={{ color: 'white' }}>
                   Telefonszám
                 </FormLabel>
                 <TextField
+                  error={!!errors.phone}
+                  helperText={errors.phone}
                   id="phone"
                   name="phone"
                   placeholder="Telefonszám"
@@ -214,56 +279,81 @@ const ContactForm: React.FC = () => {
                 />
               </FormControl>
 
-
-            <FormControl required fullWidth sx={{ mb: 3 }}>
+              <FormControl required fullWidth sx={{ mb: 3 }}>
                 <FormLabel htmlFor="message" sx={{ color: 'white' }}>
-                    Üzenet
+                  Üzenet
                 </FormLabel>
                 <TextField
-                    id="message"
-                    name="message"
-                    placeholder="Üzenet"
-                    value={formData.message}
-                    onChange={handleChange}
-                    variant="outlined"
-                    multiline
-                    rows={4}
-                    inputProps={{
-                    maxLength: 1000,
-                    }}
-                    sx={{
+                  error={!!errors.message}
+                  helperText={errors.message}
+                  id="message"
+                  name="message"
+                  placeholder="Üzenet"
+                  value={formData.message}
+                  onChange={handleChange}
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                  inputProps={{ maxLength: 1000 }}
+                  sx={{
                     '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
+                      '& fieldset': {
                         borderColor: 'white',
-                        },
-                        '&:hover fieldset': {
+                      },
+                      '&:hover fieldset': {
                         borderColor: 'white',
-                        },
-                        '&.Mui-focused fieldset': {
+                      },
+                      '&.Mui-focused fieldset': {
                         borderColor: 'white',
-                        },
+                      },
                     },
                     '& .MuiInputBase-input': {
-                        color: 'white',
+                      color: 'white',
                     },
-                    }}
-                />
-            </FormControl>
+                  }}/>
 
+                <Typography
+                  sx={{
+                    textAlign: 'right',
+                    color: formData.message.length === 1000 ? 'red' : 'white',
+                    mt: 1,
+                  }}
+                >
+                  {formData.message.length}/1000
+                </Typography>
+              </FormControl>
 
               <Button
                 type="submit"
+                fullWidth
                 variant="contained"
                 sx={{
-                    mt: 3,
-                    backgroundColor: "white", 
-                    color: "black", 
-                    '&:hover': {
-                    backgroundColor: "#f1f1f1", 
-                    },
-                }}>
-                Beküldés
-                </Button>
+                  marginTop: 2,
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  color: 'white',
+                  backgroundColor: '#3f72af',
+                  '&:hover': {
+                    backgroundColor: '#2c4e8c',
+                  },
+                }}
+              >
+                Beküldés!
+              </Button>
+
+
+              {alert && (
+                <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 2 }}>
+                  {alert.success ? (
+                    <CheckCircleIcon sx={{ color: 'green', marginRight: 1 }} />
+                  ) : (
+                    <CancelIcon sx={{ color: 'red', marginRight: 1 }} />
+                  )}
+                  <Typography sx={{ color: alert.success ? 'green' : 'red' }}>
+                    {alert.message}
+                  </Typography>
+                </Box>
+              )}
 
             </Box>
           </Grid>

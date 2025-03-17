@@ -1,6 +1,5 @@
 "use client";
 
-import Head from "next/head";
 import Materialuiinform from "@/components/Materialuiinform";
 import ResponsiveAppBar from "@/components/Materialuinavbar";
 import Materiualuifaq from "@/components/Materiualuifaq";
@@ -8,23 +7,51 @@ import Materialuifooter from "@/components/Materiualuifooter";
 import MyMap from "@/components/Mymap";
 import MySwiper from "@/components/MySwiper";
 import { Col, Row } from "react-bootstrap";
-import { Box, Slide } from "@mui/material";
+import { Box, Slide, CircularProgress, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import Materialuiline from "@/components/Materialuiline";
 import Materialuiscrollbutton from "@/components/Materialuiscrollbutton";
 import Materialuiquicksearch from "@/components/Materialuiquicksearch";
+import MaterialuiCookie from "@/components/MaterialuiCookie";
+import MuiVisualSearch from "@/components/MuiVisualSearch";
 
 export default function Page() {
+    const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        setOpen(true);
+        const timeout = setTimeout(() => {
+            setLoading(false);
+            setOpen(true);
+        }, 1000);
+
+        return () => clearTimeout(timeout);
     }, []);
+
+    if (loading) {
+        return (
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                    backgroundColor: "#1c2331",
+                    color: "white",
+                }}
+            >
+                <CircularProgress color="primary" />
+                <Typography sx={{ marginTop: 2, fontSize: "18px" }}>
+                    Jelenleg az oldal betölt, kérem várjon...
+                </Typography>
+            </Box>
+        );
+    }
 
     return (
         <>
             <title>PLÁZAÁSZ Főoldal</title>
-            
 
             <Box
                 sx={{
@@ -59,6 +86,7 @@ export default function Page() {
                     </Row>
                 </Slide>
 
+
                 <Row>
                     <Materialuiline />
                 </Row>
@@ -84,6 +112,8 @@ export default function Page() {
                         <Materialuifooter />
                     </Row>
                 </Slide>
+
+                <MaterialuiCookie />
 
                 <Materialuiscrollbutton />
             </Box>

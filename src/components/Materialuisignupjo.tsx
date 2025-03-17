@@ -13,6 +13,11 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -52,6 +57,24 @@ export default function SignUp() {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [usernameError, setUsernameError] = React.useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = React.useState('');
+  const [securityQuestionError, setSecurityQuestionError] = React.useState(false);
+  const [securityQuestionErrorMessage, setSecurityQuestionErrorMessage] = React.useState('');
+  const [alert, setAlert] = React.useState<{ message: string; success: boolean }>({ message: '', success: false });
+
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState(false);
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = React.useState('');
+
+  const [formData, setFormData] = React.useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    securityQuestionAnswer: ''
+  });
+
+  const handleAlertClose = () => {
+    setAlert({ message: '', success: false });
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,6 +85,7 @@ export default function SignUp() {
         username: data.get('username'),
         email: data.get('email'),
         password: data.get('password'),
+        securityQuestionAnswer: data.get('securityQuestionAnswer'),
       };
 
       try {
@@ -76,15 +100,26 @@ export default function SignUp() {
         if (response.ok) {
           const result = await response.json();
           console.log('Sikeres regisztráció:', result);
-          alert('Sikeresen regisztráltál!');
+          setAlert({ message: 'Sikeresen regisztráltál!', success: true });
+          setTimeout(handleAlertClose, 3000);
+
+          setFormData({
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            securityQuestionAnswer: ''
+          });
         } else {
           const errorData = await response.json();
           console.error('Regisztrációs hiba:', errorData);
-          alert('Hiba történt a regisztráció során!');
+          setAlert({ message: 'Hiba történt a regisztráció során!', success: false });
+          setTimeout(handleAlertClose, 3000);
         }
       } catch (error) {
         console.error('Hálózati hiba:', error);
-        alert('Hálózati hiba történt!');
+        setAlert({ message: 'Hálózati hiba történt!', success: false });
+        setTimeout(handleAlertClose, 3000);
       }
     }
   };
@@ -93,12 +128,13 @@ export default function SignUp() {
     const username = document.getElementById('username') as HTMLInputElement;
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
+    const securityQuestionAnswer = document.getElementById('securityQuestionAnswer') as HTMLInputElement;
 
     let isValid = true;
 
-    if (!username.value || username.value.length < 4) {
+    if (!username.value || username.value.length < 4 || username.value.length > 16 || /[^a-zA-Z0-9]/.test(username.value)) {
       setUsernameError(true);
-      setUsernameErrorMessage('A felhasználónévnek legalább 4 karakter hosszúnak kell lennie.');
+      setUsernameErrorMessage('A felhasználónévnek 4-16 karakter hosszúnak kell lennie és nem tartalmazhat speciális karaktereket vagy szóközt.');
       isValid = false;
     } else {
       setUsernameError(false);
@@ -114,17 +150,52 @@ export default function SignUp() {
       setEmailErrorMessage('');
     }
 
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    const containsUpperCase = /[A-Z]/.test(password.value);
+    const containsNumber = /\d/.test(password.value);
+
     if (!password.value || password.value.length < 6) {
       setPasswordError(true);
       setPasswordErrorMessage('A jelszónak legalább 6 karakter hosszúnak kell lennie.');
+      isValid = false;
+    } else if (!containsUpperCase && !containsNumber) {
+      setPasswordError(true);
+      setPasswordErrorMessage('A jelszónak legalább egy nagybetűt és egy számot kell tartalmaznia.');
+      isValid = false;
+    } else if (!containsUpperCase) {
+      setPasswordError(true);
+      setPasswordErrorMessage('A jelszónak tartalmaznia kell legalább egy nagybetűt.');
+      isValid = false;
+    } else if (!containsNumber) {
+      setPasswordError(true);
+      setPasswordErrorMessage('A jelszónak tartalmaznia kell legalább egy számot.');
       isValid = false;
     } else {
       setPasswordError(false);
       setPasswordErrorMessage('');
     }
 
+    if (!securityQuestionAnswer.value) {
+      setSecurityQuestionError(true);
+      setSecurityQuestionErrorMessage('Kérjük, válaszoljon a biztonsági kérdésre.');
+      isValid = false;
+    } else {
+      setSecurityQuestionError(false);
+      setSecurityQuestionErrorMessage('');
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setConfirmPasswordError(true);
+      setConfirmPasswordErrorMessage('A jelszavak nem egyeznek meg.');
+      isValid = false;
+    } else {
+      setConfirmPasswordError(false);
+      setConfirmPasswordErrorMessage('');
+    }
+
     return isValid;
   };
+
 
   return (
     <>
@@ -164,6 +235,8 @@ export default function SignUp() {
                 fullWidth
                 variant="outlined"
                 color={usernameError ? 'error' : 'primary'}
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
@@ -199,6 +272,8 @@ export default function SignUp() {
                 fullWidth
                 variant="outlined"
                 color={emailError ? 'error' : 'primary'}
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
@@ -221,19 +296,75 @@ export default function SignUp() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="password" sx={{ color: 'white' }}>Jelszó</FormLabel>
+            <FormLabel htmlFor="password" sx={{ color: 'white' }}>Jelszó</FormLabel>
+            <TextField
+              error={passwordError}
+              helperText={passwordErrorMessage}
+              name="password"
+              placeholder="••••••"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              required
+              fullWidth
+              variant="outlined"
+              color={passwordError ? 'error' : 'primary'}
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': { borderColor: 'white' },
+                  '&:hover fieldset': { borderColor: 'white' },
+                  '&.Mui-focused fieldset': { borderColor: 'white' },
+                },
+                '& .MuiInputBase-input': { color: 'white' },
+                '& .MuiFormHelperText-root': { color: passwordError ? 'error.main' : 'white' },
+              }}
+            />
+          </FormControl>
+
+          <FormControl sx={{ mt: 2 }}>
+            <FormLabel htmlFor="confirmPassword" sx={{ color: 'white' }}>Jelszó megerősítése</FormLabel>
+            <TextField
+              error={confirmPasswordError}
+              helperText={confirmPasswordErrorMessage}
+              name="confirmPassword"
+              placeholder="••••••"
+              type="password"
+              id="confirmPassword"
+              autoComplete="new-password"
+              required
+              fullWidth
+              variant="outlined"
+              color={confirmPasswordError ? 'error' : 'primary'}
+              value={formData.confirmPassword}
+              onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': { borderColor: 'white' },
+                  '&:hover fieldset': { borderColor: 'white' },
+                  '&.Mui-focused fieldset': { borderColor: 'white' },
+                },
+                '& .MuiInputBase-input': { color: 'white' },
+                '& .MuiFormHelperText-root': { color: confirmPasswordError ? 'error.main' : 'white' },
+              }}
+            />
+          </FormControl>
+
+            <FormControl>
+              <FormLabel htmlFor="securityQuestionAnswer" sx={{ color: 'white' }}>Mi jelenleg vagy volt a beceneved?</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                error={securityQuestionError}
+                helperText={securityQuestionErrorMessage}
+                name="securityQuestionAnswer"
+                placeholder="Becenév válasz"
+                id="securityQuestionAnswer"
                 required
                 fullWidth
                 variant="outlined"
-                color={passwordError ? 'error' : 'primary'}
+                color={securityQuestionError ? 'error' : 'primary'}
+                value={formData.securityQuestionAnswer}
+                onChange={(e) => setFormData({ ...formData, securityQuestionAnswer: e.target.value })}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
@@ -250,33 +381,60 @@ export default function SignUp() {
                     color: 'white',
                   },
                   '& .MuiFormHelperText-root': {
-                    color: passwordError ? 'error.main' : 'white',
+                    color: securityQuestionError ? 'error.main' : 'white',
                   },
                 }}
               />
             </FormControl>
+
+
+
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{
-                backgroundColor: 'rgba(50, 150, 255, 0.8)',
-                color: 'white',
+                marginTop: 2,
+                fontSize: '1rem',
                 fontWeight: 'bold',
+                color: 'white',
+                backgroundColor: '#3f72af',
                 '&:hover': {
-                  backgroundColor: 'rgba(50, 150, 255, 1)',
+                  backgroundColor: '#2c4e8c',
                 },
-                padding: '0.75rem',
-                marginBottom: '1rem',
               }}
             >
               Regisztrálás
             </Button>
 
+
+
+
+            {alert.message && (
+              <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 2 }}>
+                {alert.success ? (
+                  <CheckCircleIcon sx={{ color: 'green', marginRight: 1 }} />
+                ) : (
+                  <CancelIcon sx={{ color: 'red', marginRight: 1 }} />
+                )}
+                <Typography sx={{ color: alert.success ? 'green' : 'red' }}>
+                  {alert.message}
+                </Typography>
+              </Box>
+            )}
+
+
             <Typography align="center" sx={{ color: 'white' }}>
-              Már van felhasználód?{' '}
-              <Link href="/login" sx={{ color: 'rgba(50, 150, 255, 0.8)', '&:hover': { color: 'rgba(50, 150, 255, 1)' } }}>
-                Bejelentkezés
+              Már van felhasználód ?{' '}
+              <Link
+                href="/login"
+                sx={{
+                  color: 'rgba(50, 150, 255, 0.8)',
+                  '&:hover': { color: 'rgba(50, 150, 255, 1)' },
+                }}
+              >
+                Katt ide!
               </Link>
             </Typography>
           </Box>

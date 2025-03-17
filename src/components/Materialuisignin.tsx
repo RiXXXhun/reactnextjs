@@ -1,20 +1,17 @@
-"use client";
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { Link } from "@mui/material";
+
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
   minHeight: "60vh",
@@ -53,15 +50,16 @@ export default function SignIn() {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [loginError, setLoginError] = React.useState("");
+  const [alertMessage, setAlertMessage] = React.useState<{ message: string; success: boolean }>({ message: "", success: false });
+
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (validateInputs()) {
-      const data = new FormData(event.currentTarget);
-      const email = data.get("email") as string;
-      const password = data.get("password") as string;
-
       console.log("Bejelentkezési próbálkozás:", { email, password });
 
       try {
@@ -77,25 +75,25 @@ export default function SignIn() {
 
         if (response.ok) {
           console.log("Sikeres bejelentkezés!", result);
-          alert("Sikeres bejelentkezés!");
+          setAlertMessage({ message: "Sikeres bejelentkezés!", success: true });
+
+          setEmail("");
+          setPassword("");
         } else {
           console.log("Sikertelen bejelentkezés:", result.message);
-          alert(result.message || "Hibás email vagy jelszó!");
+          setAlertMessage({ message: result.message || "Hibás email vagy jelszó!", success: false });
         }
       } catch (error) {
         console.error("Hálózati hiba:", error);
-        alert("Hálózati hiba történt, próbáld újra később!");
+        setAlertMessage({ message: "Hálózati hiba történt, próbáld újra később!", success: false });
       }
     }
   };
 
   const validateInputs = () => {
-    const email = document.getElementById("email") as HTMLInputElement;
-    const password = document.getElementById("password") as HTMLInputElement;
-
     let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError(true);
       setEmailErrorMessage("Kérjük, adjon meg egy érvényes e-mail címet.");
       isValid = false;
@@ -104,7 +102,7 @@ export default function SignIn() {
       setEmailErrorMessage("");
     }
 
-    if (!password.value || password.value.length < 6) {
+    if (!password || password.length < 6) {
       setPasswordError(true);
       setPasswordErrorMessage("Adjon meg egy érvényes jelszót.");
       isValid = false;
@@ -135,101 +133,122 @@ export default function SignIn() {
             Bejelentkezés
           </Typography>
 
-          {loginError && (
-            <Typography sx={{ color: "red", textAlign: "center" }}>{loginError}</Typography>
-          )}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: "flex", flexDirection: "column", width: "100%", gap: 2 }}>
-            <FormControl>
-              <FormLabel htmlFor="email" sx={{ color: "white" }}>Email</FormLabel>
-              <TextField
-                error={emailError}
-                helperText={emailErrorMessage}
-                id="email"
-                type="email"
-                name="email"
-                placeholder="sajatemailed@email.com"
-                autoComplete="email"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'white',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: 'white',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'white',
-                    },
+            <TextField
+              error={emailError}
+              helperText={emailErrorMessage}
+              id="email"
+              type="email"
+              name="email"
+              placeholder="sajatemailed@email.com"
+              autoComplete="email"
+              autoFocus
+              required
+              fullWidth
+              variant="outlined"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
                   },
-                  '& .MuiInputBase-input': {
-                    color: 'white',
+                  '&:hover fieldset': {
+                    borderColor: 'white',
                   },
-                  '& .MuiFormHelperText-root': {
-                    color: emailError ? 'error.main' : 'white',
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'white',
                   },
-                }}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="password" sx={{ color: "white" }}>Jelszó</FormLabel>
-              <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                required
-                fullWidth
-                variant="outlined"
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'white',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: 'white',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'white',
-                    },
-                  },
-                  '& .MuiInputBase-input': {
-                    color: 'white',
-                  },
-                  '& .MuiFormHelperText-root': {
-                    color: emailError ? 'error.main' : 'white',
-                  },
-                }}
-              />
-            </FormControl>
-
-            <Button type="submit" fullWidth variant="contained" sx={{
-                backgroundColor: 'rgba(50, 150, 255, 0.8)',
-                color: 'white',
-                fontWeight: 'bold',
-                '&:hover': {
-                  backgroundColor: 'rgba(50, 150, 255, 1)',
                 },
-                padding: '0.75rem',
-                marginBottom: '1rem',
-              }}>Bejelentkezés</Button>
+                '& .MuiInputBase-input': {
+                  color: 'white',
+                },
+              }}
+            />
+            <TextField
+              error={passwordError}
+              helperText={passwordErrorMessage}
+              name="password"
+              placeholder="••••••"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              required
+              fullWidth
+              variant="outlined"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'white',
+                  },
+                },
+                '& .MuiInputBase-input': {
+                  color: 'white',
+                },
+              }}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                marginTop: 2,
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                color: 'white',
+                backgroundColor: '#3f72af',
+                '&:hover': {
+                  backgroundColor: '#2c4e8c',
+                },
+              }}
+            >
+              Bejelentkezés
+            </Button>
+
+            {alertMessage.message && (
+              <Box sx={{ display: "flex", alignItems: "center", marginTop: 2 }}>
+                {alertMessage.success ? (
+                  <CheckCircleIcon sx={{ color: "green", marginRight: 1 }} />
+                ) : (
+                  <CancelIcon sx={{ color: "red", marginRight: 1 }} />
+                )}
+                <Typography sx={{ color: alertMessage.success ? "green" : "red" }}>
+                  {alertMessage.message}
+                </Typography>
+              </Box>
+            )}
 
             <Typography align="center" sx={{ color: 'white' }}>
               Még nincs felhasználód ?{' '}
-              <Link href="/registration" sx={{ color: 'rgba(50, 150, 255, 0.8)', '&:hover': { color: 'rgba(50, 150, 255, 1)' } }}>
+              <Link
+                href="/registration"
+                sx={{
+                  color: 'rgba(50, 150, 255, 0.8)',
+                  '&:hover': { color: 'rgba(50, 150, 255, 1)' },
+                }}
+              >
                 Regisztráció
               </Link>
             </Typography>
 
             <Typography align="center" sx={{ color: 'white' }}>
-              Elfejletteted a jelszavad ? {' '}
-              <Link href="/registration" sx={{ color: 'rgba(50, 150, 255, 0.8)', '&:hover': { color: 'rgba(50, 150, 255, 1)' } }}>
+              Elfejletteted a jelszavad ?{' '}
+              <Link
+                href="/forgotpassword"
+                sx={{
+                  color: 'rgba(50, 150, 255, 0.8)',
+                  '&:hover': { color: 'rgba(50, 150, 255, 1)' },
+                }}
+              >
                 Katt ide!
               </Link>
             </Typography>
