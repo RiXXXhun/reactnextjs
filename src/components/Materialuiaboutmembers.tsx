@@ -10,7 +10,7 @@ const teamMembers = [
   },
   {
     name: "Nagy-Eperjesi Richárd János",
-    role: "Szoftverfejlesztő (Back-end, Frond-end), UX/UI tervező, PPT, Ikon tervezésm, .md/útmutató",  
+    role: "Szoftverfejlesztő (Back-end, Frond-end), UX/UI tervező, PPT, Ikon tervezés, .md/útmutató",  
     img: "/Nagy-Eperjesi Richárd János.jpg",  
   },
   {
