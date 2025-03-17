@@ -5,17 +5,17 @@ import { YouTube, GitHub, Facebook } from "@mui/icons-material";
 const teamMembers = [
   {
     name: "Hustikker Szabolcs",
-    role: "Dokumentáció, fejlesztés (Back-end), Ikon tervezés, Design tervezés, Információszerzés",  
+    role: "Szoftverfejlesztő (Back-end, Frond-end), Grafikus designer, Dokumentációs szakértő",  
     img: "/Hustikker Szabolcs.jpg",  
   },
   {
     name: "Nagy-Eperjesi Richárd János",
-    role: "Fejlesztés (Frond-end, Back-end), Markdown/Útmutató, Design tervezés",  
+    role: "Szoftverfejlesztő (Back-end, Frond-end), UX/UI tervező, PPT, Ikon tervezésm, .md/útmutató",  
     img: "/Nagy-Eperjesi Richárd János.jpg",  
   },
   {
     name: "Tóth Zoltán",
-    role: "Fejlesztés (Back-end), Információszerzés, Fő ötletgazda, Timeline",  
+    role: "Szoftverfejlesztő (Back-end, Frond-end), Fő ötletgazda, Timeline, PPT, Fő Szoftvertesztelő",  
     img: "/Tóth Zoltán.jpg", 
   },
 ];
