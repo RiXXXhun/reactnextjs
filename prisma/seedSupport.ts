@@ -25,7 +25,7 @@ const generateSupport = async (numSupport: number): Promise<Prisma.SupportCreate
     return supports;
   };
   
-  const seedSupport = async () => {
+  export const seedSupport = async () => {
     const supports = await generateSupport(10);
   
     for (const support of supports) {

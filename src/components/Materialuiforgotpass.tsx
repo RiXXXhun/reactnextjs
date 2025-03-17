@@ -14,6 +14,7 @@ import { styled } from "@mui/material/styles";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { Link } from "@mui/material";
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
   minHeight: "60vh",
@@ -321,6 +322,19 @@ export default function ForgotPassword() {
             >
               Új jelszó beállitása
             </Button>
+
+            <Typography align="center" sx={{ color: 'white' }}>
+              Mégis tudod a jelszavad ?{' '}
+              <Link
+                href="/login"
+                sx={{
+                  color: 'rgba(50, 150, 255, 0.8)',
+                  '&:hover': { color: 'rgba(50, 150, 255, 1)' },
+                }}
+              >
+                Katt ide!
+              </Link>
+            </Typography>
 
             {alert && (
               <Stack direction="row" spacing={1} alignItems="center" sx={{ marginTop: 2 }}>

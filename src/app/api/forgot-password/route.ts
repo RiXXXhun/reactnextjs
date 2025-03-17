@@ -2,19 +2,16 @@ import bcrypt from 'bcryptjs';
 import prisma from '../../../lib/prisma'; 
 import { NextResponse } from 'next/server';
 
-
 const validatePassword = (password: string) => {
   const hasUpperCase = /[A-Z]/.test(password);  
   const hasNumbers = /\d/.test(password);  
   const minLength = password.length >= 6;  
-
 
   return hasUpperCase && hasNumbers && minLength;
 };
 
 export const POST = async (req: Request) => {
   const { username, email, securityQuestionAnswer, newPassword } = await req.json();
-
 
   if (!username || !email || !securityQuestionAnswer || !newPassword) {
     return NextResponse.json({ message: "Minden mezőt ki kell tölteni!" }, { status: 400 });
@@ -29,8 +26,8 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ message: "Rossz E-Mail címet vagy Felhasználónevet adott meg" }, { status: 400 });
     }
 
-
-    if (user.securityQuestionAnswer !== securityQuestionAnswer) {
+    const isSecurityAnswerValid = await bcrypt.compare(securityQuestionAnswer, user.securityQuestionAnswer);
+    if (!isSecurityAnswerValid) {
       return NextResponse.json({ message: "Hibás válasz a biztonsági kérdésre!" }, { status: 400 });
     }
 

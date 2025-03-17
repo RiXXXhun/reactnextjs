@@ -1,15 +1,15 @@
-import { seedCoupon } from "./seedCoupon";
-import { seedStore } from "./seedStore";
+import { seedCoupons } from "./seedCoupon";
+import { seedStores } from "./seedStore";
 import { seedAdmin } from "./seedAdmin";
-import { seedUser } from "./seedUser";
+import { seedUsers } from "./seedUser";
 import { seedSupport } from "./seedSupport";
 
 async function main() {
 
   await seedAdmin();
-  await seedUser();
-  await seedStore();
-  await seedCoupon();
+  await seedUsers();
+  await seedStores();
+  await seedCoupons();
   await seedSupport();
 
   console.log("Az adatbázis seedelése megtörtént");
