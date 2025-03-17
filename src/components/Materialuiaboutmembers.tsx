@@ -4,26 +4,35 @@ import { YouTube, GitHub, Facebook } from "@mui/icons-material";
 
 const teamMembers = [
   {
-    name: "Ricsi",
-    role: "asd",
-    img: "pngtree-mysterious-user-contact-person-profile-png-image_4816440.png",
+    name: "Hustikker Szabolcs",
+    role: "Dokumentáció, fejlesztés (Back-end), Ikon tervezés, Design tervezés, Információszerzés",  
+    img: "/Hustikker Szabolcs.jpg",  
   },
   {
-    name: "Zoli",
-    role: "asd",
-    img: "pngtree-mysterious-user-contact-person-profile-png-image_4816440.png",
+    name: "Nagy-Eperjesi Richárd János",
+    role: "Fejlesztés (Frond-end, Back-end), Markdown/Útmutató, Design tervezés",  
+    img: "/Nagy-Eperjesi Richárd János.jpg",  
   },
   {
-    name: "Szabi",
-    role: "asd",
-    img: "pngtree-mysterious-user-contact-person-profile-png-image_4816440.png",
+    name: "Tóth Zoltán",
+    role: "Fejlesztés (Back-end), Információszerzés, Fő ötletgazda, Timeline",  
+    img: "/Tóth Zoltán.jpg", 
   },
 ];
 
 const TeamSection: React.FC = () => {
   return (
     <Box sx={{ textAlign: "center", p: 4, background: "#1c2331" }}>
-      <Typography variant="h4" sx={{ mb: 4, textTransform: "uppercase", fontWeight: 500, color: "white", pb: 10}}>
+      <Typography
+        variant="h4"
+        sx={{
+          mb: 4,
+          textTransform: "uppercase",
+          fontWeight: 500,
+          color: "white",
+          pb: 10,
+        }}
+      >
         Csapatunk emberei
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10 }}>
@@ -47,7 +56,12 @@ const TeamSection: React.FC = () => {
               },
             }}
           >
-            <CardMedia component="img" height="400" image={member.img} alt={member.name} />
+            <CardMedia
+              component="img"
+              height="400"
+              image={member.img}
+              alt={member.name}
+            />
             <Box
               className="content"
               sx={{
@@ -68,8 +82,8 @@ const TeamSection: React.FC = () => {
                 {member.role}
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
-                <IconButton 
-                  color="inherit" 
+                <IconButton
+                  color="inherit"
                   sx={{
                     transition: "box-shadow 0.3s ease-in-out",
                     "&:hover": {
@@ -79,8 +93,8 @@ const TeamSection: React.FC = () => {
                 >
                   <YouTube />
                 </IconButton>
-                <IconButton 
-                  color="inherit" 
+                <IconButton
+                  color="inherit"
                   sx={{
                     transition: "box-shadow 0.3s ease-in-out",
                     "&:hover": {
@@ -90,8 +104,8 @@ const TeamSection: React.FC = () => {
                 >
                   <GitHub />
                 </IconButton>
-                <IconButton 
-                  color="inherit" 
+                <IconButton
+                  color="inherit"
                   sx={{
                     transition: "box-shadow 0.3s ease-in-out",
                     "&:hover": {
