@@ -6,6 +6,7 @@ interface PlazaStore {
   name: string;
   openingTime: string;
   closingTime: string;
+  description: string;
   createdAt: string;
 }
 
@@ -14,6 +15,7 @@ const PlazaStoreManager: React.FC = () => {
   const [newStoreName, setNewStoreName] = useState<string>('');
   const [openingTime, setOpeningTime] = useState<string>('');
   const [closingTime, setClosingTime] = useState<string>('');
+  const [description, setDescription] = useState<string>(''); 
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
 
@@ -36,7 +38,13 @@ const PlazaStoreManager: React.FC = () => {
   }, []);
 
   const handleAddStore = async () => {
-    if (newStoreName.trim() !== '' && openingTime && closingTime) {
+    if (newStoreName.trim() !== '' && openingTime && closingTime && description.trim() !== '') {
+      if (description.length > 1000) {
+        setErrorMessage('A leírás maximális hossza 1000 karakter lehet!');
+        setOpenSnackbar(true);
+        return;
+      }
+
       if (closingTime <= openingTime) {
         setErrorMessage('A zárási idő nem lehet korábban, mint a nyitási idő!');
         setOpenSnackbar(true);
@@ -53,6 +61,7 @@ const PlazaStoreManager: React.FC = () => {
             name: newStoreName,
             openingTime,
             closingTime,
+            description, 
           }),
         });
         const data = await response.json();
@@ -60,6 +69,7 @@ const PlazaStoreManager: React.FC = () => {
           setNewStoreName('');
           setOpeningTime('');
           setClosingTime('');
+          setDescription('');
           fetchStores();
           setErrorMessage('');
         } else {
@@ -130,6 +140,16 @@ const PlazaStoreManager: React.FC = () => {
         helperText={errorMessage}
         sx={{ mt: 2 }}
       />
+      <TextField
+        label="Bolt leírás (max 1000 karakter)"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        fullWidth
+        error={!!errorMessage}
+        helperText={errorMessage}
+        sx={{ mt: 2 }}
+        inputProps={{ maxLength: 1000 }} 
+      />
       <Button onClick={handleAddStore} variant="contained" color="primary" style={{ marginTop: 10 }}>
         Hozzáadás
       </Button>
@@ -142,6 +162,7 @@ const PlazaStoreManager: React.FC = () => {
               <TableCell align="center">Bolt neve</TableCell>
               <TableCell align="center">Nyitási idő</TableCell>
               <TableCell align="center">Zárási idő</TableCell>
+              <TableCell align="center">Leírás</TableCell> 
               <TableCell align="center">Létrehozva</TableCell>
               <TableCell align="center">Műveletek</TableCell>
             </TableRow>
@@ -153,6 +174,7 @@ const PlazaStoreManager: React.FC = () => {
                 <TableCell align="center">{store.name}</TableCell>
                 <TableCell align="center">{store.openingTime}</TableCell>
                 <TableCell align="center">{store.closingTime}</TableCell>
+                <TableCell align="center">{store.description}</TableCell> 
                 <TableCell align="center">{new Date(store.createdAt).toLocaleString()}</TableCell>
                 <TableCell align="center">
                   <Button
