@@ -119,7 +119,7 @@ const PlazaStoreManager: React.FC = () => {
 
   return (
     <Box sx={{ padding: 2, mt: '200px' }} id='plazaStoreSection'>
-      <h2>{storeId ? 'Bolt Módosítása' : 'Bolt Hozzáadás'}</h2>
+      <h2>{storeId ? 'Pláza Bolt Módosítása' : 'Pláza Bolt Hozzáadás'}</h2>
       <TextField
         label="Bolt neve"
         value={storeName}

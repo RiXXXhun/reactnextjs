@@ -129,7 +129,7 @@ const StoreManager: React.FC = () => {
 
   return (
     <Box sx={{ padding: 2, mt: "200px" }} id="storeSection">
-      <h2>{editStoreId !== null ? 'Bolt Módosítása' : 'Bolt Hozzáadás'}</h2>
+      <h2>{editStoreId !== null ? 'Kupon Bolt Módosítása' : 'Kupon Bolt Hozzáadás'}</h2>
 
       <TextField
         label={editStoreId !== null ? 'Bolt neve (módosítás)' : 'Új bolt hozzáadása'}
