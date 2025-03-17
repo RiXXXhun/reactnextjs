@@ -6,17 +6,17 @@ const teamMembers = [
   {
     name: "Hustikker Szabolcs",
     role: "Szoftverfejlesztő (Back-end, Frond-end), Grafikus designer, Dokumentációs szakértő",  
-    img: "/Hustikker Szabolcs.jpg",  
+    img: "/Hustikker_Szabolcs.jpg",  
   },
   {
     name: "Nagy-Eperjesi Richárd János",
     role: "Szoftverfejlesztő (Back-end, Frond-end), UX/UI tervező, PPT, Ikon tervezés, .md/útmutató",  
-    img: "/Nagy-Eperjesi Richárd János.jpg",  
+    img: "/Nagy-Eperjesi_Richard_Janos.jpg",  
   },
   {
     name: "Tóth Zoltán",
     role: "Szoftverfejlesztő (Back-end, Frond-end), Fő ötletgazda, Timeline, PPT, Fő Szoftvertesztelő",  
-    img: "/Tóth Zoltán.jpg", 
+    img: "/Toth_Zoltan.jpg", 
   },
 ];
 
