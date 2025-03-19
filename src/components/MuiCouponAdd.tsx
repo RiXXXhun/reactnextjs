@@ -323,6 +323,7 @@ const CouponForm: React.FC = () => {
                 variant="outlined"
                 color="secondary"
                 onClick={handleCancelEdit}
+                sx={{ }}
               >
                 Mégse
               </Button>
@@ -364,7 +365,7 @@ const CouponForm: React.FC = () => {
                     variant="outlined"
                     color="primary"
                     onClick={() => handleEditClick(coupon)}
-                    sx={{ ml: 2 }}
+                    sx={{ mt: 1}}
                   >
                     Módosítás
                   </Button>
