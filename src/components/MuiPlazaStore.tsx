@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Snackbar, Alert, Box } from '@mui/material';
 
@@ -19,6 +20,13 @@ const PlazaStoreManager: React.FC = () => {
   const [description, setDescription] = useState<string>(''); 
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string>('');
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    setErrorMessage('');
+    setSuccessMessage('');
+  };
 
   useEffect(() => {
     fetchStores();
@@ -57,18 +65,20 @@ const PlazaStoreManager: React.FC = () => {
 
   const handleSaveStore = async () => {
     if (!validateInputs()) return;
-
+  
     const endpoint = storeId ? '/api/plaza-stores/update' : '/api/plaza-stores/create';
     const method = storeId ? 'PUT' : 'POST';
-    const payload = storeId ? { id: storeId, name: storeName, openingTime, closingTime, description } : { name: storeName, openingTime, closingTime, description };
-    
+    const payload = storeId
+      ? { id: storeId, name: storeName, openingTime, closingTime, description }
+      : { name: storeName, openingTime, closingTime, description };
+  
     try {
       const response = await fetch(endpoint, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      
+  
       const data = await response.json();
       if (response.ok) {
         setStoreId(null);
@@ -77,6 +87,8 @@ const PlazaStoreManager: React.FC = () => {
         setClosingTime('');
         setDescription('');
         fetchStores();
+        setSuccessMessage(storeId ? 'Bolt sikeresen frissítve!' : 'Bolt sikeresen hozzáadva!');
+        setOpenSnackbar(true);
       } else {
         setErrorMessage(data.message);
         setOpenSnackbar(true);
@@ -85,6 +97,7 @@ const PlazaStoreManager: React.FC = () => {
       console.error('Error saving store:', error);
     }
   };
+  
 
   const handleEditStore = (store: PlazaStore) => {
     setStoreId(store.id);
@@ -111,6 +124,8 @@ const PlazaStoreManager: React.FC = () => {
       });
       if (response.ok) {
         setStores(stores.filter(store => store.id !== id));
+        setSuccessMessage('Bolt sikeresen törölve!');
+        setOpenSnackbar(true);
       }
     } catch (error) {
       console.error('Error deleting store:', error);
@@ -188,6 +203,15 @@ const PlazaStoreManager: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={successMessage ? 'success' : 'error'}
+          sx={{ width: '100%' }}
+        >
+          {successMessage || errorMessage}
+        </Alert>
+      </Snackbar>;
     </Box>
   );
 };

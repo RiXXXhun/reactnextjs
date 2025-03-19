@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Snackbar, Alert, Box } from '@mui/material';
 
@@ -33,30 +34,36 @@ const StoreManager: React.FC = () => {
     fetchStores();
   }, []);
 
+
   const handleAddStore = async () => {
-    if (newStore.trim() !== '') {
-      try {
-        const response = await fetch('/api/stores/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name: newStore }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setNewStore('');
-          fetchStores();
-          setErrorMessage('');
-        } else {
-          setErrorMessage(data.message);
-          setOpenSnackbar(true);
-        }
-      } catch (error) {
-        console.error('Error adding store:', error);
+    if (newStore.trim() === '') {
+      setErrorMessage('Kötelező kitölteni');
+      setOpenSnackbar(true);
+      return;
+    }
+  
+    try {
+      const response = await fetch('/api/stores/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: newStore }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setNewStore('');
+        fetchStores();
+        setErrorMessage('');
+      } else {
+        setErrorMessage(data.message);
+        setOpenSnackbar(true);
       }
+    } catch (error) {
+      console.error('Error adding store:', error);
     }
   };
+  
 
   const handleDeleteStore = async (id: number) => {
     try {
