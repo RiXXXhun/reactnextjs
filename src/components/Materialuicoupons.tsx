@@ -125,7 +125,7 @@ const Materialuiinform = () => {
                     backgroundColor: "#161C27",
                     display: "flex",
                     justifyContent: "center",
-                    position: "relative", 
+                    position: "relative",
                   }}
                 >
                   <QRCode 
