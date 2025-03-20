@@ -14,7 +14,7 @@ const generateCoupons = async (numCoupons: number): Promise<Prisma.CouponCreateI
       const discount: string = `${faker.number.int({ min: 5, max: 99 })}`; // Véletlenszerű kedvezmény
       const validFrom: Date = faker.date.recent(); // Véletlenszerű kezdő dátum
       const validUntil: Date = faker.date.future(); // Véletlenszerű lejárati dátum
-      const usageDetails: string = faker.lorem.sentence(); // Véletlenszerű használati részletek
+      const usageDetails: string = faker.lorem.word(); // Véletlenszerű használati részletek
       const storeId: number = stores[Math.floor(Math.random() * stores.length)].id; // Véletlenszerű bolt azonosító
   
       coupons.push({

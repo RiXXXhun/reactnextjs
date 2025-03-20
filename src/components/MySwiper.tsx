@@ -81,56 +81,6 @@ const cardData = [
       },
     ],
   },
-  {
-    title: "Borsod-Abaúj-Zemplén vármegye",
-    description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-    extraCards: [
-      {
-        title: "Miskolc",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Miskolc Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Diósgyőri Vár", description: "Történelmi vár.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-      {
-        title: "Sátoraljaújhely",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Zempléni Kalandpark", description: "Kalandpark.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Sátoraljaújhelyi Kávéház", description: "Kávézó.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Heves vármegye",
-    description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-    extraCards: [
-      {
-        title: "Eger",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Egri Vár", description: "Történelmi vár.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Egri Borvidék", description: "Borászat.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-      {
-        title: "Gyöngyös",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Kékestető", description: "Legmagasabb pont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Gyöngyösi Templom", description: "Történelmi templom.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-    ],
-  },
 ];
 
 

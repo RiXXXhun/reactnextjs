@@ -22,7 +22,7 @@ const Materialuiinform = () => {
     fetchStores();
 
     // 3mp hogy változott-e valami 
-    const intervalId = setInterval(fetchStores, 30000);
+    const intervalId = setInterval(fetchStores, 5000);
 
     return () => clearInterval(intervalId); //cleareljük nehogy újra ugyna azt keresse 
   }, []);
@@ -41,7 +41,7 @@ const Materialuiinform = () => {
     fetchCoupons();
 
     // ez 3 mp-ként lekrértdezi változott-e
-    const intervalId = setInterval(fetchCoupons, 30000);
+    const intervalId = setInterval(fetchCoupons, 5000);
 
     return () => clearInterval(intervalId); // Tisztítás
   }, []);
@@ -88,6 +88,7 @@ const Materialuiinform = () => {
                 textAlign: "center",
                 marginBottom: "30px",
                 textTransform: "uppercase",
+                
               }}
             >
               Kuponok
@@ -104,6 +105,7 @@ const Materialuiinform = () => {
                   padding: "20px",
                   backgroundColor: "#161C27",
                   color: "#ffffff",
+                  minHeight: "70vh",
                   pt: "50px",
                   transition: "box-shadow 0.3s ease-in-out",
                   "&:hover": {

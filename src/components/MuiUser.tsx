@@ -22,7 +22,7 @@ const UserDataTable = () => {
   }, []);
 
   return (
-    <Box id="userDataSection" sx={{ marginTop: "200px" }}>
+    <Box id="userDataSection" sx={{ marginTop: "100px" }}>
       <Typography variant="h5" gutterBottom>Felhasználói adatok:</Typography>
       {error && <Typography color="error">{error}</Typography>}
       <TableContainer component={Paper} sx={{ marginTop: "20px", width: "100%" }}>
