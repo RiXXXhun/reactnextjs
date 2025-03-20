@@ -23,7 +23,7 @@ export default function Page() {
         const timeout = setTimeout(() => {
             setLoading(false);
             setOpen(true);
-        }, 1000);
+        }, 700);
 
         return () => clearTimeout(timeout);
     }, []);
