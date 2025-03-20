@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Typography, Card, Box, Container } from "@mui/material";
 import QRCode from "react-qr-code";
+import { Discount } from "@mui/icons-material";
 
 const Materialuiinform = () => {
   const [coupons, setCoupons] = useState<any[]>([]);
@@ -34,6 +35,7 @@ const Materialuiinform = () => {
 
     fetchCoupons();
   }, []);
+
 
   const getStoreName = (storeId: number) => {
     const store = stores.find((store) => store.id === storeId);
@@ -99,9 +101,9 @@ const Materialuiinform = () => {
                   },
                 }}
               >
-                <Box sx={{ marginBottom: "16px" }}>
+                <Box sx={{ marginBottom: "16px"}}>
                   <Typography variant="h5" sx={{ color: "#ffffff", textTransform: "uppercase" }}>
-                    {card.discount}%
+                    {card.discount}
                   </Typography>
                 </Box>
 
@@ -116,13 +118,12 @@ const Materialuiinform = () => {
                     position: "relative", 
                   }}
                 >
-                  <QRCode
-                    value={card.qrCode}
-                    size={300}
-                    bgColor="#161C27"
-                    fgColor="#ffffff"
+                  <QRCode 
+                  value={card.qrCode}
+                  size={300}
+                  bgColor="#161C27"
+                  fgColor="#ffffff"
                   />
-
                   <Box
                     sx={{
                       position: "absolute",
@@ -131,7 +132,7 @@ const Materialuiinform = () => {
                       transform: "translate(-50%, -50%)",
                       width: "40px",
                       height: "40px",
-                      backgroundImage: "url('/Logo.png')",
+                      backgroundColor: "#0000",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}

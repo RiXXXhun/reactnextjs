@@ -11,7 +11,7 @@ const generateCoupons = async (numCoupons: number): Promise<Prisma.CouponCreateI
   
     for (let i = 0; i < numCoupons; i++) {
       const qrCode: string = faker.string.alphanumeric(10); // Véletlenszerű QR kód
-      const discount: string = `${faker.number.int({ min: 5, max: 50 })}%`; // Véletlenszerű kedvezmény
+      const discount: string = `${faker.number.int({ min: 5, max: 99 })}`; // Véletlenszerű kedvezmény
       const validFrom: Date = faker.date.recent(); // Véletlenszerű kezdő dátum
       const validUntil: Date = faker.date.future(); // Véletlenszerű lejárati dátum
       const usageDetails: string = faker.lorem.sentence(); // Véletlenszerű használati részletek
@@ -50,3 +50,4 @@ const generateCoupons = async (numCoupons: number): Promise<Prisma.CouponCreateI
   }).finally(() => {
     prisma.$disconnect();
   });
+  
