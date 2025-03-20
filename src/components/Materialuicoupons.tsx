@@ -22,7 +22,7 @@ const Materialuiinform = () => {
     fetchStores();
 
     // 3mp hogy változott-e valami 
-    const intervalId = setInterval(fetchStores, 3000);
+    const intervalId = setInterval(fetchStores, 30000);
 
     return () => clearInterval(intervalId); //cleareljük nehogy újra ugyna azt keresse 
   }, []);
@@ -41,7 +41,7 @@ const Materialuiinform = () => {
     fetchCoupons();
 
     // ez 3 mp-ként lekrértdezi változott-e
-    const intervalId = setInterval(fetchCoupons, 3000);
+    const intervalId = setInterval(fetchCoupons, 30000);
 
     return () => clearInterval(intervalId); // Tisztítás
   }, []);
@@ -113,7 +113,7 @@ const Materialuiinform = () => {
               >
                 <Box sx={{ marginBottom: "16px"}}>
                   <Typography variant="h5" sx={{ color: "#ffffff", textTransform: "uppercase" }}>
-                    {card.discount}
+                    {card.discount}%
                   </Typography>
                 </Box>
 
@@ -142,7 +142,7 @@ const Materialuiinform = () => {
                       transform: "translate(-50%, -50%)",
                       width: "40px",
                       height: "40px",
-                      backgroundColor: "#0000",
+                      backgroundImage: "url('/Logo.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
