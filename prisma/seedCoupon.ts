@@ -32,7 +32,7 @@ const generateCoupons = async (numCoupons: number): Promise<Prisma.CouponCreateI
     return coupons;
   };
   
-  const seedCoupons = async () => {
+  export const seedCoupons = async () => {
     const coupons = await generateCoupons(15);
   
     for (const coupon of coupons) {

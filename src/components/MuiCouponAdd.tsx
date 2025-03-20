@@ -27,6 +27,7 @@ const CouponForm: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState<string>('');
   const [alertSeverity, setAlertSeverity] = useState<'success' | 'error'>('error');
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [editingCouponId, setEditingCouponId] = useState<number | null>(null); 
 
   useEffect(() => {
     const fetchStores = async () => {
@@ -62,13 +63,11 @@ const CouponForm: React.FC = () => {
     fetchCoupons();
   }, []);
 
-
   const generateQrCode = (discount: number) => {
     const randomNumbers = Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join('');
     return `PLÁZAÁSZ-${discount}-${randomNumbers}`;
   };
 
-  
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const validFromDate = new Date(validFrom);
@@ -81,7 +80,6 @@ const CouponForm: React.FC = () => {
       setOpenSnackbar(true);
       return false;
     }
-
 
     if (validFromDate < today) {
       setAlertMessage('Az érvényesség kezdete nem lehet a mai napnál régebbi!');
@@ -109,7 +107,6 @@ const CouponForm: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
-
 
     const qrCode = generateQrCode(discount);
     const couponData = {
@@ -154,25 +151,72 @@ const CouponForm: React.FC = () => {
 
   const handleDeleteCoupon = async (couponId: number) => {
     try {
-      const response = await fetch(`/api/coupons/delete?id=${couponId}`, {
+      const response = await fetch('/api/coupons/delete', {
         method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: couponId }),
+      });
+  
+      if (response.ok) {
+        setCoupons(coupons.filter((coupon) => coupon.id !== couponId));
+        setAlertMessage('A kupon sikeresen törölve!');
+        setAlertSeverity('success');
+        setOpenSnackbar(true);
+      } else {
+        const data = await response.json();
+        setAlertMessage(data.message || 'Hiba történt a kupon törlésében!');
+        setAlertSeverity('error');
+        setOpenSnackbar(true);
+      }
+    } catch (error) {
+      console.error('Error deleting coupon:', error);
+      setAlertMessage('Hiba történt a kupon törlésében!');
+      setAlertSeverity('error');
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleEditCoupon = async () => {
+    if (!validateForm()) return;
+
+    const qrCode = generateQrCode(discount);
+    const couponData = {
+      id: editingCouponId,
+      qrCode,
+      discount,
+      validFrom: validFrom || coupons.find(coupon => coupon.id === editingCouponId)?.validFrom || '',
+      validUntil: validUntil || coupons.find(coupon => coupon.id === editingCouponId)?.validUntil || '',
+      usageDetails,
+      storeId,
+    };
+
+    try {
+      const response = await fetch(`/api/coupons/update`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(couponData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setAlertMessage('A kupon sikeresen törölve!');
+        setAlertMessage('A kupon sikeresen módosítva!');
         setAlertSeverity('success');
-
-        setCoupons(coupons.filter((coupon) => coupon.id !== couponId));
+        setCoupons(coupons.map(coupon => coupon.id === editingCouponId ? data : coupon));
+        setDiscount(0);
+        setValidFrom('');
+        setValidUntil('');
+        setUsageDetails('');
+        setStoreId('');
+        setEditingCouponId(null); 
       } else {
-        setAlertMessage(data.message || 'Hiba történt a kupon törlésekor!');
+        setAlertMessage(data.message || 'Hiba történt a kupon módosításakor!');
         setAlertSeverity('error');
       }
       setOpenSnackbar(true);
     } catch (error) {
-      console.error('Error deleting coupon:', error);
-      setAlertMessage('Hiba történt a kupon törlésében!');
+      console.error('Error updating coupon:', error);
+      setAlertMessage('Hiba történt a kupon módosításakor!');
       setAlertSeverity('error');
       setOpenSnackbar(true);
     }
@@ -182,6 +226,24 @@ const CouponForm: React.FC = () => {
     setOpenSnackbar(false);
   };
 
+  const handleEditClick = (coupon: Coupon) => {
+    setDiscount(coupon.discount);
+    setValidFrom(coupon.validFrom);
+    setValidUntil(coupon.validUntil);
+    setUsageDetails(coupon.usageDetails);
+    setStoreId(coupon.storeId);
+    setEditingCouponId(coupon.id);
+  };
+
+  const handleCancelEdit = () => {
+    setDiscount(0);
+    setValidFrom('');
+    setValidUntil('');
+    setUsageDetails('');
+    setStoreId('');
+    setEditingCouponId(null); 
+  };
+
   return (
     <Box sx={{ marginTop: "200px" }} id='couponSection'>
       <h2 >Új kupon hozzáadása</h2>
@@ -189,7 +251,6 @@ const CouponForm: React.FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             label="Kedvezmény (%)"
-            
             type="number"
             fullWidth
             value={discount}
@@ -230,41 +291,55 @@ const CouponForm: React.FC = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControl fullWidth>
-            <InputLabel id="store-select-label">Bolt</InputLabel>
-            <Select
-              labelId="store-select-label"
-              value={storeId}
-              onChange={(e) => setStoreId(Number(e.target.value))}
-              label="Bolt"
+        <FormControl fullWidth>
+          <InputLabel>Bolt</InputLabel>
+          <Select
+            value={storeId}
+            onChange={(e) => setStoreId(e.target.value ? Number(e.target.value) : '')} 
+            label="Bolt"
+          >
+            {stores.map((store) => (
+              <MenuItem key={store.id} value={store.id}>
+                {store.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        </Grid>
+        <Grid item xs={12} container spacing={2}>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={editingCouponId ? handleEditCoupon : handleSubmit}
             >
-              {stores.length > 0 ? (
-                stores.map((store) => (
-                  <MenuItem key={store.id} value={store.id}>
-                    {store.name}
-                  </MenuItem>
-                ))
-              ) : (
-                <MenuItem disabled>Nincs elérhető bolt</MenuItem>
-              )}
-            </Select>
-          </FormControl>
+              {editingCouponId ? "Mentés" : "Hozzáadás"}
+            </Button>
+          </Grid>
+          {editingCouponId && (
+            <Grid item>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleCancelEdit}
+                sx={{ }}
+              >
+                Mégse
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </Grid>
-      <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '20px' }}>
-        Kupon hozzáadása
-      </Button>
 
       <TableContainer component={Paper} sx={{ marginTop: "20px", width: "100%", mb: "100px" }}>
-        <Table aria-label="Coupons Data">
+        <Table sx={{ minWidth: 650 }} aria-label="Coupons Data">
           <TableHead>
             <TableRow>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">QR Kód</TableCell>
+              <TableCell>Kupon ID</TableCell>
               <TableCell align="center">Kedvezmény</TableCell>
-              <TableCell align="center">Érvényesség kezdete</TableCell>
-              <TableCell align="center">Érvényesség vége</TableCell>
-              <TableCell align="center">Bolt id</TableCell>
+              <TableCell align="center">Érvényesség</TableCell>
+              <TableCell align="center">Bolt</TableCell>
               <TableCell align="center">Felhasználási módja</TableCell>
               <TableCell align="center">Műveletek</TableCell>
             </TableRow>
@@ -272,12 +347,11 @@ const CouponForm: React.FC = () => {
           <TableBody>
             {coupons.map((coupon) => (
               <TableRow key={coupon.id}>
-                <TableCell align="center">{coupon.id}</TableCell>
-                <TableCell align="center">{coupon.qrCode}</TableCell>
-                <TableCell align="center">{coupon.discount}%</TableCell>
-                <TableCell align="center">{new Date(coupon.validFrom).toLocaleDateString()}</TableCell>
-                <TableCell align="center">{new Date(coupon.validUntil).toLocaleDateString()}</TableCell>
-                <TableCell align="center">{coupon.storeId}</TableCell>
+                <TableCell>{coupon.id}</TableCell>
+                <TableCell align="center">{coupon.discount}</TableCell>
+                <TableCell align="center"> {new Date(coupon.validFrom).toLocaleDateString()} -{" "} {new Date(coupon.validUntil).toLocaleDateString()}
+                </TableCell>
+                <TableCell align="center">{stores.find(store => store.id === coupon.storeId)?.name}</TableCell>
                 <TableCell align="center">{coupon.usageDetails}</TableCell>
                 <TableCell align="center">
                   <Button
@@ -287,6 +361,14 @@ const CouponForm: React.FC = () => {
                   >
                     Törlés
                   </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => handleEditClick(coupon)}
+                    sx={{ mt: 1}}
+                  >
+                    Módosítás
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -294,7 +376,11 @@ const CouponForm: React.FC = () => {
         </Table>
       </TableContainer>
 
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
         <Alert onClose={handleCloseSnackbar} severity={alertSeverity}>
           {alertMessage}
         </Alert>

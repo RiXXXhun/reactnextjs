@@ -20,6 +20,11 @@ const Materialuiinform = () => {
     };
 
     fetchStores();
+
+    // 3mp hogy változott-e valami 
+    const intervalId = setInterval(fetchStores, 3000);
+
+    return () => clearInterval(intervalId); //cleareljük nehogy újra ugyna azt keresse 
   }, []);
 
   useEffect(() => {
@@ -34,6 +39,11 @@ const Materialuiinform = () => {
     };
 
     fetchCoupons();
+
+    // ez 3 mp-ként lekrértdezi változott-e
+    const intervalId = setInterval(fetchCoupons, 3000);
+
+    return () => clearInterval(intervalId); // Tisztítás
   }, []);
 
 

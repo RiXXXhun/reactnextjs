@@ -25,7 +25,7 @@ const generateUsers = async (numUsers: number): Promise<Prisma.UserCreateInput[]
   return users;
 };
 
-const seedUsers = async () => {
+export const seedUsers = async () => {
   const users = await generateUsers(100);
 
   for (const user of users) {

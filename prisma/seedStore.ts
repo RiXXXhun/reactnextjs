@@ -19,7 +19,7 @@ const generateStores = async (numStores: number): Promise<Prisma.StoreCreateInpu
     return stores;
   };
   
-  const seedStores = async () => {
+  export const seedStores = async () => {
     const stores = await generateStores(10);
   
     for (const store of stores) {

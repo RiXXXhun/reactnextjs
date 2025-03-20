@@ -73,9 +73,11 @@ model PlazaStore {
   name   String
   openingTime   String
   closingTime   String
+  description   String @db.VarChar(1000)
   plazas Plaza[] @relation("PlazaToStores")
   createdAt DateTime @default(now())
 }
+
 
 model LeafletMap {
   id         Int     @id @default(autoincrement())
