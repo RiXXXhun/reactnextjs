@@ -168,7 +168,7 @@ export default function ForgotPassword() {
   return (
     <>
       <CssBaseline enableColorScheme />
-      <SignInContainer direction="column" justifyContent="center">
+      <SignInContainer direction="column" justifyContent="center" sx={{ mt: "100px", }}>
         <Card variant="outlined">
           <LockOpenIcon sx={{ fontSize: 60, color: "white", alignSelf: "center" }} />
           <Typography

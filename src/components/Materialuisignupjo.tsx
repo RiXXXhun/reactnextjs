@@ -27,6 +27,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
   padding: theme.spacing(4),
   gap: theme.spacing(2),
   margin: 'auto',
+  mt: "100px",
   [theme.breakpoints.up('sm')]: {
     maxWidth: '450px',
   },
@@ -200,7 +201,7 @@ export default function SignUp() {
   return (
     <>
       <CssBaseline enableColorScheme />
-      <SignUpContainer direction="column" justifyContent="space-between">
+      <SignUpContainer direction="column" justifyContent="space-between" sx={{ mt: "100px", }}>
         <Card variant="outlined">
           <LockOutlinedIcon sx={{ fontSize: 60, color: 'white', alignSelf: 'center' }} />
           <Typography

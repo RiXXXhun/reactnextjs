@@ -52,11 +52,27 @@ const AboutUs: React.FC = () => {
           align="center"
           gutterBottom
           sx={{
+            fontSize: "20px",
             marginBottom: '60px',
             color: 'white',
           }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu.
+          A Plázaász mögött egy lelkes, innovatív csapat áll, akik szenvedélyesen dolgoznak azon, hogy a vásárlás egyszerűbb és kényelmesebb legyen mindenki számára. <br />
+          Hármunk közös célja, hogy a Plázaász ne csupán egy plázakereső oldal legyen, hanem egy igazi élmény minden vásárlónak. Egy hely, ahol gyorsan és egyszerűen megtalálhatod a legjobb bevásárlóközpontokat, üzleteket és még kuponokat is használhatnak.
+        </Typography>
+
+        <Typography
+          variant="body1"
+          component="p"
+          align="center"
+          gutterBottom
+          sx={{
+            fontSize: "20px",
+            marginBottom: '60px',
+            color: 'white',
+          }}
+        >
+                  „Plázák és boltok egy kattintásra – gyors keresés, könnyű felfedezés!”
         </Typography>
         <Box
           sx={{

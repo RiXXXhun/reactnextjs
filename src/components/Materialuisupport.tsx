@@ -5,6 +5,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 interface FormData {
   fullName: string;
@@ -109,17 +111,18 @@ const ContactForm: React.FC = () => {
           <Grid item xs={12} md={6}>
             
             <Typography variant="h4" gutterBottom color="white">
-              Lépj velünk kapcsolatba
+              Lépj velünk kapcsolatba <SupportAgentIcon sx={{ width: "45px", height: "45px" }}></SupportAgentIcon>
             </Typography>
             <Typography variant="body1" color="white" paragraph>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto natus voluptatem similique consectetur illo. Eius esse nostrum aperiam voluptatem? Quaerat eum, magni neque ducimus deleniti adipisci suscipit nostrum laboriosam explicabo?
+            Ha bármilyen hibát észlelsz az oldal működésében, kérjük, jelezd nekünk! Fontos számunkra, hogy a Plázaász mindig zavartalanul működjön. 
+            Vedd fel velünk a kapcsolatot az alábbi űrlapon keresztül, és csapatunk a lehető leghamarabb utánajár a problémának. Köszönjük a segítséged!
             </Typography>
 
             <Box mb={4}>
               <Typography variant="h6" color="white">Cím</Typography>
               <Box display="flex" alignItems="center">
                 <LocationOn sx={{ color: "white", mr: 2 }} />
-                <Typography variant="body2" color="white">Csepreg</Typography>
+                <Typography variant="body2" color="white">Csepreg, Rákóczi Ferenc utca 13, 9735</Typography>
               </Box>
             </Box>
 
@@ -128,7 +131,7 @@ const ContactForm: React.FC = () => {
               <Box display="flex" alignItems="center">
                 <Phone sx={{ color: "white", mr: 2 }} />
                 <Typography variant="body2" color="white">
-                  <a href="tel:06302222222" style={{ color: "white" }}>06 30 222 2222</a>
+                   06 30 782 8553
                 </Typography>
               </Box>
             </Box>
@@ -138,15 +141,23 @@ const ContactForm: React.FC = () => {
               <Box display="flex" alignItems="center">
                 <Mail sx={{ color: "white", mr: 2 }} />
                 <Typography variant="body2" color="white">
-                  <a href="mailto:asd@asd.com" style={{ color: "white" }}>asd@asd.com</a>
+                  plazaasz@gmail.com
                 </Typography>
               </Box>
             </Box>
 
             <Box mb={4}>
-              <Typography variant="h6" color="white">Nyitvatartás</Typography>
-              <Typography variant="body2" color="white">H-P: 9:00 - 17:00</Typography>
-              <Typography variant="body2" color="white">Szo-V: Zárva</Typography>
+              <Typography variant="h4" color="white" sx={{ mb: 3 }}>Nyitvatartás <CalendarMonthIcon sx={{ height: "30px", width: "30px" }}></CalendarMonthIcon> </Typography> 
+
+
+
+              <Typography variant="body2" color="white" sx={{ mb: 1 }}>Hétfő - 08:00-16:00</Typography>
+              <Typography variant="body2" color="white" sx={{ mb: 1 }}>Kedd - 08:00-16:00</Typography>
+              <Typography variant="body2" color="white" sx={{ mb: 1 }}>Szerda - 08:00-16:00</Typography>
+              <Typography variant="body2" color="white" sx={{ mb: 1 }}>Csütörtök - 08:00-16:00</Typography>
+              <Typography variant="body2" color="white" sx={{ mb: 1 }}>Péntek - 08:00-16:00</Typography>
+              <Typography variant="body2" color="white" sx={{ mb: 1 }}>Szombat - 10:00-16:00</Typography>
+              <Typography variant="body2" color="white">Vasárnap - Zárva</Typography>
             </Box>
           </Grid>
 

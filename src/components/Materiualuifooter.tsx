@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
               
             </Box>
             <Typography variant="body2" sx={{ marginBottom: 2 }}>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda animi eaque neque quia, vel modi aut voluptates aspernatur esse vero voluptate perferendis optio tenetur facilis repudiandae quam! Tempore, recusandae quam.
+            „Plázák és boltok egy kattintásra – gyors keresés, könnyű felfedezés!”
             </Typography>
           </Grid>
 
@@ -94,16 +94,16 @@ const Footer: React.FC = () => {
               
             </Box>
             <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Bejelentkezés
+              Fontos tudnivalók 
             </Link>
             <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Térkép
+              Gyorskeresés
             </Link>
             <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
               Ügyfélszolgálat
             </Link>
             <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              FAQ
+              GYíK
             </Link>
           </Grid>
 
@@ -113,16 +113,13 @@ const Footer: React.FC = () => {
               
             </Box>
             <Typography variant="body2" sx={{ marginBottom: 1 }}>
-              <i className="fas fa-home mr-3"></i> 9735 Csepreg, Rákóczi u. 13-15.
+              <i className="fas fa-home mr-3"></i> Csepreg, Rákóczi Ferenc utca 13, 9735
             </Typography>
             <Typography variant="body2" sx={{ marginBottom: 1 }}>
               <i className="fas fa-envelope mr-3"></i> plazaasz@gmail.com
             </Typography>
             <Typography variant="body2" sx={{ marginBottom: 1 }}>
               <i className="fas fa-phone mr-3"></i> 06 30 782 8553
-            </Typography>
-            <Typography variant="body2" sx={{ marginBottom: 1 }}>
-              <i className="fas fa-print mr-3"></i> 06 30 555 5555
             </Typography>
           </Grid>
         </Grid>

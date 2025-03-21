@@ -5,31 +5,32 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import AppsIcon from '@mui/icons-material/Apps';
 import DiscountIcon from '@mui/icons-material/Discount';
 import BusinessIcon from '@mui/icons-material/Business';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 const cardData = [
   {
     title: 'Lehetőségek',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
+    description: 'Fedezd fel a legjobb plázákat és bevsárlóközpontoan Magyaroszág Nyugat-Dunántúli régiójában pár kattintással, könnyen és gyorsan!',
     icon: <AppsIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
-    title: '24/7 Ügyfélszolgálat',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. 2000 AC YEAR',
+    title: 'H-SZ Ügyfélszolgálat',
+    description: 'Bármikor kérdésed van vagy esetleg hibát találtál az oldalunkon ? Mi itt vagyunk, hogy segítsünk a tökéletes vásárlási élményben!',
     icon: <SupportAgentIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
-    title: 'Lehetőségek',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-    icon: <AppsIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
+    title: 'Regisztráció nélkül is',
+    description: 'Kereshetsz plázákat és bevásárlóközpontokat, valamint használhatsz kuponokat anélkül, hogy fiókot kellene létrehoznod.',
+    icon: <AppRegistrationIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: 'Kedvezmények',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
+    description: 'Spórolj meg többet! Használj exkluzív kuponokat és akciókat, hogy még jobb áron vásárolhass!',
     icon: <DiscountIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: 'Cégünk',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
+    description: ' Szenvedélyünk a vásárlás egyszerűbbé tétele mindenki számára – a PlázaÁsz a legjobb társad a plázák világában!',
     icon: <BusinessIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
 
