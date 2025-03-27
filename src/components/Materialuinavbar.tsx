@@ -1,4 +1,3 @@
-"use client"
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,23 +7,57 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import LogoDevIcon from '@mui/icons-material/LogoDev';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import jwt from 'jsonwebtoken';
+import router from 'next/router';
 
-const pages = ['Rólunk']; 
-const settings = ['Profil', 'Belépés', 'Regisztráció', 'Kijelentkezés'];
-
-
-const label = { inputProps: { 'aria-label': 'Toggle switch' } };
+const pages = ['Rólunk'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [checked, setChecked] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+  React.useEffect(() => {
+    const token = Cookies.get('auth_token');
+    console.log("JWT token:", token); 
+
+    if (token) {
+      try {
+        const decoded = jwt.decode(token);
+        console.log("Decoded token:", decoded);
+
+        if (decoded) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Invalid token:', error);
+        setIsAuthenticated(false);
+      }
+    } else {
+      setIsAuthenticated(false);  
+    }
+  }, []);
+
+    const handleLogout = async () => {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.message === 'Sikeres kijelentkezés') {
+        window.location.reload();  
+      }
+    };
+
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -42,23 +75,22 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-
   return (
     <AppBar position="static" sx={{ backgroundColor: '#161C27', color: '#ecf0f1' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ minHeight: { xs: 80, md: 80, xl: 100 }, fontSize: { xl: 20 } }}>
-        <Box
-      component="img"
-      src="/Logo.png"
-      alt="Logo"
-      sx={{
-        display: { xs: 'none', md: 'flex', xl: 'flex' },
-        mr: 1,
-        width: 50,  
-        height: 50, 
-        maxWidth: '100%', 
-      }}
-    />
+          <Box
+            component="img"
+            src="/Logo.png"
+            alt="Logo"
+            sx={{
+              display: { xs: 'none', md: 'flex', xl: 'flex' },
+              mr: 1,
+              width: 50,
+              height: 50,
+              maxWidth: '100%',
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -90,8 +122,6 @@ function ResponsiveAppBar() {
               <MenuIcon />
             </IconButton>
 
-
-
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -120,7 +150,6 @@ function ResponsiveAppBar() {
                 </Link>
               </MenuItem>
 
-
               <MenuItem key="Ügyfélszolgálat" onClick={handleCloseNavMenu}>
                 <Link href="/support" style={{ textDecoration: 'none', color: 'inherit' }}>
                   <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>Ügyfélszolgálat</Typography>
@@ -130,18 +159,17 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box
-      component="img"
-      src="/Logo.png"
-      alt="Logo"
-      sx={{
-        display: { xs: 'flex', md: 'none', xl: 'none' },
-        mr: 1,
-        width: 40,  
-        height: 40, 
-        maxWidth: '100%', 
-      }}
-    />
-          
+            component="img"
+            src="/Logo.png"
+            alt="Logo"
+            sx={{
+              display: { xs: 'flex', md: 'none', xl: 'none' },
+              mr: 1,
+              width: 40,
+              height: 40,
+              maxWidth: '100%',
+            }}
+          />
 
           <Typography
             variant="h5"
@@ -158,10 +186,10 @@ function ResponsiveAppBar() {
               color: 'inherit',
               textDecoration: 'none',
               fontSize: { xl: 35 },
-            }}>
+            }}
+          >
             PLÁZAÁSZ
           </Typography>
-
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -180,7 +208,6 @@ function ResponsiveAppBar() {
               </Button>
             ))}
 
-
             <Button
               key="Kuponok"
               onClick={handleCloseNavMenu}
@@ -190,9 +217,6 @@ function ResponsiveAppBar() {
                 Kuponok
               </Link>
             </Button>
-
-
-
 
             <Button
               key="Ügyfélszolgálat"
@@ -205,13 +229,10 @@ function ResponsiveAppBar() {
             </Button>
           </Box>
 
-
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            
-
             <Tooltip title="Profil beállitások">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 0.5 }}>
-                <Avatar alt="Remy Sharp" src="" sx={{ width: { xl: 50 }, height: { xl: 50 } }} />
+                <AccountBoxIcon sx={{ width: { xl: 50 }, height: { xl: 50 }, color: 'white' }} />
               </IconButton>
             </Tooltip>
 
@@ -225,22 +246,35 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
-                    {setting === 'Belépés' ? (
-                      <Link href="/login" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> 
-                    ) : setting === 'Regisztráció' ? (
-                      <Link href="/registration" style={{ textDecoration: 'none', color: 'inherit' }}>{setting}</Link> 
-                    ) : (
-                      setting 
-                    )}
-                  </Typography>
-                </MenuItem>
-              ))}
+              {isAuthenticated ? (
+                [
+                  <MenuItem key="Profil" onClick={handleCloseUserMenu}>
+                    <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
+                      <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>Profil</Link>
+                    </Typography>
+                  </MenuItem>,
+                  <MenuItem key="Kijelentkezés" onClick={handleLogout}>
+                    <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
+                      Kijelentkezés
+                    </Typography>
+                  </MenuItem>
+                ]
+              ) : (
+                [
+                  <MenuItem key="Belépés" onClick={handleCloseUserMenu}>
+                    <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
+                      <Link href="/login" style={{ textDecoration: 'none', color: 'inherit' }}>Belépés</Link>
+                    </Typography>
+                  </MenuItem>,
+                  <MenuItem key="Regisztráció" onClick={handleCloseUserMenu}>
+                    <Typography sx={{ textAlign: 'center', fontSize: { xl: 20 } }}>
+                      <Link href="/registration" style={{ textDecoration: 'none', color: 'inherit' }}>Regisztráció</Link>
+                    </Typography>
+                  </MenuItem>
+                ]
+              )}
             </Menu>
           </Box>
-          
         </Toolbar>
       </Container>
     </AppBar>

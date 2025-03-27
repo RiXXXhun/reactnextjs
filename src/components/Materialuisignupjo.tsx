@@ -101,7 +101,7 @@ export default function SignUp() {
         if (response.ok) {
           const result = await response.json();
           console.log('Sikeres regisztráció:', result);
-          setAlert({ message: 'Sikeresen regisztráltál!', success: true });
+          setAlert({ message: 'Sikeresen regisztrált!', success: true });
           setTimeout(handleAlertClose, 3000);
 
           setFormData({
@@ -267,7 +267,7 @@ export default function SignUp() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="sajatemailed@email.com"
+                placeholder="sajatemailcime@email.com"
                 autoComplete="email"
                 required
                 fullWidth
@@ -353,7 +353,7 @@ export default function SignUp() {
           </FormControl>
 
             <FormControl>
-              <FormLabel htmlFor="securityQuestionAnswer" sx={{ color: 'white' }}>Mi jelenleg vagy volt a beceneved?</FormLabel>
+              <FormLabel htmlFor="securityQuestionAnswer" sx={{ color: 'white' }}>Mi jelenleg vagy volt a beceneve?</FormLabel>
               <TextField
                 error={securityQuestionError}
                 helperText={securityQuestionErrorMessage}
@@ -427,7 +427,7 @@ export default function SignUp() {
 
 
             <Typography align="center" sx={{ color: 'white' }}>
-              Már van felhasználód ?{' '}
+              Már van felhasználója ?{' '}
               <Link
                 href="/login"
                 sx={{
@@ -435,7 +435,7 @@ export default function SignUp() {
                   '&:hover': { color: 'rgba(50, 150, 255, 1)' },
                 }}
               >
-                Katt ide!
+                Kattintson ide!
               </Link>
             </Typography>
           </Box>

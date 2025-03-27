@@ -37,7 +37,7 @@ model Coupon {
   discount     String
   validFrom    DateTime
   validUntil   DateTime
-  usageDetails String
+  usageDetails String   @db.VarChar(1000)
   storeId      Int
   store        Store    @relation(fields: [storeId], references: [id])
   createdAt    DateTime @default(now())
@@ -50,23 +50,36 @@ model Store {
   createdAt DateTime @default(now())
 }
 
+
+model LeafletMap {
+  id            Int       @id @default(autoincrement())
+  plazaMapName  String
+  latitude      Float
+  longitude     Float
+  createdAt     DateTime  @default(now())
+  plazas        Plaza[]   @relation("PlazaToLeafletMap") 
+}
+
 model Plaza {
-  id           Int          @id @default(autoincrement())
-  plazaName    String       @unique
-  location     String       @unique
-  city         String
+  id           Int       @id @default(autoincrement())
+  plazaName    String    @unique
+  location     String    @unique
+  cityId       Int
+  city         City      @relation("PlazaCity", fields: [cityId], references: [id])
   openingTime  String
   closingTime  String
   email        String
   phone        String
-  image        String?
-  description  String?
+  image        String
+  description  String    @db.VarChar(1000)
   plazaStores  PlazaStore[] @relation("PlazaToStores")
-  leafletMapId Int          @unique
+  leafletMapId Int       @unique
+  leafletMap   LeafletMap @relation("PlazaToLeafletMap", fields: [leafletMapId], references: [id])
   countyId     Int
-  county       County       @relation(fields: [countyId], references: [id])
-  createdAt DateTime @default(now())
+  county       County    @relation(fields: [countyId], references: [id])
+  createdAt    DateTime  @default(now())
 }
+
 
 model PlazaStore {
   id     Int     @id @default(autoincrement())
@@ -79,13 +92,7 @@ model PlazaStore {
 }
 
 
-model LeafletMap {
-  id         Int     @id @default(autoincrement())
-  plazaMapName  String
-  latitude   Float
-  longitude  Float
-  createdAt DateTime @default(now())
-}
+
 
 
 model County {
@@ -95,3 +102,9 @@ model County {
   createdAt DateTime @default(now())
 }
 
+model City {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  plazas      Plaza[]   @relation("PlazaCity")
+  createdAt DateTime @default(now())
+}

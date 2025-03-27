@@ -10,8 +10,8 @@ import { styled } from "@mui/material/styles";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Link } from "@mui/material";
-
+import Link from "next/link";
+import Cookies from 'js-cookie';
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
   minHeight: "60vh",
@@ -44,24 +44,20 @@ const Card = styled(MuiCard)(({ theme }) => ({
   },
 }));
 
-export default function SignIn() {
+const SignIn = () => {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
-  const [loginError, setLoginError] = React.useState("");
   const [alertMessage, setAlertMessage] = React.useState<{ message: string; success: boolean }>({ message: "", success: false });
-
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     if (validateInputs()) {
-      console.log("Bejelentkezési próbálkozás:", { email, password });
-
       try {
         const response = await fetch("/api/auth/login", {
           method: "POST",
@@ -70,22 +66,34 @@ export default function SignIn() {
           },
           body: JSON.stringify({ email, password }),
         });
-
+  
         const result = await response.json();
-
+  
         if (response.ok) {
-          console.log("Sikeres bejelentkezés!", result);
+          Cookies.set("auth_token", result.token, {
+            expires: 1, 
+            path: "/",
+            secure: true,
+            sameSite: "strict",
+          });
+  
           setAlertMessage({ message: "Sikeres bejelentkezés!", success: true });
-
           setEmail("");
           setPassword("");
+  
+          window.location.href = "/homepage";
         } else {
-          console.log("Sikertelen bejelentkezés:", result.message);
-          setAlertMessage({ message: result.message || "Hibás email vagy jelszó!", success: false });
+          setAlertMessage({
+            message: result.message || "Hibás email vagy jelszó!",
+            success: false,
+          });
         }
       } catch (error) {
         console.error("Hálózati hiba:", error);
-        setAlertMessage({ message: "Hálózati hiba történt, próbáld újra később!", success: false });
+        setAlertMessage({
+          message: "Hálózati hiba történt, próbálja újra később!",
+          success: false,
+        });
       }
     }
   };
@@ -140,7 +148,7 @@ export default function SignIn() {
               id="email"
               type="email"
               name="email"
-              placeholder="sajatemailed@email.com"
+              placeholder="sajatemailcime@email.com"
               autoComplete="email"
               autoFocus
               required
@@ -228,28 +236,32 @@ export default function SignIn() {
             )}
 
             <Typography align="center" sx={{ color: 'white' }}>
-              Még nincs felhasználód ?{' '}
-              <Link
-                href="/registration"
-                sx={{
-                  color: 'rgba(50, 150, 255, 0.8)',
-                  '&:hover': { color: 'rgba(50, 150, 255, 1)' },
-                }}
-              >
-                Regisztráció
+              Még nincs felhasználója?{' '}
+              <Link href="/registration" passHref>
+                <Typography
+                  component="span"
+                  sx={{
+                    color: 'rgba(50, 150, 255, 0.8)',
+                    '&:hover': { color: 'rgba(50, 150, 255, 1)' },
+                  }}
+                >
+                  Regisztráció
+                </Typography>
               </Link>
             </Typography>
 
             <Typography align="center" sx={{ color: 'white' }}>
-              Elfejletteted a jelszavad ?{' '}
-              <Link
-                href="/forgotpassword"
-                sx={{
-                  color: 'rgba(50, 150, 255, 0.8)',
-                  '&:hover': { color: 'rgba(50, 150, 255, 1)' },
-                }}
-              >
-                Katt ide!
+              Elfelejtette a jelszavát ?{' '}
+              <Link href="/forgotpassword" passHref>
+                <Typography
+                  component="span"
+                  sx={{
+                    color: 'rgba(50, 150, 255, 0.8)',
+                    '&:hover': { color: 'rgba(50, 150, 255, 1)' },
+                  }}
+                >
+                  Kattintson ide!
+                </Typography>
               </Link>
             </Typography>
           </Box>
@@ -257,4 +269,6 @@ export default function SignIn() {
       </SignInContainer>
     </>
   );
-}
+};
+
+export default SignIn;

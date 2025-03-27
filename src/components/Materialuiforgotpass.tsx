@@ -117,7 +117,7 @@ export default function ForgotPassword() {
         }
       } catch (error) {
         console.error("Hálózati hiba:", error);
-        setAlert({ message: "Hálózati hiba történt, próbáld újra később!", success: false });
+        setAlert({ message: "Hálózati hiba történt, próbálja újra később!", success: false });
       }
     }
   };
@@ -196,7 +196,7 @@ export default function ForgotPassword() {
                 required
                 fullWidth
                 variant="outlined"
-                placeholder="Írd be a felhasználóneved"
+                placeholder="Írja be a felhasználónevét"
                 helperText={usernameError ? "Hibás felhasználónév" : ""}
                 sx={{
                   '& .MuiOutlinedInput-root': {
@@ -220,7 +220,7 @@ export default function ForgotPassword() {
                 required
                 fullWidth
                 variant="outlined"
-                placeholder="Írd be az email címed"
+                placeholder="Írja be az email címét"
                 helperText={emailError ? "Hibás email cím" : ""}
                 sx={{
                   '& .MuiOutlinedInput-root': {
@@ -234,7 +234,7 @@ export default function ForgotPassword() {
             </FormControl>
 
             <FormControl>
-              <FormLabel htmlFor="securityQuestionAnswer" sx={{ color: "white" }}>Mi jelenleg vagy volt a beceneved?</FormLabel>
+              <FormLabel htmlFor="securityQuestionAnswer" sx={{ color: "white" }}>Mi jelenleg vagy volt a beceneve?</FormLabel>
               <TextField
                 error={securityQuestionAnswerError}
                 id="securityQuestionAnswer"
@@ -244,7 +244,7 @@ export default function ForgotPassword() {
                 required
                 fullWidth
                 variant="outlined"
-                placeholder="Írd be a választ a biztonsági kérdésre"
+                placeholder="Írja be a választ a biztonsági kérdésre"
                 helperText={securityQuestionAnswerError ? "Válasz megadása kötelező" : ""}
                 sx={{
                   '& .MuiOutlinedInput-root': {
@@ -268,7 +268,7 @@ export default function ForgotPassword() {
                 required
                 fullWidth
                 variant="outlined"
-                placeholder="Írd be az új jelszót"
+                placeholder="Írja be az új jelszót"
                 helperText={newPasswordError ? "A jelszónak minimum 6 karakternek kell lennie és tartalmaznia kell egy számot és egy nagybetűt" : ""}
                 sx={{
                   '& .MuiOutlinedInput-root': {
@@ -292,7 +292,7 @@ export default function ForgotPassword() {
                 required
                 fullWidth
                 variant="outlined"
-                placeholder="Írd be a jelszót mégegyszer"
+                placeholder="Írja be a jelszót mégegyszer"
                 helperText={confirmPasswordError ? "A jelszavak nem egyeznek" : ""}
                 sx={{
                   '& .MuiOutlinedInput-root': {
@@ -324,7 +324,7 @@ export default function ForgotPassword() {
             </Button>
 
             <Typography align="center" sx={{ color: 'white' }}>
-              Mégis tudod a jelszavad ?{' '}
+              Mégis tudja a jelszavát ?{' '}
               <Link
                 href="/login"
                 sx={{
@@ -332,7 +332,7 @@ export default function ForgotPassword() {
                   '&:hover': { color: 'rgba(50, 150, 255, 1)' },
                 }}
               >
-                Katt ide!
+                Kattintson ide!
               </Link>
             </Typography>
 

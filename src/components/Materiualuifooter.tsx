@@ -36,22 +36,22 @@ const Footer: React.FC = () => {
                   },
                 }}
               >
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={() => window.location.href = '/not-found'}>
                   <Facebook />
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={() => window.location.href = '/not-found'}>
                   <Twitter />
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={() => window.location.href = '/not-found'}>
                   <Google />
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={() => window.location.href = '/not-found'}>
                   <Instagram />
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={() => window.location.href = '/not-found'}>
                   <LinkedIn />
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={() => window.location.href = '/not-found'}>
                   <GitHub />
                 </IconButton>
               </Box>
@@ -73,18 +73,21 @@ const Footer: React.FC = () => {
           </Grid>
 
           <Grid item xs={12} md={2}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rólunk</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Fontos Részek</Typography>
             <Box sx={{ width: 60, height: 2, backgroundColor: '#1E90FF', marginY: 1, position: 'relative' }}>
               
             </Box>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Nagy-Eperjesi Richárd
+            <Link href="http://localhost:3000/homepage#informSection" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Tudnivalók
             </Link>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Tóth Zoltán
+            <Link href="http://localhost:3000/homepage#quick-search" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Gyorskeresés
             </Link>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Hustikker Szabolcs
+            <Link href="http://localhost:3000/homepage#map" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Térkép
+            </Link>
+            <Link href="http://localhost:3000/homepage#faq" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              GYIK
             </Link>
           </Grid>
 
@@ -93,17 +96,17 @@ const Footer: React.FC = () => {
             <Box sx={{ width: 60, height: 2, backgroundColor: '#1E90FF', marginY: 1, position: 'relative' }}>
               
             </Box>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Fontos tudnivalók 
+            <Link href="http://localhost:3000/homepage" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Főoldal
             </Link>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              Gyorskeresés
+            <Link href="http://localhost:3000/coupons" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Kuponok
             </Link>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+            <Link href="http://localhost:3000/support" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
               Ügyfélszolgálat
             </Link>
-            <Link href="#" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
-              GYíK
+            <Link href="http://localhost:3000/adminPage" color="inherit" sx={{ display: 'block', textDecoration: 'none', fontSize: '1rem', marginBottom: 0.5 }}>
+              Admin oldal
             </Link>
           </Grid>
 

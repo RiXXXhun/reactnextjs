@@ -17,7 +17,6 @@ export async function POST(request: Request) {
     );
   }
 
-  // Bcrypt összehasonlítás adminpassword
   const passwordMatch = await bcrypt.compare(password, admin.password);
 
   if (!passwordMatch) {

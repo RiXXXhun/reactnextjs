@@ -1,5 +1,4 @@
 import { PrismaClient, Prisma, Coupon } from '@prisma/client';
-import bcrypt from 'bcryptjs';
 import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
@@ -8,11 +7,11 @@ const generateStores = async (numStores: number): Promise<Prisma.StoreCreateInpu
     const stores: Prisma.StoreCreateInput[] = [];
   
     for (let i = 0; i < numStores; i++) {
-      const name: string = faker.company.name(); // Véletlenszerű bolt név
+      const name: string = faker.company.name();
   
       stores.push({
         name,
-        createdAt: new Date(), // Az aktuális dátum és idő
+        createdAt: new Date(),
       });
     }
   

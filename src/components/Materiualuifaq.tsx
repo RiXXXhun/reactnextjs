@@ -6,33 +6,59 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const faqs = [
   {
-    question: "Lorem ipsum dolor sit amet?",
-    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempus felis a felis facilisis, a dapibus nunc suscipit.",
+    question: "Hogyan tudok regisztrálni ?",
+    answers: [
+      <span>Lépjen a Regisztrációs oldalra: <a href="http://localhost:3000/registration" style={{ color: 'lightblue' }}>Kattintson ide!</a></span>,
+      "Vigye fel az adatait (Felhasználónév, Email, Jelszó és Jelszó megerősítése, Biztonsági kérdésre a válasz).",
+      "Kattintson a 'Regisztráció' gombra.",
+      "Ha a felületen látszódik, hogy sikeres regisztráció, akkor már be tud jelentkezni.",
+    ],
   },
   {
-    question: "Quisque ut velit ac nisi viverra pretium?",
-    answer: "Quisque ut velit ac nisi viverra pretium. Suspendisse potenti. Phasellus dignissim purus vel velit cursus, sed commodo lorem varius.",
+    question: "Hogyan tud bejelentkezni a fiókjába ?",
+    answers: [
+      <span>Lépjen a Bejelentkezési oldalra: <a href="http://localhost:3000/login" style={{ color: 'lightblue' }}>Kattintson ide!</a></span>,
+      "A regisztrációs adataival jelentkezzen be  (Email, Jelszó).",
+      "Kattintson a 'Bejelentkezés' gombra.",
+      "Ha a felületen látszódik hogy sikeres bejelentkezés akkor sikeres volt a belépés.",
+    ],
   },
   {
-    question: "Fusce iaculis quam sed sapien euismod?",
-    answer: "Fusce iaculis quam sed sapien euismod, ac cursus mauris dictum. Nam id sapien eu turpis aliquet egestas in id erat.",
+    question: "Elfelejtettem a jelszavam. Mit tegyek ?",
+    answers: [
+      "Lépjen a bejelentkezési oldalon az 'Elfelejtett jelszó' opcióra.",
+      <span>Vagy lépjen erre az oldalra: <a href="http://localhost:3000/forgotpassword" style={{ color: 'lightblue' }}>Kattintson ide!</a></span>,
+      "Adja meg a felhasználói adatait (Email, Felhazsnálónév, Biztonsági kérdésre a helyes választ).",
+      "Majd ha ezeket megadta, írja be az új jelszavát és az új jelszó megerőítésése mezőbe az új jelszavát.",
+      "Kattintson a 'Új jelszó beállítása' gombra.",
+      "Ha a felületen látszódik hogy sikeres volt az új jelszó beállítása akkor sikeres volt a jelszóváltoztatás.",
+      "Bejelentkezhet az új jelszóval.",
+    ],
   },
   {
-    question: "Curabitur fringilla lectus nec tellus fermentum?",
-    answer: "Curabitur fringilla lectus nec tellus fermentum, ut venenatis orci aliquet. Donec ac tortor sed urna egestas commodo.",
+    question: "Biztonságban vannak az adataim ?",
+    answers: [
+      "Igen, adatai titkosított formában kerülnek tárolásra.",
+      "Csak a legmodernebb biztonsági protokollokat használjuk.",
+      "Soha nem adjuk ki harmadik fél számára a személyes adatait.",
+    ],
   },
   {
-    question: "Pellentesque non eros vel mauris pulvinar?",
-    answer: "Pellentesque non eros vel mauris pulvinar cursus. Aliquam erat volutpat. Vivamus sit amet dolor eget odio malesuada.",
+    question: "A regisztráció ingyenes ?",
+    answers: [
+      "Igen a Regisztráció teljes mértékben díjmentes.",
+      <span>Ha Regisztrálni szeretne: <a href="http://localhost:3000/registration" style={{ color: 'lightblue' }}>Kattintson ide!</a></span>,
+    ],
   },
 ];
 
+
 const Materialuifaq: React.FC = () => {
   return (
-    <Box sx={{ bgcolor: '#1c2331', minHeight: '30vh', py: 5 }}>
+    <Box sx={{ bgcolor: '#1c2331', minHeight: '30vh', py: 5 }} id="faq">
       <Container maxWidth="md" sx={{ mt: 4, mb: 4, bgcolor: '#1c2331', color: 'white', borderRadius: '8px', p: 3 }}>
         <Typography variant="h4" component="h1" sx={{ mb: 4, textAlign: 'center' }}>
-          FAQ
+          GYIK
         </Typography>
         {faqs.map((faq, index) => (
           <Accordion
@@ -57,8 +83,15 @@ const Materialuifaq: React.FC = () => {
               <Typography>{faq.question}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{faq.answer}</Typography>
+              <ul>
+                {faq.answers.map((answer, idx) => (
+                  <li key={idx}>
+                    <Typography>{answer}</Typography>
+                  </li>
+                ))}
+              </ul>
             </AccordionDetails>
+
           </Accordion>
         ))}
       </Container>
