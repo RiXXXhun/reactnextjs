@@ -2,33 +2,78 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import React, { useState, useRef, useEffect } from "react";
 import { Typography, Box, TextField, InputAdornment, IconButton, List, ListItem, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { getPlazas, getCities, getCounties } from '../services/api';
+
+type Plaza = {
+  id: string;
+  plazaName: string;
+  cityId: string;
+  countyId: string;
+};
+
+type City = {
+  id: string;
+  name: string;
+};
+
+type County = {
+  id: string;
+  name: string;
+};
 
 const QuickSearch: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [suggestions] = useState<string[]>([
-    "Vas Megyei Plaza 1",
-    "Vas Megyei Plaza 2",
-    "Zala Megyei Plaza 1",
-    "Zala Megyei Plaza 2",
-    "Győr-Moson-Sopron Megyei Plaza 1",
-    "Győr-Moson-Sopron Megyei Plaza 2"
-  ]);
-  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>(suggestions);
+  const [plazas, setPlazas] = useState<Plaza[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [counties, setCounties] = useState<County[]>([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<Plaza[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const fetchPlazasCitiesAndCounties = async () => {
+      try {
+        const [plazaData, cityData, countyData] = await Promise.all([getPlazas(), getCities(), getCounties()]);
+        setPlazas(plazaData);
+        setCities(cityData);
+        setCounties(countyData);
+        setFilteredSuggestions(plazaData);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchPlazasCitiesAndCounties();
+  }, []);
+
+  const getCityNameById = (cityId: string) => {
+    const city = cities.find(city => city.id === cityId);
+    return city ? city.name : '';
+  };
+
+  const getCountyNameById = (countyId: string) => {
+    const county = counties.find(county => county.id === countyId);
+    return county ? county.name : '';
+  };
+
   const handleSearch = () => {
-    window.location.href = "https://hu.wikipedia.org/wiki/Vas_v%C3%A1rmegye";
+    if (filteredSuggestions.length > 0) {
+      window.location.href = `/plazas/${filteredSuggestions[0].id}`;
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
     if (query) {
-      setFilteredSuggestions(suggestions.filter(suggestion => suggestion.toLowerCase().includes(query.toLowerCase())).slice(0, 6));
+      setFilteredSuggestions(plazas.filter(plaza => 
+        plaza.plazaName.toLowerCase().includes(query.toLowerCase()) ||
+        getCityNameById(plaza.cityId).toLowerCase().includes(query.toLowerCase()) ||
+        getCountyNameById(plaza.countyId).toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 6));
       setShowSuggestions(true);
     } else {
-      setFilteredSuggestions(suggestions);
+      setFilteredSuggestions(plazas);
       setShowSuggestions(false);
     }
   };
@@ -39,9 +84,10 @@ const QuickSearch: React.FC = () => {
     }
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchQuery(suggestion);
+  const handleSuggestionClick = (plaza: Plaza) => {
+    setSearchQuery(`${getCountyNameById(plaza.countyId)} ${getCityNameById(plaza.cityId)} ${plaza.plazaName}`);
     setShowSuggestions(false);
+    window.location.href = `/plazas/${plaza.id}`;
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -63,6 +109,7 @@ const QuickSearch: React.FC = () => {
         padding: "50px 0", 
         textAlign: "center", 
       }}
+      id="quick-search"
     >
       <Typography
         variant="h6"
@@ -134,7 +181,7 @@ const QuickSearch: React.FC = () => {
                 '::-webkit-scrollbar-thumb:hover': { background: '#555' }
               }}
             >
-              {filteredSuggestions.map((suggestion, index) => (
+              {filteredSuggestions.map((plaza, index) => (
                 <ListItem 
                   key={index} 
                   sx={{ 
@@ -145,9 +192,9 @@ const QuickSearch: React.FC = () => {
                     alignItems: "center", 
                     justifyContent: "space-between" 
                   }} 
-                  onClick={() => handleSuggestionClick(suggestion)}
+                  onClick={() => handleSuggestionClick(plaza)}
                 >
-                  {suggestion}
+                  {`${getCountyNameById(plaza.countyId)} ${getCityNameById(plaza.cityId)} ${plaza.plazaName}`}
                   <ArrowRightAltIcon />
                 </ListItem>
               ))}
