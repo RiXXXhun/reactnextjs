@@ -10,43 +10,42 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 const cardData = [
   {
     title: 'Lehetőségek',
-    description: 'Fedezd fel a legjobb plázákat és bevsárlóközpontoan Magyaroszág Nyugat-Dunántúli régiójában pár kattintással, könnyen és gyorsan!',
+    description: 'Fedezze fel a legjobb plázákat és bevásárlóközpontoan Magyaroszág Nyugat-Dunántúli régiójában pár kattintással, könnyen és gyorsan!',
     icon: <AppsIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: 'H-SZ Ügyfélszolgálat',
-    description: 'Bármikor kérdésed van vagy esetleg hibát találtál az oldalunkon ? Mi itt vagyunk, hogy segítsünk a tökéletes vásárlási élményben!',
+    description: 'Bármikor kérdése van vagy esetleg hibát talált az oldalunkon ? Mi itt vagyunk, hogy segítsünk a tökéletes vásárlási élményben!',
     icon: <SupportAgentIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: 'Regisztráció nélkül is',
-    description: 'Kereshetsz plázákat és bevásárlóközpontokat, valamint használhatsz kuponokat anélkül, hogy fiókot kellene létrehoznod.',
+    description: 'Kereshet plázákat és bevásárlóközpontokat, valamint használhat kuponokat anélkül, hogy fiókot kellene létrehoznia.',
     icon: <AppRegistrationIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: 'Kedvezmények',
-    description: 'Spórolj meg többet! Használj exkluzív kuponokat és akciókat, hogy még jobb áron vásárolhass!',
+    description: 'Spóroljon meg többet! Használja exkluzív kuponokat és akciókat, hogy még jobb áron vásárolhasson!',
     icon: <DiscountIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: 'Cégünk',
-    description: ' Szenvedélyünk a vásárlás egyszerűbbé tétele mindenki számára – a PlázaÁsz a legjobb társad a plázák világában!',
+    description: ' Szenvedélyünk a vásárlás egyszerűbbé tétele mindenki számára – a PlázaÁsz a legjobb társa a plázák világában!',
     icon: <BusinessIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
-
 ];
 
 const Materialuiinform = () => {
   return (
-    <Container sx={{ backgroundColor: '#1c2331', margin: '30px auto 0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Box sx={{ padding: '20px', backgroundColor: '#1c2331', borderRadius: '16px', pt: "20px" }}>
+    <Container sx={{ backgroundColor: '#1c2331', margin: '30px auto 0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }} id="informSection">
+      <Box sx={{ padding: '20px', backgroundColor: '#1c2331', borderRadius: '16px', pt: "20px", zIndex: 1000 }}>
         <Grid container spacing={5} justifyContent="center">
           <Grid item xs={12}>
             <Typography 
               variant="h4" 
               component="h2" 
               gutterBottom 
-              sx={{ color: '#ffffff', textAlign: 'center', marginBottom: '30px' }}
+              sx={{ color: '#ffffff', textAlign: 'center', marginBottom: '30px', zIndex: 1000 }}
             >
               Tudnivalók
             </Typography>
@@ -67,6 +66,7 @@ const Materialuiinform = () => {
                   '&:hover': {
                     boxShadow: '0 0 8px 2px rgba(30, 144, 255, 0.8)', 
                   },
+                  zIndex: 1000,
                 }}
               >
                 <Box
@@ -79,15 +79,16 @@ const Materialuiinform = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    zIndex: 1000,
                   }}
                 >
                   {card.icon}
                 </Box>
-                <CardContent>
-                  <Typography variant="h6" component="h3" gutterBottom sx={{ color: '#ffffff' }}>
+                <CardContent sx={{ zIndex: 1000 }}>
+                  <Typography variant="h6" component="h3" gutterBottom sx={{ color: '#ffffff', zIndex: 1000 }}>
                     {card.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: '#ffffff' }}>
+                  <Typography variant="body2" sx={{ color: '#ffffff', zIndex: 1000 }}>
                     {card.description}
                   </Typography>
                 </CardContent>
@@ -96,7 +97,6 @@ const Materialuiinform = () => {
           ))}
         </Grid>
       </Box>
-      
     </Container>
   );
 };

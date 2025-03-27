@@ -9,30 +9,19 @@ import BusinessIcon from '@mui/icons-material/Business';
 const cardData = [
   {
     title: 'Lehetőségek',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
+    description: 'Késöbbiekben fedezze fel az exkluzív funkciókat és személyre szabott élményeket, amelyek csak regisztrált tagok számára érhetők el!',
+    icon: <AppsIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
+  },
+  {
+    title: 'Közösség és Kapcsolat',
+    description: 'Csatlakozzon egy aktív plázás közösséghez, vásároljon és ossza meg tapasztalatait.',
     icon: <AppsIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
   {
     title: '24/7 Ügyfélszolgálat',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. 2000 AC YEAR',
+    description: 'Regisztrált tagként bármikor elérhet minket! Kérdése van? Mi mindig itt vagyunk, hogy segítsünk. (Nem regisztrált tagoknak is elérhető az ügyfélszolgálatunk)',
     icon: <SupportAgentIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
   },
-  {
-    title: 'Lehetőségek',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-    icon: <AppsIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
-  },
-  {
-    title: 'Kedvezmények',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-    icon: <DiscountIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
-  },
-  {
-    title: 'Cégünk',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-    icon: <BusinessIcon style={{ width: '30px', height: '30px', color: '#1c2331' }} />,
-  },
-
 ];
 
 const Materialuiinform = () => {

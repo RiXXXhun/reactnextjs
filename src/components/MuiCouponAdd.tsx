@@ -365,7 +365,7 @@ const CouponForm: React.FC = () => {
                     variant="outlined"
                     color="primary"
                     onClick={() => handleEditClick(coupon)}
-                    sx={{ mt: 1}}
+                    sx={{ mt: 0, ml: "15px" }}
                   >
                     Módosítás
                   </Button>

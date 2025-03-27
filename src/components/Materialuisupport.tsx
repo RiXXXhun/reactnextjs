@@ -111,11 +111,11 @@ const ContactForm: React.FC = () => {
           <Grid item xs={12} md={6}>
             
             <Typography variant="h4" gutterBottom color="white">
-              Lépj velünk kapcsolatba <SupportAgentIcon sx={{ width: "45px", height: "45px" }}></SupportAgentIcon>
+              Lépjen velünk kapcsolatba <SupportAgentIcon sx={{ width: "45px", height: "45px" }}></SupportAgentIcon>
             </Typography>
             <Typography variant="body1" color="white" paragraph>
-            Ha bármilyen hibát észlelsz az oldal működésében, kérjük, jelezd nekünk! Fontos számunkra, hogy a Plázaász mindig zavartalanul működjön. 
-            Vedd fel velünk a kapcsolatot az alábbi űrlapon keresztül, és csapatunk a lehető leghamarabb utánajár a problémának. Köszönjük a segítséged!
+            Ha bármilyen hibát észlel az oldal működésében, kérjük, jelezze nekünk! Fontos számunkra, hogy a Plázaász mindig zavartalanul működjön. 
+            Vegye fel velünk a kapcsolatot az alábbi űrlapon keresztül, és csapatunk a lehető leghamarabb utánajár a problémának. Köszönjük a segítségét!
             </Typography>
 
             <Box mb={4}>

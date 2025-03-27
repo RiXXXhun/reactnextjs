@@ -150,6 +150,8 @@ const PlazaStoreManager: React.FC = () => {
         fullWidth
         error={!!errorMessage}
         helperText={errorMessage}
+        InputLabelProps={{ shrink: true }}
+        type="time"
         sx={{ mt: 2 }}
       />
       <TextField
@@ -159,6 +161,8 @@ const PlazaStoreManager: React.FC = () => {
         fullWidth
         error={!!errorMessage}
         helperText={errorMessage}
+        InputLabelProps={{ shrink: true }}
+        type="time"
         sx={{ mt: 2 }}
       />
       <TextField
@@ -211,7 +215,7 @@ const PlazaStoreManager: React.FC = () => {
         >
           {successMessage || errorMessage}
         </Alert>
-      </Snackbar>;
+      </Snackbar>
     </Box>
   );
 };

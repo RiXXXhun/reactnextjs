@@ -1,0 +1,14 @@
+.mapContainer {
+    height: 100%;
+    width: 100%;
+    border: 10px solid #161C27;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .leafletContainer {
+    height: 100% !important;
+    width: 100% !important;
+    z-index: 1;
+  }

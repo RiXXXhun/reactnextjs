@@ -83,7 +83,7 @@ const AboutUs: React.FC = () => {
         >
           <IconButton
             component="a"
-            href="/"
+            href="/_not_found"
             sx={{
               width: 40,
               height: 40,
@@ -98,7 +98,7 @@ const AboutUs: React.FC = () => {
           </IconButton>
           <IconButton
             component="a"
-            href="/"
+            href="/_not_found"
             sx={{
               width: 40,
               height: 40,
@@ -113,7 +113,7 @@ const AboutUs: React.FC = () => {
           </IconButton>
           <IconButton
             component="a"
-            href="/"
+            href="/_not_found"
             sx={{
               width: 40,
               height: 40,
@@ -128,7 +128,7 @@ const AboutUs: React.FC = () => {
           </IconButton>
           <IconButton
             component="a"
-            href="/"
+            href="/_not_found"
             sx={{
               width: 40,
               height: 40,

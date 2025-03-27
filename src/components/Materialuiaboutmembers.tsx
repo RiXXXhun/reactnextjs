@@ -83,18 +83,20 @@ const TeamSection: React.FC = () => {
               </Typography>
               <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
                 <IconButton
-                  color="inherit"
-                  sx={{
-                    transition: "box-shadow 0.3s ease-in-out",
-                    "&:hover": {
-                      boxShadow: "0 0 8px 2px rgba(30, 144, 255, 0.8)",
-                    },
-                  }}
+                onClick={() => window.location.href = '/not-found'}
+                color="inherit"
+                sx={{
+                  transition: "box-shadow 0.3s ease-in-out",
+                  "&:hover": {
+                    boxShadow: "0 0 8px 2px rgba(30, 144, 255, 0.8)",
+                  },
+                }}
                 >
                   <YouTube />
                 </IconButton>
                 <IconButton
                   color="inherit"
+                  onClick={() => window.location.href = '/not-found'}
                   sx={{
                     transition: "box-shadow 0.3s ease-in-out",
                     "&:hover": {
@@ -105,6 +107,7 @@ const TeamSection: React.FC = () => {
                   <GitHub />
                 </IconButton>
                 <IconButton
+                  onClick={() => window.location.href = '/not-found'}
                   color="inherit"
                   sx={{
                     transition: "box-shadow 0.3s ease-in-out",
