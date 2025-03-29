@@ -1,174 +1,59 @@
-import React, { useState } from "react";
-import { Typography, Card, CardContent, Box, Container, Grid, TextField, InputAdornment, IconButton } from "@mui/material";
-import FlagIcon from "@mui/icons-material/Flag";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SearchIcon from "@mui/icons-material/Search";
+"use client";
 
-const cardData = [
-  {
-    title: "Vas vármegye",
-    description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-    extraCards: [
-      {
-        title: "Szombathely",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Savaria Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Family Center", description: "Kereskedelmi központ.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-      {
-        title: "Sárvár",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Sárvári Gyógyfürdő", description: "Híres fürdőhely.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Nádasdy-vár", description: "Történelmi épület.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Győr-Moson-Sopron vármegye",
-    description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-    extraCards: [
-      {
-        title: "Győr",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Árkád Győr", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Győri Bazilika", description: "Történelmi helyszín.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-      {
-        title: "Sopron",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Fő tér", description: "Központi hely.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Lővérek", description: "Természeti látványosság.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Zala vármegye",
-    description: "Kattints a részletekhez!",
-    icon: <FlagIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-    extraCards: [
-      {
-        title: "Zalaegerszeg",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Zala Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Zalakerámia Sportcsarnok", description: "Sportlétesítmény.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-      {
-        title: "Keszthely",
-        description: "A város nevezetességei.",
-        icon: <LocationCityIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} />,
-        extraCards: [
-          { title: "Festetics-kastély", description: "Történelmi helyszín.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-          { title: "Balaton Plaza", description: "Bevásárlóközpont.", icon: <ShoppingCartIcon style={{ width: "30px", height: "30px", color: "#1c2331" }} /> },
-        ],
-      },
-    ],
-  },
-];
+import React, { useEffect, useState } from "react";
+import {Grid, Typography, Card, CardContent, Box, Container, Button } from "@mui/material";
+import { getPlazas, getCities, getCounties } from "../services/api";
 
+type Plaza = {
+  id: string;
+  plazaName: string;
+  cityId: string;
+  countyId: string;
+};
 
-const Materialuiinform = () => {
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [searchQuery, setSearchQuery] = useState("");
+type City = {
+  id: string;
+  name: string;
+};
 
-  const toggleCard = (path: string) => {
-    setExpanded((prev) => ({
-      ...prev,
-      [path]: !prev[path],
-    }));
-  };
+type County = {
+  id: string;
+  name: string;
+};
 
-  const handleSearch = () => {
-    console.log("Keresés:", searchQuery);
-  };
+const DynamicCardsComponent: React.FC = () => {
+  const [data, setData] = useState<
+    { county: string; city: string; plaza: string; route: string }[]
+  >([])
+;
 
-  const renderCards = (cards: any[], parentPath: string = "", isChild: boolean = false) => (
-    <Grid
-      container
-      spacing={3}
-      sx={{
-        justifyContent: isChild ? "flex-start" : "center",
-        alignItems: "stretch",
-      }}
-    >
-      {cards.map((card, index) => {
-        const currentPath = `${parentPath}-${index}`;
-        const isExpanded = expanded[currentPath] || false;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const counties: County[] = await getCounties(); 
+        const cities: City[] = await getCities(); 
+        const plazas: Plaza[] = await getPlazas(); 
 
-        return (
-          <Grid
-            item
-            key={currentPath}
-            xs={12}
-            sm={isChild ? 12 : 8}
-            md={isChild ? 12 : 4}
-            lg={isChild ? 12 : 4}
-          >
-            <Card
-              sx={{
-                width: "100%",
-                borderRadius: "16px",
-                boxShadow: 3,
-                textAlign: "center",
-                padding: "20px",
-                backgroundColor: "#161C27",
-                color: "#ffffff",
-                transition: "box-shadow 0.3s ease-in-out",
-                height: "250px",  
-                "&:hover": {
-                  boxShadow: "0 0 8px 2px rgba(30, 144, 255, 0.8)",
-                },
-              }}
-              onClick={() => toggleCard(currentPath)}
-            >
-              <Box
-                sx={{
-                  width: "60px",
-                  height: "60px",
-                  margin: "0 auto 16px",
-                  backgroundColor: "#DAFFC4",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                {card.icon}
-              </Box>
-              <CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
-                <Typography variant="h6" component="h3" gutterBottom sx={{ color: "#ffffff" }}>
-                  {card.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "#ffffff", flex: 1 }}>
-                  {card.description}
-                </Typography>
-              </CardContent>
-            </Card>
-            {isExpanded && card.extraCards?.length > 0 && (
-              <Box mt={2}>{renderCards(card.extraCards, currentPath, true)}</Box>
-            )}
-          </Grid>
-        );
-      })}
-    </Grid>
-  );
+        const combinedData = plazas.map((plaza: Plaza) => {
+          const city = cities.find((c: City) => c.id === plaza.cityId)!; 
+          const county = counties.find((co: County) => co.id === plaza.countyId)!; 
+
+          return {
+            county: county.name,
+            city: city.name,
+            plaza: plaza.plazaName,
+            route: `/plazas/${plaza.id}`,
+          };
+        });
+
+        setData(combinedData);
+      } catch (error) {
+        console.error("Hiba az adatok betöltésekor:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container
@@ -176,26 +61,109 @@ const Materialuiinform = () => {
         backgroundColor: "#1c2331",
         margin: "30px auto",
         display: "flex",
-        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
-        padding: "20px",
       }}
+      id="informSection"
     >
-      <Typography
-        variant="h6"
+      <Box
         sx={{
-          color: "#ffffff",
-          marginBottom: "50px",
+          padding: "20px",
+          backgroundColor: "#1c2331",
+          borderRadius: "16px",
+          pt: "20px",
         }}
       >
-        Vizuális Gyorskeresés
-      </Typography>
+        <Grid container spacing={5} justifyContent="center">
+          <Grid item xs={12}>
+            <Typography
+              variant="h5"
+              component="h2"
+              gutterBottom
+              sx={{
+                color: "#ffffff",
+                textAlign: "center",
+                marginBottom: "30px",
+              }}
+            >
+              Vizuális gyorskeresés
+            </Typography>
+          </Grid>
 
-      <Box sx={{ width: "100%" }}>
-        {renderCards(cardData)}
+          {data.map((item, index) => (
+            <Grid item xs={12} sm={8} md={8} lg={5} key={index}>
+              <Card
+                sx={{
+                  borderRadius: "16px",
+                  boxShadow: 3,
+                  textAlign: "center",
+                  mr: "30px",
+                  pt: "10px",
+                  backgroundColor: "#161C27",
+                  color: "#ffffff",
+                  transition: "box-shadow 0.3s ease-in-out",
+                  minHeight: "25vh", 
+                  "&:hover": {
+                    boxShadow: "0 0 8px 2px rgba(30, 144, 255, 0.8)",
+                  },
+                }}
+              >
+                <CardContent>
+                  <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
+                    <img
+                      src="/Logo.png"
+                      alt="Logo"
+                      style={{ width: "50px", height: "50px" }}
+                    />
+                  </Box>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: "bold",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {item.county}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: "bold",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {item.city}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "#bbb",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {item.plaza}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    href={item.route}
+                    sx={{
+                      backgroundColor: "#00bcd4",
+                      "&:hover": {
+                        backgroundColor: "#1c2331",
+                        color: "#ffffff",
+                      },
+                    }}
+                  >
+                    Tovább
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Container>
   );
 };
 
-export default Materialuiinform;
+export default DynamicCardsComponent;
