@@ -8,7 +8,7 @@ Ez az útmutató segít abban, hogyan telepítsd és futtasd a **PLÁZAÁSZ** pr
 Először is klónozd a repót a következő paranccsal:
 
 ```bash
-git clone https://github.com/username/plazazsz.git
+git clone https://github.com/RiXXXhun/reactnextjs.git
 ```
 
 ### Mappa elérési út
@@ -47,9 +47,10 @@ npx prisma migrate dev
 ## 5. Telepítsd a szükséges függőségeket
 
 Navigálj a projekt mappájába, majd futtasd az `npm install` parancsot, hogy telepítsd a szükséges csomagokat:
+PL: C:\Users\Ricsi\Documents\GitHub\reactnextjs
 
 ```bash
-cd plazazsz
+cd mappa_ahol_van_a_github_repo_conja 
 npm install
 ```
 
@@ -78,4 +79,4 @@ npm run dev
 
 A weboldal mostantól elérhető lesz a következő linken: [http://localhost:3000/homepage](http://localhost:3000/homepage)
 
-
+Készítette: Nagy-Eperjesi Richárd János, Hustikker Szabolcs, Tóth Zoltán 13.A | NTSZKI VMSZC Szakdolgozat
