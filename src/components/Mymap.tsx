@@ -7,12 +7,13 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import styles from '@/styles/Map.module.css';
 import { Box, Container, Typography, Button } from '@mui/material';
-import { getLeafletMaps, getPlazas, getCities } from '../services/api'; 
+import { getLeafletMaps, getPlazas, getCities } from '../services/api';
 
 const MyMap = () => {
   const [leafletMaps, setLeafletMaps] = useState<any[]>([]);
   const [plazas, setPlazas] = useState<any[]>([]);
-  const [cities, setCities] = useState<any[]>([]); 
+  const [cities, setCities] = useState<any[]>([]);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const MyMap = () => {
 
     const fetchLeafletMaps = async () => {
       try {
-        const response = await getLeafletMaps(); 
+        const response = await getLeafletMaps();
         setLeafletMaps(response);
       } catch (error) {
         console.error("Error fetching leaflet maps:", error);
@@ -34,7 +35,7 @@ const MyMap = () => {
 
     const fetchPlazas = async () => {
       try {
-        const response = await getPlazas(); 
+        const response = await getPlazas();
         setPlazas(response);
       } catch (error) {
         console.error("Error fetching plazas:", error);
@@ -43,12 +44,23 @@ const MyMap = () => {
 
     const fetchCities = async () => {
       try {
-        const response = await getCities(); 
+        const response = await getCities();
         setCities(response);
       } catch (error) {
         console.error("Error fetching cities:", error);
       }
     };
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation([position.coords.latitude, position.coords.longitude]);
+        },
+        (error) => {
+          console.error("Helymeghatározási hiba:", error);
+        }
+      );
+    }
 
     fetchLeafletMaps();
     fetchPlazas();
@@ -59,27 +71,40 @@ const MyMap = () => {
   const defaultZoom = 7;
 
   const handleNavigate = (plazaId: string) => {
-    router.push(`/plazas/${plazaId}`); 
+    router.push(`/plazas/${plazaId}`);
   };
 
   return (
-    <Box sx={{ backgroundColor: "#1c2331", width: "100%", zIndex: 500 }} id="map" >
-      <Container 
-        maxWidth="lg"
-        sx={{ 
-          py: 4,
-          px: 2,
-          zIndex: 500,
+    <Box 
+    sx={{ 
+      backgroundColor: "#1c2331", 
+      width: "100%", 
+      zIndex: 500 
+      }} id="map"
+    >
+      <Container maxWidth="lg" 
+      sx={{ 
+        py: 4, 
+        px: 2, 
+        zIndex: 500 
         }}
       >
-        <Box sx={{ 
+        <Box 
+        sx={{ 
           display: "flex", 
           flexDirection: "column", 
           alignItems: "center", 
-          mb: 4,
-          zIndex: 500,
-        }}>
-          <Typography variant="h5" sx={{ color: "white", mb: 3, zIndex: 500 }}>
+          mb: 4, 
+          zIndex: 500 
+          }}
+        >
+          <Typography variant="h5" 
+          sx={{
+            color: "white", 
+            mb: 3, 
+            zIndex: 500 
+            }}
+          >
             TÉRKÉPES KERESÉS
           </Typography>
         </Box>
@@ -102,8 +127,8 @@ const MyMap = () => {
         >
           <MapContainer
             key={defaultCenter.toString()}
-            center={defaultCenter}
-            zoom={defaultZoom}
+            center={userLocation || defaultCenter}
+            zoom={userLocation ? 13 : defaultZoom}
             className={styles.leafletContainer}
             scrollWheelZoom={true}
           >
@@ -111,16 +136,28 @@ const MyMap = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+
+            {userLocation && (
+              <Marker position={userLocation}>
+                <Popup>
+                  <Typography variant="h6" 
+                  sx={{ 
+                    color: '#000' 
+                    }}
+                  >
+                    Az Ön helyzete 📍
+                  </Typography>
+                </Popup>
+              </Marker>
+            )}
+
             {leafletMaps.map((map) => {
               const plaza = plazas.find((p) => p.leafletMapId === map.id);
-              const city = cities.find((c) => c.id === plaza?.cityId); 
+              const city = cities.find((c) => c.id === plaza?.cityId);
 
               if (map.latitude && map.longitude && plaza && city) {
                 return (
-                  <Marker 
-                    key={map.id} 
-                    position={[map.latitude, map.longitude]}
-                  >
+                  <Marker key={map.id} position={[map.latitude, map.longitude]}>
                     <Popup>
                       <Box sx={{ textAlign: 'center' }}>
                         <Typography variant="h5" sx={{ color: '#000' }}>
@@ -143,7 +180,7 @@ const MyMap = () => {
                 );
               }
 
-              return null; 
+              return null;
             })}
           </MapContainer>
         </Box>

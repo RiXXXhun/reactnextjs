@@ -68,7 +68,7 @@ async function main() {
   
   const leafletMapSopron = await prisma.leafletMap.create({
     data: {
-      plazaMapName: "Sopron Plaza Map",
+      plazaMapName: "Sopron Plaza",
       latitude: 47.6851,
       longitude: 16.5905,
     },
@@ -76,7 +76,7 @@ async function main() {
   
   const leafletMapSavaria = await prisma.leafletMap.create({
     data: {
-      plazaMapName: "Savaria Plaza Map",
+      plazaMapName: "Savaria Plaza",
       latitude: 47.2307,
       longitude: 16.6218,
     },
@@ -84,7 +84,7 @@ async function main() {
 
   const leafletMapGyor = await prisma.leafletMap.create({
     data: {
-      plazaMapName: "Gyor Plaza Map",
+      plazaMapName: "Gyor Plaza",
       latitude: 47.66925,
       longitude: 17.65127,
     },
@@ -92,7 +92,7 @@ async function main() {
 
   const leafletMapZala = await prisma.leafletMap.create({
     data: {
-      plazaMapName: "Zala Plaza Map",
+      plazaMapName: "Zala Plaza",
       latitude: 46.84739,
       longitude: 16.85151,
     },
@@ -259,38 +259,38 @@ async function main() {
       data: { ...store, plazas: { connect: { id: plazaGyor.id } } },
     });
 // ZALA
-    const ZalaStores = [
-      { name: "Cinema City", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
-      { name: "Spar", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
-      { name: "Libri", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
-      { name: "H&M", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
-      { name: "OXO Bubble Tea", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
-      { name: "Sportisimo", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
-      { name: "Sinsay", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
-      { name: "House", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
-      { name: "Phone", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
-      { name: "CCC", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
-      { name: "Virágok Világa", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
-      { name: "Tally Weijl", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
-      { name: "Scitec Nutrition", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
-      { name: "Roland Divatház", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
-      { name: "Retro", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
-      { name: "Press Cafe", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
-      { name: "Pepco", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
-      { name: "Nemzeti Dohánybolt", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
-      { name: "Mister Minit", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
-      { name: "Devergo", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
-      { name: "Balance", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
-      { name: "Auchan", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
-      { name: "Rossmann", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
-      { name: "Budmil", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
-    ];
-  
-    for (const store of ZalaStores) {
-      await prisma.plazaStore.create({
-        data: { ...store, plazas: { connect: { id: plazaZala.id } } },
-      });
-    }
+  const ZalaStores = [
+    { name: "Cinema City", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
+    { name: "Spar", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
+    { name: "Libri", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
+    { name: "H&M", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
+    { name: "OXO Bubble Tea", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
+    { name: "Sportisimo", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
+    { name: "Sinsay", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
+    { name: "House", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
+    { name: "Phone", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
+    { name: "CCC", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
+    { name: "Virágok Világa", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
+    { name: "Tally Weijl", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
+    { name: "Scitec Nutrition", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
+    { name: "Roland Divatház", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
+    { name: "Retro", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
+    { name: "Press Cafe", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
+    { name: "Pepco", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
+    { name: "Nemzeti Dohánybolt", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
+    { name: "Mister Minit", openingTime: "09:00", closingTime: "23:00", description: "+36 1 999 6161" },
+    { name: "Devergo", openingTime: "07:00", closingTime: "21:00", description: "+36 1 444 4444" },
+    { name: "Balance", openingTime: "09:00", closingTime: "20:00", description: "+36 1 777 7777" },
+    { name: "Auchan", openingTime: "09:00", closingTime: "20:00", description: "+36 1 666 6666" },
+    { name: "Rossmann", openingTime: "10:00", closingTime: "21:00", description: "+36 1 333 3333" },
+    { name: "Budmil", openingTime: "09:00", closingTime: "20:00", description: "+36 1 222 2222" },
+  ];
+
+  for (const store of ZalaStores) {
+    await prisma.plazaStore.create({
+      data: { ...store, plazas: { connect: { id: plazaZala.id } } },
+    });
+  }
   
     console.log("Seeder sikeresen lefutott!");
   }
