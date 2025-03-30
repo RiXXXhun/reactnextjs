@@ -8,7 +8,7 @@ Ez az útmutató segít abban, hogyan telepítsd és futtasd a **PLÁZAÁSZ** pr
 Először is klónozd a repót a következő paranccsal:
 
 ```bash
-git clone https://github.com/username/plazazsz.git
+git clone https://github.com/RiXXXhun/reactnextjs.git
 ```
 
 ### Mappa elérési út
