@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# PLÁZAÁSZ - Projekt Telepítési és Futtatási Útmutató
 
-First, run the development server:
+Ez az útmutató segít abban, hogyan telepítsd és futtasd a **PLÁZAÁSZ** projektet a helyi gépeden.
+
+## 1. Klónozd le a GitHub repót
+
+Először is klónozd a repót a következő paranccsal:
+
+```bash
+git clone https://github.com/username/plazazsz.git
+```
+
+### Mappa elérési út
+
+A projektet a kívánt mappába klónozd le. Például:
+
+```bash
+cd C:\Users\Ricsi\Documents\GitHub\reactnextjs
+```
+
+## 2. Indítsd el a MySQL adatbázist a Laragonban
+
+Mielőtt folytatnád a seedelést, győződj meg róla, hogy a **Laragon** beépített MySQL adatbázisa fut. Nyisd meg a Laragon alkalmazást, és indítsd el a MySQL szervert.
+
+## 3. Állítsd be az adatbázist
+
+A MySQL adatbázist a következő beállítással hozd létre:
+
+1. Nyisd meg a Laragon menüjében a **Database** szekciót.
+2. Hozz létre egy új adatbázist **PlazaaszDB** néven.
+
+Ezután szükséges beállítani a `.env` fájlban az adatbázis kapcsolatot. Állítsd be a következő **DATABASE_URL** értéket:
+
+```bash
+DATABASE_URL="mysql://root:@localhost:3306/PlazaaszDB"
+```
+
+## 4. Prisma migráció
+
+Miután létrehoztad az adatbázist, futtasd a következő migrációs parancsot, hogy létrehozd az adatbázis tábláit:
+
+```bash
+npx prisma migrate dev
+```
+
+## 5. Telepítsd a szükséges függőségeket
+
+Navigálj a projekt mappájába, majd futtasd az `npm install` parancsot, hogy telepítsd a szükséges csomagokat:
+
+```bash
+cd plazazsz
+npm install
+```
+
+## 6. Seedeld az adatbázist
+
+A következő parancsok futtatásával töltsd fel az adatbázist a szükséges adatokkal. Fontos, hogy a seedelést a megadott sorrendben végezd el.
+
+Futtasd az alábbi parancsokat:
+
+```bash
+npx ts-node prisma/seedAdmin.ts
+npx ts-node prisma/seedStore.ts
+npx ts-node prisma/seedCoupon.ts
+npx ts-node prisma/seedUser.ts
+npx ts-node prisma/seedSupport.ts
+npx ts-node prisma/seedPlaza.ts
+```
+
+## 7. A projekt futtatása
+
+Miután sikeresen seedelted az adatbázist, elindíthatod a fejlesztői környezetet az alábbi parancs használatával:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A weboldal mostantól elérhető lesz a következő linken: [http://localhost:3000/homepage](http://localhost:3000/homepage)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Készítette: Nagy-Eperjesi Richárd János, Hustikker Szabolcs, Tóth Zoltán 13.A | NTSZKI VMSZC Szakdolgozat
