@@ -105,7 +105,7 @@ const Materialuiinform = () => {
                   padding: "20px",
                   backgroundColor: "#161C27",
                   color: "#ffffff",
-                  minHeight: "70vh",
+                  minHeight: "40vh",
                   pt: "50px",
                   transition: "box-shadow 0.3s ease-in-out",
                   "&:hover": {

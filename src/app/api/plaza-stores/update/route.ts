@@ -23,12 +23,14 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ message: 'A bolt nem található!' }, { status: 404 });
     }
 
-    const nameExists = await prisma.plazaStore.findFirst({
-      where: { name, id: { not: id } },
-    });
+    if (existingStore.name !== name) {
+      const nameExists = await prisma.plazaStore.findFirst({
+        where: { name, id: { not: id } },
+      });
 
-    if (nameExists) {
-      return NextResponse.json({ message: 'Ez a bolt név már létezik!' }, { status: 400 });
+      if (nameExists) {
+        return NextResponse.json({ message: 'Ez a bolt név már létezik!' }, { status: 400 });
+      }
     }
 
     const updatedStore = await prisma.plazaStore.update({
