@@ -47,9 +47,10 @@ npx prisma migrate dev
 ## 5. Telepítsd a szükséges függőségeket
 
 Navigálj a projekt mappájába, majd futtasd az `npm install` parancsot, hogy telepítsd a szükséges csomagokat:
+PL: C:\Users\Ricsi\Documents\GitHub\reactnextjs
 
 ```bash
-cd plazazsz
+cd mappa_ahol_van_a_github_repo_conja 
 npm install
 ```
 
