@@ -21,41 +21,42 @@ async function main() {
     },
   });
 
-  const citySopron = await prisma.city.upsert({
+  const countyZala = await prisma.county.upsert({
     where: { id: 3 }, 
     update: {},
     create: {
       id: 3, 
+      name: "Zala Vármegye",
+    },
+  });
+
+  const citySopron = await prisma.city.upsert({
+    where: { id: 4 }, 
+    update: {},
+    create: {
+      id: 4, 
       name: "Sopron",
     },
   });
   
   const citySzombathely = await prisma.city.upsert({
-    where: { id: 4 }, 
+    where: { id: 5 }, 
     update: {},
     create: {
-      id: 4, 
+      id: 5, 
       name: "Szombathely",
     },
   });
 
   const cityGyor = await prisma.city.upsert({
-    where: { id: 5 }, 
-    update: {},
-    create: {
-      id: 5, 
-      name: "Győr",
-    },
-  });
-
-  const countyZala = await prisma.county.upsert({
     where: { id: 6 }, 
     update: {},
     create: {
       id: 6, 
-      name: "Zala Vármegye",
+      name: "Győr",
     },
   });
+
 
   const cityZala = await prisma.city.upsert({
     where: { id: 7 }, 
