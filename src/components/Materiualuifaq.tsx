@@ -56,7 +56,16 @@ const faqs = [
 const Materialuifaq: React.FC = () => {
   return (
     <Box sx={{ bgcolor: '#1c2331', minHeight: '30vh', py: 5 }} id="faq">
-      <Container maxWidth="md" sx={{ mt: 4, mb: 4, bgcolor: '#1c2331', color: 'white', borderRadius: '8px', p: 3 }}>
+      <Container maxWidth="md" 
+      sx={{ 
+        mt: 4, 
+        mb: 4, 
+        bgcolor: '#1c2331', 
+        color: 'white', 
+        borderRadius: '8px', 
+        p: 3 
+        }}
+      >
         <Typography variant="h4" component="h1" sx={{ mb: 4, textAlign: 'center' }}>
           GYIK
         </Typography>

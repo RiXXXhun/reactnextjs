@@ -122,6 +122,9 @@ const SignIn = () => {
     return isValid;
   };
 
+
+
+  
   return (
     <>
       <CssBaseline enableColorScheme />
@@ -140,6 +143,8 @@ const SignIn = () => {
           >
             Bejelentkezés
           </Typography>
+
+
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: "flex", flexDirection: "column", width: "100%", gap: 2 }}>
             <TextField

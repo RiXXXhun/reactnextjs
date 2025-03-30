@@ -433,7 +433,19 @@ const MuiPlaza: React.FC = () => {
 
             <Grid item xs={12}>
               <Typography variant="h6">Pláza Boltok</Typography>
-                <Typography variant="h6" sx={{ color:"red" }}><WarningIcon sx={{ height: "30px", width: "30px" }}></WarningIcon>MÓDOSÍTÁS ESETÉN ÚJRA BE KELL PIPÁLNI A PLÁZÁBAN LÉVŐ BOLTOKAT !!! KÜLÖNBEN ELVESZNEK<WarningIcon sx={{ height: "30px", width: "30px" }}></WarningIcon></Typography> 
+                <Typography variant="h6" sx={{ color:"red" }}><WarningIcon 
+                sx={{ 
+                  height: "30px", 
+                  width: "30px" 
+                  }}
+                >
+                  </WarningIcon>MÓDOSÍTÁS ESETÉN ÚJRA BE KELL PIPÁLNI A PLÁZÁBAN LÉVŐ BOLTOKAT !!! KÜLÖNBEN ELVESZNEK<WarningIcon 
+                sx={{ 
+                  height: "30px", 
+                  width: "30px" }}
+                >
+                  </WarningIcon>
+                </Typography> 
               {plazaStores.map((store: any) => (
                 <FormControlLabel
                   key={store.id}

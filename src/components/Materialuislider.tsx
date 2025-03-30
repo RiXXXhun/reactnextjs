@@ -47,8 +47,31 @@ const MaterialSwiper: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Container sx={{ backgroundColor: '#1c2331', py: 5, minHeight: '58vh', padding: 0, marginTop: '60px', pl: 5, pr: 5, maxWidth: '1400px', width: '100%' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4, backgroundColor: '#1c2331', pt: '100px', pl: 4, pr: 5 }}>
+    <Container 
+    sx={{ 
+      backgroundColor: '#1c2331', 
+      py: 5, 
+      minHeight: '58vh', 
+      padding: 0, 
+      marginTop: '60px', 
+      pl: 5, 
+      pr: 5, 
+      maxWidth: '1400px', 
+      width: '100%' 
+      }}
+    >
+      <Box 
+      sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        mb: 4, 
+        backgroundColor: '#1c2331', 
+        pt: '100px', 
+        pl: 4, 
+        pr: 5 
+        }}
+      >
         <Typography variant="h5" sx={{ color: 'white', mb: 5 }}>
           GYORSKERESÉS
         </Typography>

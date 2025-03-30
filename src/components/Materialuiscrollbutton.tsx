@@ -25,6 +25,7 @@ const Materialzuscrollbutton: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  
   return (
     <div
       style={{

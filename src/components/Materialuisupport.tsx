@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Container, Grid, TextField, Button, Box, Typography, FormControl, FormLabel, FormHelperText, Snackbar, Alert, IconButton } from "@mui/material";
 import { Phone, Mail, LocationOn, Close as CloseIcon, Close } from "@mui/icons-material";
-import EmailIcon from '@mui/icons-material/Email';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -185,7 +184,14 @@ const ContactForm: React.FC = () => {
                 <Typography
                             component="h1"
                             variant="h4"
-                            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)', textAlign: 'center', color: 'white', pb: '40px', pt: '10px' }}
+                            sx={{ 
+                              width: '100%', 
+                              fontSize: 'clamp(2rem, 10vw, 2.15rem)', 
+                              textAlign: 'center', 
+                              color: 'white', 
+                              pb: '40px', 
+                              pt: '10px' 
+                            }}
                           >
                             Hibabejelentés
                 </Typography>

@@ -25,7 +25,12 @@ const UserDataTable = () => {
     <Box id="userDataSection" sx={{ marginTop: "100px" }}>
       <Typography variant="h5" gutterBottom>Felhasználói adatok:</Typography>
       {error && <Typography color="error">{error}</Typography>}
-      <TableContainer component={Paper} sx={{ marginTop: "20px", width: "100%" }}>
+      <TableContainer component={Paper} 
+      sx={{ 
+        marginTop: "20px", 
+        width: "100%" 
+        }}
+      >
         <Table aria-label="User Data">
           <TableHead>
             <TableRow>

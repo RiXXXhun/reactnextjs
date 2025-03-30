@@ -104,7 +104,14 @@ const NewPassword = () => {
           Új Jelszó Beállítása
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: "flex", flexDirection: "column", width: "100%", gap: 2 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate 
+        sx={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          width: "100%", 
+          gap: 2 
+          }}
+        >
           <FormControl>
             <FormLabel htmlFor="newPassword" sx={{ color: "white" }}>Új jelszó</FormLabel>
             <TextField

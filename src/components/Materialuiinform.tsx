@@ -37,8 +37,26 @@ const cardData = [
 
 const Materialuiinform = () => {
   return (
-    <Container sx={{ backgroundColor: '#1c2331', margin: '30px auto 0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }} id="informSection">
-      <Box sx={{ padding: '20px', backgroundColor: '#1c2331', borderRadius: '16px', pt: "20px", zIndex: 1000 }}>
+    <Container 
+    sx={{ 
+      backgroundColor: '#1c2331', 
+      margin: '30px auto 0 auto', 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      zIndex: 1000 
+      }} 
+      id="informSection"
+    >
+      <Box 
+      sx={{ 
+        padding: '20px', 
+        backgroundColor: '#1c2331', 
+        borderRadius: '16px', 
+        pt: "20px", 
+        zIndex: 1000 
+        }}
+      >
         <Grid container spacing={5} justifyContent="center">
           <Grid item xs={12}>
             <Typography 

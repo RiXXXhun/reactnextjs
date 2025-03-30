@@ -124,7 +124,14 @@ const CityManager: React.FC = () => {
         error={!!errorMessage}
         helperText={errorMessage}
       />
-      <Button onClick={handleSaveCity} variant='contained' color='primary' sx={{ mr: 2, mt: 2 }}>{cityId ? 'Mentés' : 'Hozzáadás'}</Button>
+      <Button onClick={handleSaveCity} variant='contained' color='primary' 
+      sx={{ 
+        mr: 2, 
+        mt: 2 
+        }}
+      >
+        {cityId ? 'Mentés' : 'Hozzáadás'}
+      </Button>
       {cityId && <Button onClick={handleCancelEdit} variant='outlined' color='secondary' sx={{ marginTop: 2}}>Mégse</Button>}
 
       <TableContainer component={Paper} sx={{ marginTop: '20px', width: '100%' }}>
