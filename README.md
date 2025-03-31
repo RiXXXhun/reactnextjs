@@ -7,8 +7,19 @@ Ez az útmutató segít abban, hogyan telepítsd és futtasd a **PLÁZAÁSZ** pr
 
 Először is klónozd a repót a következő paranccsal:
 
+GITHUB CLI
 ```bash
-git clone https://github.com/RiXXXhun/reactnextjs.git
+gh repo clone RiXXXhun/Szakdolgozat---PLAZAASZ-2024-2025
+```
+
+HTTPS
+```bash
+https://github.com/RiXXXhun/Szakdolgozat---PLAZAASZ-2024-2025.git
+```
+
+SSH
+```bash
+git@github.com:RiXXXhun/Szakdolgozat---PLAZAASZ-2024-2025.git
 ```
 
 ### Mappa elérési út
