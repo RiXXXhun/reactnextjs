@@ -79,4 +79,4 @@ npm run dev
 
 A weboldal mostantól elérhető lesz a következő linken: [http://localhost:3000/homepage](http://localhost:3000/homepage)
 
-Készítette: Nagy-Eperjesi Richárd János, Hustikker Szabolcs, Tóth Zoltán 13.A | NTSZKI VMSZC Szakdolgozat
+Készítette: Nagy-Eperjesi Richárd János, Hustikker Szabolcs, Tóth Zoltán 13.A | Vas Vármegyei Szakképzési Centrum Nádasdy Tamás Technikum és Kollégium | Szakdolgozat | 2024-2025
