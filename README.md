@@ -3,7 +3,7 @@
 
 Ez az útmutató segít abban, hogyan telepítsd és futtasd a **PLÁZAÁSZ** projektet a helyi gépeden.
 
-## 1. Klónozd le a GitHub repót
+## 1. Klónozd le a GitHub repot
 
 Először is klónozd a repót a következő paranccsal:
 
@@ -77,7 +77,9 @@ npx ts-node prisma/seedStore.ts
 npx ts-node prisma/seedCoupon.ts
 npx ts-node prisma/seedUser.ts
 npx ts-node prisma/seedSupport.ts
-npx ts-node prisma/seedPlaza.ts
+npx ts-node prisma/seedZala.ts
+npx ts-node prisma/seedVas.ts
+npx ts-node prisma/seedGYMS.ts
 ```
 
 ## 7. A projekt futtatása
